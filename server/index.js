@@ -27,5 +27,5 @@ massive(CONNECTION_STRING)
 
 app.get('/api/users', controller.getUsers)
 app.post('/auth/register', controller.register)
-
-// app.post('/auth/login', controller.login)
+app.post('/auth/login', controller.login)
+app.get('/auth/logout', controller.logout)
