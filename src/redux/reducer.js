@@ -5,7 +5,8 @@ const initialState = {
 	email: '',
 	allItems: [],
 	allLists: [],
-	allTrips: []
+	allTrips: [],
+	authenticated: false
 }
 
 const REGISTER_USER = 'REGISTER_USER'
@@ -23,7 +24,6 @@ export function registerUser(obj) {
 
 export default function reducer(state = initialState, action) {
 	const { type, payload } = action
-
 	switch (type) {
 		case REGISTER_USER:
 			return { 
@@ -31,6 +31,7 @@ export default function reducer(state = initialState, action) {
 				firstname: payload.firstname,
 				lastname: payload.lastname,
 				email: payload.email,
+				user_id: payload.id
 			}
 		default:
 			return state

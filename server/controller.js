@@ -16,14 +16,19 @@ module.exports = {
         if (alreadyRegistered !== 0) {
             return res.sendStatus(409)
         }
-        const salt = bcrypt.genSaltSync(10)
-        const hashed_password = bcrypt.hashSync(password, salt)
-        await database.register({
-            firstname,
-            lastname,
-            email,
-            hashed_password
-        })
+        try {        
+            const salt = bcrypt.genSaltSync(10)
+            const hashed_password = bcrypt.hashSync(password, salt)
+            await database.register({
+                firstname,
+                lastname,
+                email,
+                hashed_password
+            })
+        } catch(err) {
+            res.sendStatus(401)
+          }
+
         const user = await database.login({email}) // get our new user info
         session.user = user[0] // store that info on the session so they don't have to log in afterword
         res.status(200).send({authorized: true, user: user[0]})
