@@ -8,3 +8,6 @@ values
     ${email},
     ${hashed_password} 
 );
+
+select id from users
+where email = ${email};
