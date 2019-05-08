@@ -1,10 +1,10 @@
 const bcrypt = require('bcryptjs')
 
 module.exports = {
-	getUsers: async (req, res) => {
+	getUser: async (req, res) => {
 		const database = req.app.get('db')
-        const users = await database.getAllUsers()
-        res.status(200).send(users)
+        const user = await database.getUserInfo()
+        res.status(200).send(user)
 	},
 
     register: async (req, res) => { //async to prevent execution from continuing before the database response
@@ -31,7 +31,7 @@ module.exports = {
 
         const user = await database.login({email}) // get our new user info
         session.user = user[0] // store that info on the session so they don't have to log in afterword
-        res.status(200).send({authorized: true, user: user[0]})
+        res.status(200).send({user: user[0]})
     },
 
     login: async (req, res) => {
@@ -43,7 +43,7 @@ module.exports = {
             const authorized = bcrypt.compareSync(password, credentials[0].hashed_password)
             if (authorized){
                 session.user = credentials[0]
-                res.status(200).send({authorized, user: credentials[0]})
+                res.status(200).send({user: credentials[0]})
             } else {
                 throw new Error(401)
             }

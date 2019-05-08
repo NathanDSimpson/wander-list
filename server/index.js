@@ -25,9 +25,8 @@ massive(CONNECTION_STRING)
     })
 })
 
-app.get('/api/users', controller.getUsers)
-// User
+app.get('/api/user', controller.getUser)
+
 app.post('/auth/register', controller.register)
 app.post('/auth/login', controller.login)
 app.get('/auth/logout', controller.logout)
-// 

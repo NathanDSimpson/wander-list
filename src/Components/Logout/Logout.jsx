@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import { loginUser } from '../../redux/reducer'
+
 
 class Login extends Component {
     constructor(){
@@ -60,6 +57,7 @@ class Login extends Component {
 
 }
 
+
 const mapStateToProps = (reduxState) => {
     const { authenticated, user_id, firstname, lastname, email, allItems, allLists, allTrips } = reduxState
     return { authenticated, user_id, firstname, lastname, email, allItems, allLists, allTrips }
@@ -69,5 +67,5 @@ const mapDispatchToProps = {
     loginUser
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login))
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
 // export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login))

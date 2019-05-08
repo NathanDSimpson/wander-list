@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux'
-// import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { registerUser } from '../../redux/reducer'
 
 class Register extends Component {
@@ -32,15 +32,14 @@ class Register extends Component {
         }
         try {
             const response = await axios.post('/auth/register', {firstname, lastname, email, password}) // register in out db
-            this.props.registerUser({firstname, lastname, email, id: response.data.user.id})// dispatch to store
+            this.props.registerUser({firstname, lastname, email, id: response.data.user.id, authenticated: true})// dispatch to store
         } catch(err){
             // display an error message
         }
-
     }
 
     render(){
-        console.log(this.props)
+        // console.log(`Props for <Register>`, this.props)
         return(
             <>
                 <h1>Register</h1>
@@ -92,5 +91,5 @@ const mapDispatchToProps = {
     registerUser
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Register))
 // export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Register))

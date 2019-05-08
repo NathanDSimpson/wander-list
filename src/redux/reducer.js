@@ -1,16 +1,16 @@
 const initialState = {
+	authenticated: false,
 	user_id: 0,
 	firstname: '',
 	lastname: '',
 	email: '',
-	allItems: [],
-	allLists: [],
-	allTrips: [],
-	authenticated: false
+	items: [],
+	lists: [],
+	trips: []
 }
 
 const REGISTER_USER = 'REGISTER_USER'
-
+const LOGIN_USER = 'LOGIN_USER'
 // const UPDATE_USER_ITEMS = 'UPDATE_USER_ITEMS'
 // const UPDATE_USER_LISTS = 'UPDATE_USER_LISTS'
 // const UPDATE_USER_TRIPS = 'UPDATE_USER_TRIPS'
@@ -18,6 +18,13 @@ const REGISTER_USER = 'REGISTER_USER'
 export function registerUser(obj) {
 	return {
 		type: REGISTER_USER,
+		payload: obj
+	}
+}
+
+export function loginUser(obj) {
+	return {
+		type: LOGIN_USER,
 		payload: obj
 	}
 }
@@ -31,8 +38,18 @@ export default function reducer(state = initialState, action) {
 				firstname: payload.firstname,
 				lastname: payload.lastname,
 				email: payload.email,
-				user_id: payload.id
+				user_id: payload.id,
+				authenticated: payload.authenticated
 			}
+		case LOGIN_USER:
+			return { 
+				...state, 
+				firstname: payload.firstname,
+				lastname: payload.lastname,
+				email: payload.email,
+				user_id: payload.id,
+				authenticated: payload.authenticated
+		}
 		default:
 			return state
 	}

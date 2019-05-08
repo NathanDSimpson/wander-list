@@ -11,7 +11,12 @@ export default class Lists extends Component{
     render(){
         return(
             <div>
-                This will display all of our users stored LISTS.
+            This will display all of our users stored LISTS.
+            {/* <h1>
+                <span>Trips</span>
+                <span>Lists</span>
+                <span>Items</span>
+            </h1> */}
             </div>
         )
     }
