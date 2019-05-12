@@ -25,8 +25,9 @@ massive(CONNECTION_STRING)
     })
 })
 
-app.get('/api/user', controller.getUser)
+app.post('/api/items', controller.getUserItems) //get all items for the user
+app.post('/api/add-item', controller.addItem) //add an item to the user's library
 
-app.post('/auth/register', controller.register)
+app.post('/auth/register', controller.register) 
 app.post('/auth/login', controller.login)
 app.get('/auth/logout', controller.logout)

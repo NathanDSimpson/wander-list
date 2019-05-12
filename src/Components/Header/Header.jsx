@@ -12,7 +12,6 @@ export default class Header extends Component{
                 <Link to='/trips'>-Trips- </Link>
 				<Link to='/lists'>-Lists- </Link>
 				<Link to='/items'>-Items- </Link>
-
             </>
         )
     }

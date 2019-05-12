@@ -1,9 +1,12 @@
--- drop table if exists users cascade;
--- drop table if exists trips cascade;
--- drop table if exists lists cascade;
--- drop table if exists items cascade;
--- drop table if exists hashtags cascade;
--- drop table if exists list_items cascade;
+drop table if exists users cascade;
+drop table if exists trips cascade;
+drop table if exists lists cascade;
+drop table if exists items cascade;
+drop table if exists list_items cascade;
+drop table if exists item_tags cascade;
+drop table if exists list_tags cascade;
+drop table if exists trip_tags cascade;
+
 
 create table users (
     id serial primary key not null,
@@ -18,7 +21,7 @@ create table trips (
     user_id integer references users(id) not null,
     trip_name varchar not null,
     description text,
-    type varchar
+    category varchar
 );
 
 create table lists (
@@ -27,27 +30,23 @@ create table lists (
     user_id integer references users(id) not null,
     name varchar,
     description text,
-    type varchar
+    category varchar
 );
 
 create table items (
     id serial primary key not null,
     user_id integer references users(id) not null,
     name varchar not null,
+    serial_number varchar,
+    img_url text,
     description text,
     weight float,
     volume float,
-    type varchar,
+    category varchar,
     season varchar,
     activity varchar
 );
 
-create table hashtags (
-    id serial primary key not null,
-    user_id integer references users(id) not null,
-    item_id integer references items(id) not null,
-    tag varchar not null
-);
 
 create table list_items (
     id serial primary key not null,
@@ -56,6 +55,29 @@ create table list_items (
     quantity integer not null
 
 );
+
+create table item_tags (
+    id serial primary key not null,
+    user_id integer references users(id) not null,
+    item_id integer references items(id) not null,
+    tag varchar not null
+);
+
+create table list_tags (
+    id serial primary key not null,
+    user_id integer references users(id) not null,
+    list_id integer references lists(id) not null,
+    tag varchar not null
+);
+
+create table trip_tags (
+    id serial primary key not null,
+    user_id integer references users(id) not null,
+    trip_id integer references trips(id) not null,
+    tag varchar not null
+);
+
+
 
 
 

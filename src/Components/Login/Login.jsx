@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { loginUser } from '../../redux/reducer'
+import { loginUser, getItems } from '../../redux/reducer'
 
 class Login extends Component {
     constructor(){
@@ -24,11 +24,12 @@ class Login extends Component {
         event.preventDefault()
         const { email, password } = this.state
         try {
-            const response = await axios.post('/auth/login', { email, password }) 
+            const response = await axios.post('/auth/login', { email, password }) // log in
             const { id, firstname, lastname} = response.data.user
-            console.log(`response:`, response)
-            console.log({ id, firstname, lastname, email, authenticated: true })
-            this.props.loginUser({ id, firstname, lastname, email, authenticated: true })// dispatch to store
+            this.props.loginUser({ id, firstname, lastname, email, authenticated: true }) // dispatch to store
+            const res = await axios.post('/api/items', {user_id: id})
+            const items = res.data
+            this.props.getItems(items)
         } catch(err){
             // display an error message
         }
@@ -61,12 +62,13 @@ class Login extends Component {
 }
 
 const mapStateToProps = (reduxState) => {
-    const { authenticated, user_id, firstname, lastname, email, allItems, allLists, allTrips } = reduxState
-    return { authenticated, user_id, firstname, lastname, email, allItems, allLists, allTrips }
+    const { authenticated, user_id, firstname, lastname, email, items, lists, trips } = reduxState
+    return { authenticated, user_id, firstname, lastname, email, items, lists, trips }
 }
 
 const mapDispatchToProps = {
-    loginUser
+    loginUser,
+    getItems
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login))
