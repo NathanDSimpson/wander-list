@@ -26,6 +26,9 @@ class Login extends Component {
         const { email, password } = this.state
         try {
             const response = await axios.post('/auth/login', { email, password }) // log in
+
+            console.log(response)
+
             const { id, firstname, lastname} = response.data.user
             this.props.loginUser({ id, firstname, lastname, email, authenticated: true }) // dispatch to store
             const res = await axios.post('/api/items', {user_id: id})
@@ -33,7 +36,8 @@ class Login extends Component {
             this.props.getItems(items)
             this.props.history.push('/items')
         } catch(err){
-            // display an error message
+            alert(`You may have the wrong username or password, or the server may be down.`)
+            console.log(err)
         }
     }
 
