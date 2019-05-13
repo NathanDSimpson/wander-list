@@ -54,7 +54,10 @@ module.exports = {
     },
 
     logout: (req, res) => {
+
+        console.log(`pre:`, req.session)
         req.session.destroy()
+        console.log(`post:`, req.session)
         res.sendStatus(200)
       },
 
@@ -70,7 +73,6 @@ module.exports = {
     },
 
     deleteItem: async (req, res) => {
-        console.log(req)
         const db = req.app.get('db')
         try {
             const updatedItemList = await db.deleteItem(req.body)

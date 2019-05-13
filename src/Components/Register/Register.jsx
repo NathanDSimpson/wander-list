@@ -42,39 +42,43 @@ class Register extends Component {
         // console.log(`Props for <Register>`, this.props)
         return(
             <>
-                <h1>Register</h1>
                 <form onSubmit={this.handleSubmit}>
                     <input 
+                        className='form-entry'
                         onChange={this.handleInput} 
                         type="text" 
                         name='firstname' 
                         placeholder='First Name'
                     />
                     <input 
+                        className='form-entry'
                         onChange={this.handleInput} 
                         type="text" 
                         name='lastname' 
                         placeholder='Last Name'
                     />
                     <input 
+                        className='form-entry'
                         onChange={this.handleInput} 
                         type="text" 
                         name='email' 
                         placeholder='Email'
                     />
                     <input 
+                        className='form-entry'
                         onChange={this.handleInput} 
                         type="text" 
                         name='password' 
                         placeholder='Password'
                     />
                     <input 
+                        className='form-entry'
                         onChange={this.handleInput} 
                         type="text" 
                         name='confirmPassword' 
                         placeholder='Re-enter Password'
                         />
-                    <button> SUBMIT </button>
+                    <button className='register-button'> SUBMIT </button>
                 </form>
             </>
         )

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { loginUser, getItems } from '../../redux/reducer'
 
+
 class Login extends Component {
     constructor(){
         super()
@@ -30,30 +31,33 @@ class Login extends Component {
             const res = await axios.post('/api/items', {user_id: id})
             const items = res.data
             this.props.getItems(items)
+            this.props.history.push('/items')
         } catch(err){
             // display an error message
         }
     }
 
     render(){
-        // console.log(`Props for <Login>`, this.props)
         return(
             <>
-                <h1>Log In</h1>
                 <form onSubmit={this.handleSubmit}> 
                     <input 
+                        className='form-entry'
                         onChange={this.handleInput} 
                         type="text" 
                         name='email' 
                         placeholder='email'
                     />
                     <input 
+                        className='form-entry'
                         onChange={this.handleInput} 
                         type="text" 
                         name='password' 
                         placeholder='password'
                     />
-                    <button> Log In </button>
+                    <button>
+                        SUBMIT
+                    </button>
                 </form>
             </>
         )
@@ -61,15 +65,9 @@ class Login extends Component {
 
 }
 
-const mapStateToProps = (reduxState) => {
-    const { authenticated, user_id, firstname, lastname, email, items, lists, trips } = reduxState
-    return { authenticated, user_id, firstname, lastname, email, items, lists, trips }
-}
-
 const mapDispatchToProps = {
     loginUser,
     getItems
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login))
-// export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login))
+export default connect(null, mapDispatchToProps)(withRouter(Login))
