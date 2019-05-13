@@ -26,7 +26,6 @@ class Items extends Component{
     }
 
     async componentWillUpdate(nextProps, nextState) {
-        console.log("Component will update", nextProps, nextState);
 
         if (this.props.user_id === 0){
             return

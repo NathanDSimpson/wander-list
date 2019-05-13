@@ -27,6 +27,7 @@ massive(CONNECTION_STRING)
 
 app.post('/api/items', controller.getUserItems) //get all items for the user
 app.post('/api/add-item', controller.addItem) //add an item to the user's library
+app.post('/api/delete', controller.deleteItem) // delete an item from for a user
 
 app.post('/auth/register', controller.register) 
 app.post('/auth/login', controller.login)

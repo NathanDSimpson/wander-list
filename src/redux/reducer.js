@@ -13,6 +13,7 @@ const REGISTER_USER = 'REGISTER_USER'
 const LOGIN_USER = 'LOGIN_USER'
 const GET_ITEMS = 'GET_ITEMS'
 const ADD_ITEM ='ADD_ITEM'
+const DELETE_ITEM = 'DELETE_ITEM'
 // const UPDATE_USER_ITEMS = 'UPDATE_USER_ITEMS'
 // const UPDATE_USER_LISTS = 'UPDATE_USER_LISTS'
 // const UPDATE_USER_TRIPS = 'UPDATE_USER_TRIPS'
@@ -41,6 +42,13 @@ export function getItems(items){
 export function addItem(obj){
 	return {
 		type: ADD_ITEM,
+		payload: obj
+	}
+}
+
+export function deleteItem(obj){
+	return {
+		type: DELETE_ITEM,
 		payload: obj
 	}
 }
@@ -77,6 +85,11 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				items: updatedItems
+			}
+		case DELETE_ITEM:
+			return {
+				...state,
+				items: payload
 			}
 		default:
 			return state

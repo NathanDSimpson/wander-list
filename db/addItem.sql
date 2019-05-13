@@ -21,3 +21,6 @@ insert into items (
     ${season},
     ${activity}
 );
+
+select * from items
+where user_id = ${user_id};

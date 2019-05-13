@@ -62,8 +62,20 @@ module.exports = {
     addItem: async (req, res) => {
         const db = req.app.get('db')
         try {
-            await db.addItem(req.body)
-            return res.sendStatus(200)
+            const updatedItemList = await db.addItem(req.body)
+            return res.status(200).send(updatedItemList)
+        } catch(err){
+            res.sendStatus(401)
+        }
+    },
+
+    deleteItem: async (req, res) => {
+        console.log(req)
+        const db = req.app.get('db')
+        try {
+            const updatedItemList = await db.deleteItem(req.body)
+            return res.status(200).send(updatedItemList)
+
         } catch(err){
             res.sendStatus(401)
         }
