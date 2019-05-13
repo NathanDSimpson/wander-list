@@ -62,10 +62,10 @@ module.exports = {
     addItem: async (req, res) => {
         const db = req.app.get('db')
         try {
-            console.log(req.body)
             await db.addItem(req.body)
+            return res.sendStatus(200)
         } catch(err){
-
+            res.sendStatus(401)
         }
     }
 }

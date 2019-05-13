@@ -13,29 +13,44 @@ class Items extends Component{
         }
     }
 
-    async componentWillUpdate(){ //run when props(redux store) or state updates
+    async componentWillMount() {
         if (this.props.user_id === 0){
             return
-        } else{
-            const res = await axios.post('/api/items', {user_id: this.props.user_id}) //get user's items from the db
-            const items = res.data
-            this.props.getItems(items) // 
-            this.setState({
-                displayItems: this.props.items
-            })
         }
+        const res = await axios.post('/api/items', {user_id: this.props.user_id}) //get user's items from the db
+        const items = res.data
+        this.setState({
+            displayItems: items
+            })
+
     }
+
+    // async componentWillUpdate(){ //run when props(redux store) or state updates
+    //     if (this.props.user_id === 0){
+    //         return
+    //     }
+    //         const res = await axios.post('/api/items', {user_id: this.props.user_id}) //get user's items from the db
+    //         console.log(`this is running`)
+    //         const items = res.data
+    //         this.props.getItems(items) // 
+    //         this.setState({
+    //             displayItems: this.props.items
+    //         })
+    // }
 
     render(){
         return(
             <div>
                 <AddItem/>
-                {this.state.displayItems.map((item) => {
-                    return <SingleItem
-                            item={item}
-                            key={item.id}
-                            />
-                })}
+                <section className='items'>
+                    {this.state.displayItems.map((item) => {
+                        return <SingleItem
+                                item={item}
+                                key={item.id}
+                                />
+                    })}
+                </section>
+
             </div>
         )
     }
@@ -45,10 +60,5 @@ const mapStateToProps = (reduxState) => {
     const { authenticated, user_id, firstname, lastname, email, items, lists, trips } = reduxState
     return { authenticated, user_id, firstname, lastname, email, items, lists, trips }
 }
-
-// const mapDispatchToProps = {
-//     loginUser,
-//     getItems
-// }
 
 export default connect(mapStateToProps, null)(withRouter(Items))

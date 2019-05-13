@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { addItem } from '../../redux/reducer'
+import { addItem, getItems } from '../../redux/reducer'
 
 class AddItem extends Component {
     constructor(){
@@ -27,12 +27,17 @@ class AddItem extends Component {
         })
     }
 
-    handleSubmit = async event => {
+    handleSubmit = async (event) => {
         event.preventDefault()
         const { name, serial_number, img_url, description, weight, volume, category, season, activity } = this.state
         try {
+            //send item to db
             await axios.post('/api/add-item', { user_id: this.props.user_id, name, serial_number, img_url, description, weight, volume, category, season, activity }) 
-            // this.props.addItem({ id, firstname, lastname, email, authenticated: true })// dispatch to store
+            //get updated items list from db
+            const res = await axios.post('/api/items', {user_id: this.props.user_id})
+            const items = res.data
+            // send updated items to redux state
+            this.props.getItems(items)
         } catch(err){
             // display an error message
         }
@@ -112,7 +117,8 @@ const mapStateToProps = (reduxState) => {
 }
 
 const mapDispatchToProps = {
-    addItem
+    addItem,
+    getItems
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AddItem))

@@ -6,7 +6,13 @@ export default class Header extends Component{
     render(){
         return(
             <>
-                <h1>WanderList</h1> 
+                <h1 className='navbar'>
+                    WanderList
+                    <div>                    
+                        <i className="fas fa-user fa-xs"></i>
+                        <i className="fas fa-sort-down fa-xs"></i>
+                    </div>
+                </h1> 
 				<Link to='/login'>-Login- </Link>
 				<Link to='/register'>-Register- </Link>
                 <Link to='/trips'>-Trips- </Link>
