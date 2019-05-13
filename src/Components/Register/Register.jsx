@@ -26,20 +26,21 @@ class Register extends Component {
     handleSubmit = async event => {
         event.preventDefault()
         const { firstname, lastname, email, password, confirmPassword } = this.state
-        if (password !== confirmPassword){  // Check that passwords match  
-            //DO SOME STYLING to make the boxes red if they don't
+        if (password !== confirmPassword){
+            alert(`Your passwords do not match`)
             return
         }
         try {
             const response = await axios.post('/auth/register', {firstname, lastname, email, password}) // register in out db
             this.props.registerUser({firstname, lastname, email, id: response.data.user.id, authenticated: true})// dispatch to store
+            this.props.history.push('/items')
         } catch(err){
-            // display an error message
+            alert(`Our database does not appear to be functioning.`)
+            console.log(err)
         }
     }
 
     render(){
-        // console.log(`Props for <Register>`, this.props)
         return(
             <>
                 <form onSubmit={this.handleSubmit}>
