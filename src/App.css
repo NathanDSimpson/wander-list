@@ -26,5 +26,8 @@
   flex-wrap: wrap;
   margin: 2%; }
 
+.add-item-form {
+  margin: 2%; }
+
 body {
   background-color: gray; }

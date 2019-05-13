@@ -47,6 +47,7 @@ class AddItem extends Component {
         // console.log(`Props for <AddItem>`, this.props)
         return(
             <>
+            <div className='add-item-form'>
                 <h3>Add a new item to your library:</h3>
                 <form onSubmit={this.handleSubmit}> 
                     <input 
@@ -105,6 +106,7 @@ class AddItem extends Component {
                     />
                     <button> Add to library </button>
                 </form>
+            </div>
             </>
         )
     }

@@ -7,14 +7,17 @@ class SingleItem extends Component{
     render(){
         return(
             <div className='single-item'>
-            <div className='item-name'>
-                 {this.props.item.name}
-            </div>
-            <ul>
-                <li>
-                    {this.props.item.description}
-                </li>
-            </ul>
+                <div className='item-name'>
+                    {this.props.item.name}
+                </div>
+                <button>
+                    <i class="fas fa-times"></i>
+                </button>
+                <ul>
+                    <li>
+                        {this.props.item.description}
+                    </li>
+                </ul>
             </div>
         )
     }

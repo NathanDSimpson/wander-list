@@ -38,19 +38,6 @@ class Items extends Component{
             })
     }
 
-    // async componentWillUpdate(){ //run when props(redux store) or state updates
-    //     if (this.props.user_id === 0){
-    //         return
-    //     }
-    //         const res = await axios.post('/api/items', {user_id: this.props.user_id}) //get user's items from the db
-    //         console.log(`this is running`)
-    //         const items = res.data
-    //         this.props.getItems(items) // 
-    //         this.setState({
-    //             displayItems: this.props.items
-    //         })
-    // }
-
     render(){
         return(
             <div>
