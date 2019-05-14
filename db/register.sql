@@ -9,5 +9,5 @@ values
     ${hashed_password} 
 );
 
-select id from users
+select user_id from users
 where email = ${email};

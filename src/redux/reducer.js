@@ -72,7 +72,7 @@ export default function reducer(state = initialState, action) {
 				firstname: payload.firstname,
 				lastname: payload.lastname,
 				email: payload.email,
-				user_id: payload.id,
+				user_id: payload.user_id,
 				authenticated: payload.authenticated
 			}
 		case LOGIN_USER:
@@ -81,7 +81,7 @@ export default function reducer(state = initialState, action) {
 				firstname: payload.firstname,
 				lastname: payload.lastname,
 				email: payload.email,
-				user_id: payload.id,
+				user_id: payload.user_id,
 				authenticated: payload.authenticated
 		}
 		case LOGOUT_USER:

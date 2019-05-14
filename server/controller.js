@@ -2,10 +2,15 @@ const bcrypt = require('bcryptjs')
 
 module.exports = {
 	getUserItems: async (req, res) => {
-        const database = req.app.get('db')
-        const { user_id } = req.body
-        const items = await database.getItems({user_id})
-        res.status(200).send(items)
+        try {
+            const database = req.app.get('db')
+            const { user_id } = req.body
+            const items = await database.getItems({user_id})
+            res.status(200).send(items)
+        } catch(err){
+            res.sendStatus(401)
+        }
+
 	},
 
     register: async (req, res) => { //async to prevent execution from continuing before the database response
@@ -54,7 +59,6 @@ module.exports = {
     },
 
     logout: (req, res) => {
-
         console.log(`pre:`, req.session)
         req.session.destroy()
         console.log(`post:`, req.session)
@@ -65,7 +69,10 @@ module.exports = {
     addItem: async (req, res) => {
         const db = req.app.get('db')
         try {
+            console.log(`req.body of addItem in controller`, req.body)
             const updatedItemList = await db.addItem(req.body)
+            console.log(`updatedItemList of addItem in controller`, updatedItemList)
+
             return res.status(200).send(updatedItemList)
         } catch(err){
             res.sendStatus(401)

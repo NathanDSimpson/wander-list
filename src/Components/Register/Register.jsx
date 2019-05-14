@@ -3,6 +3,8 @@ import axios from 'axios';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { registerUser } from '../../redux/reducer'
+import { Link } from 'react-router-dom'
+
 
 class Register extends Component {
     constructor(){
@@ -81,6 +83,16 @@ class Register extends Component {
                         />
                     <button className='register-button'> SUBMIT </button>
                 </form>
+                <div
+                className='register-prompt'
+                >
+                    <div>
+                        Already have an account? 
+                    </div>
+                    <div>
+                        <Link to='/login'> Log In </Link>
+                    </div>
+                </div>
             </>
         )
     }
@@ -97,4 +109,3 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Register))
-// export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Register))

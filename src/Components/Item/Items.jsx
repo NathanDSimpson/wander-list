@@ -9,7 +9,8 @@ class Items extends Component{
     constructor(){
         super()
         this.state = {
-            displayItems: []
+            displayItems: [],
+            addItemWizard: false
         }
     }
 
@@ -22,34 +23,42 @@ class Items extends Component{
         this.setState({
             displayItems: items
             })
-
     }
 
-    async componentWillUpdate(nextProps, nextState) {
 
-        if (this.props.user_id === 0){
-            return
-        }
-        const res = await axios.post('/api/items', {user_id: this.props.user_id}) //get user's items from the db
-        const items = res.data
+    // this is running infinitely
+    // async componentDidUpdate(prevProps, prevState) {
+    //     console.log(`NEXT PROPS`,prevProps, `NEXT STATE`, prevState)
+
+    //     if (this.props.user_id === 0){
+    //         return
+    //     }
+    //     const res = await axios.post('/api/items', {user_id: this.props.user_id}) //get user's items from the db
+    //     const items = res.data
+    //     this.setState({
+    //         displayItems: items
+    //         })
+    // }
+
+    toggleAdd = () => {
         this.setState({
-            displayItems: items
-            })
+            addItemWizard: !this.state.addItemWizard
+        })
     }
 
     render(){
         return(
             <div>
-                <AddItem/>
-                <section className='items'>
+                <button onClick={this.toggleAdd}> {this.state.addItemWizard ? '- Collapse' : '+ Add Item'} </button>
+                {this.state.addItemWizard ? <AddItem/> :                 
+                    <section className='items'>
                     {this.state.displayItems.map((item) => {
                         return <SingleItem
                                 item={item}
                                 key={item.id}
                                 />
                     })}
-                </section>
-
+                    </section>}
             </div>
         )
     }

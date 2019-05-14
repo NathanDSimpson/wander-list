@@ -16,7 +16,7 @@ class SingleItem extends Component{
             const updatedItemsList = res.data
             this.props.deleteItem(updatedItemsList)
         } catch(err){
-            // send an error message
+            alert(`Whoops! Something went wrong.`)
         }
     }
 
@@ -33,12 +33,6 @@ class SingleItem extends Component{
                         ></i>
                     </button>
                 </span>
-                
-                <ul>
-                    <li>
-                        {this.props.item.description}
-                    </li>
-                </ul>
             </div>
         )
     }

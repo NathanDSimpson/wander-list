@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logoutUser } from '../../redux/reducer'
+import axios from 'axios';
 
 class Header extends Component{
     constructor(){
@@ -17,9 +18,14 @@ class Header extends Component{
         })
     }
 
-    logout = () => {
-        this.props.logoutUser()
-        this.toggleMenu()
+    logout =  async () => {
+        try{
+            await axios.get('/auth/logout')
+            this.props.logoutUser()
+            this.toggleMenu()
+        } catch(err) {
+            alert(`Error logging out`)
+        }
     }
     
     render(){

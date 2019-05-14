@@ -1,25 +1,17 @@
 insert into items (
     user_id,
     name,
-    serial_number,
     img_url,
-    description,
     weight,
     volume,
-    category,
-    season,
-    activity
+    description
 ) values (
     ${user_id},
     ${name},
-    ${serial_number},
     ${img_url},
-    ${description},
     ${weight},
     ${volume},
-    ${category},
-    ${season},
-    ${activity}
+    ${description}
 );
 
 select * from items

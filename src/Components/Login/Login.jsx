@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { loginUser, getItems } from '../../redux/reducer'
-
+import { Link } from 'react-router-dom'
 
 class Login extends Component {
     constructor(){
@@ -14,6 +14,7 @@ class Login extends Component {
         }
     }
 
+    // Take the user inputs for email and password. store them on local state
     handleInput = event => {
         let {name, value} = event.target
         this.setState({
@@ -26,12 +27,9 @@ class Login extends Component {
         const { email, password } = this.state
         try {
             const response = await axios.post('/auth/login', { email, password }) // log in
-
-            console.log(response)
-
-            const { id, firstname, lastname} = response.data.user
-            this.props.loginUser({ id, firstname, lastname, email, authenticated: true }) // dispatch to store
-            const res = await axios.post('/api/items', {user_id: id})
+            const { user_id, firstname, lastname} = response.data.user
+            this.props.loginUser({ user_id, firstname, lastname, email, authenticated: true }) // dispatch to store
+            const res = await axios.post('/api/items', {user_id})
             const items = res.data
             this.props.getItems(items)
             this.props.history.push('/items')
@@ -63,6 +61,16 @@ class Login extends Component {
                         SUBMIT
                     </button>
                 </form>
+                <div
+                className='register-prompt'
+                >
+                    <div>
+                        Need an account? 
+                    </div>
+                    <div>
+                        <Link to='/register'> Register </Link>
+                    </div>
+                </div>
             </>
         )
     }

@@ -9,14 +9,11 @@ class AddItem extends Component {
         super()
         this.state = {
             name: '',
-            serial_number: '',
             img_url: '',
             description: '',
             weight: 0,
             volume: 0,
-            category: '',
-            season: '',
-            activity: '',
+            tags: []
         }
     }
 
@@ -29,10 +26,10 @@ class AddItem extends Component {
 
     handleSubmit = async (event) => {
         event.preventDefault()
-        const { name, serial_number, img_url, description, weight, volume, category, season, activity } = this.state
+        const { name, img_url, description, weight, volume } = this.state
         try {
             //send item to db
-            const res = await axios.post('/api/add-item', { user_id: this.props.user_id, name, serial_number, img_url, description, weight, volume, category, season, activity }) 
+            const res = await axios.post('/api/add-item', { user_id: this.props.user_id, name, img_url, description, weight, volume }) 
             //get updated items list from db
             // const res = await axios.post('/api/items', {user_id: this.props.user_id})
             const items = res.data
@@ -44,11 +41,9 @@ class AddItem extends Component {
     }
 
     render(){
-        // console.log(`Props for <AddItem>`, this.props)
         return(
             <>
             <div className='add-item-form'>
-                <h3>Add a new item to your library:</h3>
                 <form onSubmit={this.handleSubmit}> 
                     <input 
                         onChange={this.handleInput} 
@@ -59,20 +54,8 @@ class AddItem extends Component {
                     <input 
                         onChange={this.handleInput} 
                         type="text" 
-                        name='serial_number' 
-                        placeholder='Serial Number'
-                    />
-                    <input 
-                        onChange={this.handleInput} 
-                        type="text" 
                         name='img_url' 
                         placeholder='Image URL'
-                    />
-                    <input 
-                        onChange={this.handleInput} 
-                        type="text" 
-                        name='description' 
-                        placeholder='Description'
                     />
                     <input 
                         onChange={this.handleInput} 
@@ -89,20 +72,14 @@ class AddItem extends Component {
                     <input 
                         onChange={this.handleInput} 
                         type="text" 
-                        name='category' 
-                        placeholder='Category'
+                        name='tags' 
+                        placeholder='Hashtags #'
                     />
                     <input 
                         onChange={this.handleInput} 
                         type="text" 
-                        name='season' 
-                        placeholder='Season'
-                    />
-                    <input 
-                        onChange={this.handleInput} 
-                        type="text" 
-                        name='activity' 
-                        placeholder='Activity'
+                        name='description' 
+                        placeholder='Description'
                     />
                     <button> Add to library </button>
                 </form>
