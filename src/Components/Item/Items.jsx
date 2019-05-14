@@ -50,12 +50,12 @@ class Items extends Component{
         return(
             <div>
                 <button onClick={this.toggleAdd}> {this.state.addItemWizard ? '- Collapse' : '+ Add Item'} </button>
-                {this.state.addItemWizard ? <AddItem/> :                 
+                {this.state.addItemWizard ? <AddItem toggleAdd={this.toggleAdd}/> :                 
                     <section className='items'>
                     {this.state.displayItems.map((item) => {
                         return <SingleItem
                                 item={item}
-                                key={item.id}
+                                key={item.item_id}
                                 />
                     })}
                     </section>}

@@ -26,6 +26,7 @@ class AddItem extends Component {
 
     handleSubmit = async (event) => {
         event.preventDefault()
+        this.props.toggleAdd()
         const { name, img_url, description, weight, volume } = this.state
         try {
             //send item to db
