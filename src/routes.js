@@ -6,6 +6,7 @@ import Home from './Components/Home/Home'
 import Trips from './Components/Trip/Trips'
 import Lists from './Components/List/Lists'
 import Items from './Components/Item/Items'
+import Edit from './Components/Item/Edit'
 
 export default (
     <Switch>
@@ -15,5 +16,6 @@ export default (
         <Route path='/trips' component={Trips} />
         <Route path='/lists' component={Lists} />
         <Route path='/items' component={Items} />
+        <Route path='/edit/:id' component={Edit} />
     </Switch>
 )

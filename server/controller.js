@@ -67,10 +67,7 @@ module.exports = {
     addItem: async (req, res) => {
         const db = req.app.get('db')
         try {
-            console.log(`req.body of addItem in controller`, req.body)
             const updatedItemList = await db.addItem(req.body)
-            console.log(`updatedItemList of addItem in controller`, updatedItemList)
-
             return res.status(200).send(updatedItemList)
         } catch(err){
             res.sendStatus(401)

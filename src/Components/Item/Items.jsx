@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import AddItem from './AddItem'
-import SingleItem from './SingleItem'
+import Icon from './Icon'
 
 class Items extends Component{
     constructor(){
@@ -53,7 +53,7 @@ class Items extends Component{
                 {this.state.addItemWizard ? <AddItem toggleAdd={this.toggleAdd}/> :                 
                     <section className='items'>
                     {this.state.displayItems.map((item) => {
-                        return <SingleItem
+                        return <Icon
                                 item={item}
                                 key={item.item_id}
                                 />
