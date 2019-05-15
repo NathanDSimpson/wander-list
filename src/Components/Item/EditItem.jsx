@@ -2,6 +2,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
+import reducer from '../../redux/reducer';
+import { jsxAttribute, file } from '@babel/types';
+
+// 1: grab the current item info via props
+// 2: allow edits and store on local state
+// 3: send the changes to the db through axios
+//     - create an endpoing in index js
+//     - axios call in function in controller file
+//  4: dispatch to redux to pull the updated items list from the db and put it on state
+//      - through reducer function, CONST, and case
+
 
 class EditItem extends Component{
     constructor(){
@@ -30,11 +41,12 @@ class EditItem extends Component{
     async componentWillReceiveProps() {
         console.log(`componentWillReceiveProps running`)
         // re-render after submitting the edits
+        // might use a different lifecycle if the info is pulled from state and not redux
     }
 
     submitEdit = async () => {
         // submit to db via axios
-        // submit to redux state via dispatch
+        // dispatch to the redux store to pull the updated items list for state from the db 
     }
 
     toggle = () => {
