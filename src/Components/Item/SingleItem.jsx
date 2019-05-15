@@ -10,7 +10,7 @@ import { deleteItem } from '../../redux/reducer'
 class SingleItem extends Component{
 
     deleteItem = async () => {
-        const { id: item_id, user_id } = this.props.item
+        const { item_id, user_id } = this.props.item
         try {
             const res = await axios.post('/api/delete', {item_id, user_id })
             const updatedItemsList = res.data
