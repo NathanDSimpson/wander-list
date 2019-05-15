@@ -46,6 +46,7 @@ class Items extends Component{
     }
 
     render(){
+
         return(
             <div>
                 <button onClick={this.toggleAdd}> {this.state.addItemWizard ? '- Collapse' : '+ Add Item'} </button>
