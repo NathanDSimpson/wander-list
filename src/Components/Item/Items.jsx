@@ -15,6 +15,7 @@ class Items extends Component{
     }
 
     async componentWillMount() {
+        console.log(`<Items> constructor firing.`)
         if (this.props.user_id === 0){
             return
         }
@@ -25,20 +26,18 @@ class Items extends Component{
             })
     }
 
+    async componentWillReceiveProps() {
+        console.log(`componentWillReceiveProps running`)
 
-    // this is running infinitely
-    // async componentDidUpdate(prevProps, prevState) {
-    //     console.log(`NEXT PROPS`,prevProps, `NEXT STATE`, prevState)
-
-    //     if (this.props.user_id === 0){
-    //         return
-    //     }
-    //     const res = await axios.post('/api/items', {user_id: this.props.user_id}) //get user's items from the db
-    //     const items = res.data
-    //     this.setState({
-    //         displayItems: items
-    //         })
-    // }
+        if (this.props.user_id === 0){
+            return
+        }
+        const res = await axios.post('/api/items', {user_id: this.props.user_id}) //get user's items from the db
+        const items = res.data
+        this.setState({
+            displayItems: items
+            })
+    }
 
     toggleAdd = () => {
         this.setState({
