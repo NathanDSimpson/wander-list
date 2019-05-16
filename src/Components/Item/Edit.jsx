@@ -86,6 +86,10 @@ class Edit extends Component{
         })
     }
 
+    backButton = () => {
+        this.props.history.push('/items')
+    }
+
     render(){
         // console.log(`Rendering <Edit>`)
         let display = ''
@@ -93,7 +97,7 @@ class Edit extends Component{
             display = (
             <div>
                  <div>
-                    <button>  BACK </button>
+                    <button onClick={this.backButton}>  BACK </button>
                     <button onClick={this.toggle}> EDIT </button>
                 </div>
                 <h3>NAME:{this.state.name}</h3>
@@ -106,51 +110,54 @@ class Edit extends Component{
             )
         } else {
             display = (
-                <form onSubmit={this.submitEdit}> 
-                NAME:
-                <input 
-                    onChange={this.handleInput} 
-                    type="text" 
-                    name='name' 
-                    value={this.state.name}
-                />
-                IMAGE URL:
-                <input 
-                    onChange={this.handleInput} 
-                    type="text" 
-                    name='img_url' 
-                    value={this.state.img_url}
-                />
-                WEIGHT (pounds):
-                <input 
-                    onChange={this.handleInput} 
-                    type="text" 
-                    name='weight' 
-                    value={this.state.weight}
-                />
-                VOLUME (liters):
-                <input 
-                    onChange={this.handleInput} 
-                    type="text" 
-                    name='volume' 
-                    value={this.state.volume}
-                />
-                DETAILS:
-                <input 
-                    onChange={this.handleInput} 
-                    type="text" 
-                    name='description' 
-                    value={this.state.description}
-                />
-                HASHTAGS:
-                <input 
-                    onChange={this.handleInput} 
-                    type="text" 
-                    name='tags' 
-                    value='Hashtags (#)'
-                />
-                <button> Submit Changes </button>
-            </form>
+                <div>
+                    <button onClick={this.toggle}>  BACK </button>
+                    <form onSubmit={this.submitEdit}> 
+                        NAME:
+                        <input 
+                            onChange={this.handleInput} 
+                            type="text" 
+                            name='name' 
+                            value={this.state.name}
+                            />
+                        IMAGE URL:
+                        <input 
+                            onChange={this.handleInput} 
+                            type="text" 
+                            name='img_url' 
+                            value={this.state.img_url}
+                            />
+                        WEIGHT (pounds):
+                        <input 
+                            onChange={this.handleInput} 
+                            type="text" 
+                            name='weight' 
+                            value={this.state.weight}
+                            />
+                        VOLUME (liters):
+                        <input 
+                            onChange={this.handleInput} 
+                            type="text" 
+                            name='volume' 
+                            value={this.state.volume}
+                            />
+                        DETAILS:
+                        <input 
+                            onChange={this.handleInput} 
+                            type="text" 
+                            name='description' 
+                            value={this.state.description}
+                            />
+                        HASHTAGS:
+                        <input 
+                            onChange={this.handleInput} 
+                            type="text" 
+                            name='tags' 
+                            value='Hashtags (#)'
+                            />
+                        <button> Submit Changes </button>
+                    </form>
+                 </div>
             )
         }
 
