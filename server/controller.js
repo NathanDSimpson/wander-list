@@ -57,7 +57,7 @@ module.exports = {
             }
         } catch(err){
             res.sendStatus(401)
-            alert( `Controller: login`)
+            alert(`Controller: login`)
         }
     },
 

@@ -6,34 +6,8 @@ class Lists extends Component{
     constructor(){
         super()
         this.state = {
-            displayLists: [],
             addListWizard: false
         }
-    }
-
-    async componentWillMount() {
-        console.log(`<Lists> constructor.`)
-        if (this.props.user_id === 0){
-            return
-        }
-        // const res = await axios.post('/api/items', {user_id: this.props.user_id}) //get user's items from the db
-        // const lists = res.data
-        // this.setState({
-        //     displayLists: lists
-        //     })
-    }
-
-    async componentWillReceiveProps() {
-        console.log(`<Lists> componentWillReceiveProps`)
-
-        if (this.props.user_id === 0){
-            return
-        }
-        // const res = await axios.post('/api/items', {user_id: this.props.user_id}) //get user's items from the db
-        // const lists = res.data
-        // this.setState({
-        //     displayLists: lists
-        //     })
     }
 
     toggleAdd = () => {

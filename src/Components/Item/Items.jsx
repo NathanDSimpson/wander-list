@@ -8,7 +8,6 @@ class Items extends Component{
     constructor(){
         super()
         this.state = {
-            displayItems: [],
             addItemWizard: false
         }
     }
