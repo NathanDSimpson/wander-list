@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import { getItems } from '../../redux/reducer'
+import { deleteItem } from '../../redux/reducer'
+
 
 // 0: create route to edit item
 // 1: grab the current item info via props
@@ -54,6 +56,18 @@ class Edit extends Component{
         // might use a different lifecycle if the info is pulled from state and not redux
     }
 
+    deleteItem = async () => {
+        const { item_id, user_id } = this.state
+        try {
+            const res = await axios.post('/api/delete', {item_id, user_id })
+            const updatedItemsList = res.data
+            this.props.deleteItem(updatedItemsList)
+            this.props.history.push('/items')
+        } catch(err){
+            alert(`Whoops! Something went wrong.`)
+        }
+    }
+
     submitEdit = async (event) => {
         event.preventDefault()
         this.toggle()
@@ -98,13 +112,16 @@ class Edit extends Component{
             <div>
                  <div>
                     <button onClick={this.backButton}>  BACK </button>
-                    <button onClick={this.toggle}> EDIT </button>
                 </div>
                 <h3>NAME:{this.state.name}</h3>
                 <div>IMAGE URL:{this.state.img_url}</div>
                 <div>WEIGHT (pounds):{this.state.weight}</div>
                 <div>VOLUME (L):{this.state.volume}</div>
                 <div>DETAILS:{this.state.description}</div>
+                <div>
+                <button onClick={this.toggle}> EDIT </button>
+                <button onClick={this.deleteItem}> DELETE </button>
+                </div>
             </div>
            
             )
@@ -175,7 +192,8 @@ const mapStateToProps = (reduxState) => {
 }
 
 const mapDispatchToProps = {
-    getItems 
+    getItems,
+    deleteItem
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Edit))
