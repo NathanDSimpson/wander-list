@@ -74,6 +74,17 @@ module.exports = {
         }
     },
 
+    editItem: async (req, res) => {
+        const db = req.app.get('db')
+        try {
+            const items = await db.updateItem(req.body)
+            console.log(`items from controller.js (line 81):`, items)
+            res.status(200).send(items)
+        } catch(err){
+            res.sendStatus(401)
+        }
+    },
+
     deleteItem: async (req, res) => {
         const db = req.app.get('db')
         try {

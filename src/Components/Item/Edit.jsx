@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 // import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
-// import axios from 'axios'
+import axios from 'axios'
+import { getItems } from '../../redux/reducer'
 
 // 0: create route to edit item
 // 1: grab the current item info via props
@@ -33,7 +34,6 @@ class Edit extends Component{
         console.log(`<EditItem> constructor firing.`)
         const item = this.props.items.filter(
             (i) => {
-                // console.log(`item.item_id:`, item.item_id, `+this.props.match.params.id:`, +this.props.match.params.id)
             return i.item_id === +this.props.match.params.id
         })
         const { description, img_url, item_id, name, user_id, volume, weight } = item[0]
@@ -57,7 +57,16 @@ class Edit extends Component{
     submitEdit = async (event) => {
         event.preventDefault()
         this.toggle()
-
+        const { name, img_url, weight, volume, description, item_id, user_id } = this.state
+        try {
+            const res = await axios.put('/api/edit-item', { name, img_url, weight, volume, description, item_id, user_id })
+            const items = res.data
+            console.log(`response from db in <edit> (line 63):`, items)
+            // send updated items to redux state
+            this.props.getItems(items)
+        } catch(err){
+            alert('<Edit> line 68: The database might be down.')
+        }
         // submit to db via axios
         // dispatch to the redux store to pull the updated items list for state from the db 
     }
@@ -78,7 +87,7 @@ class Edit extends Component{
     }
 
     render(){
-        console.log(`Rendering <Edit>`)
+        // console.log(`Rendering <Edit>`)
         let display = ''
         if (!this.state.edit){
             display = (
@@ -110,14 +119,14 @@ class Edit extends Component{
                     onChange={this.handleInput} 
                     type="text" 
                     name='img_url' 
-                    placeholder={this.state.img_url}
+                    value={this.state.img_url}
                 />
                 WEIGHT (pounds):
                 <input 
                     onChange={this.handleInput} 
                     type="text" 
                     name='weight' 
-                    placeholder={this.state.weight}
+                    value={this.state.weight}
                 />
                 VOLUME (liters):
                 <input 
@@ -158,8 +167,8 @@ const mapStateToProps = (reduxState) => {
     return { items }
 }
 
-// const mapDispatchToProps = {
-//     submitEdit //not yet created in reducer
-// }
+const mapDispatchToProps = {
+    getItems 
+}
 
-export default connect(mapStateToProps, null)(withRouter(Edit))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Edit))

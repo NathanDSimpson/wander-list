@@ -32,7 +32,6 @@ class AddItem extends Component {
             //send item to db
             const res = await axios.post('/api/add-item', { user_id: this.props.user_id, name, img_url, description, weight, volume }) 
             //get updated items list from db
-            // const res = await axios.post('/api/items', {user_id: this.props.user_id})
             const items = res.data
             // send updated items to redux state
             this.props.getItems(items)
