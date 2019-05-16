@@ -25,11 +25,20 @@ massive(CONNECTION_STRING)
     })
 })
 
-app.post('/api/items', controller.getUserItems) //get all items for the user
-app.post('/api/add-item', controller.addItem) //add an item to the user's library
-app.post('/api/delete', controller.deleteItem) // delete an item from for a user
-app.put('/api/edit-item', controller.editItem)
 
+//ENDPOINTS
+
+// auth
 app.post('/auth/register', controller.register) 
 app.post('/auth/login', controller.login)
 app.get('/auth/logout', controller.logout)
+app.get('/auth/continue-session', controller.continueSession)
+
+
+// items
+app.post('/api/items', controller.getUserItems)
+app.post('/api/add-item', controller.addItem) 
+app.put('/api/edit-item', controller.editItem)
+app.post('/api/delete', controller.deleteItem) 
+//lists
+app.post('/api/lists', controller.getUserLists)

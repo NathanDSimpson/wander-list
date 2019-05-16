@@ -1,21 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import { getItems } from '../../redux/reducer'
-import { deleteItem } from '../../redux/reducer'
-
-
-// 0: create route to edit item
-// 1: grab the current item info via props
-// 2: allow edits and store on local state
-// 3: send the changes to the db through axios
-//     - create an endpoing in index js
-//     - axios call in function in controller file
-//  4: dispatch to redux to pull the updated items list from the db and put it on state
-//      - through reducer function, CONST, and case
-
 
 class Edit extends Component{
     constructor(){
@@ -32,80 +19,70 @@ class Edit extends Component{
         }
     }
 
+    // use the URL params to find the right item in redux, then add that item to local state
     componentWillMount() {
-        console.log(`<EditItem> constructor firing.`)
-        const item = this.props.items.filter(
+        console.log(`Edit.jsx: componentWillMount`)
+        const item = this.props.items.filter( //filter redux items lists to match the URL param to the item_id
             (i) => {
-            return i.item_id === +this.props.match.params.id
+            return i.item_id === +this.props.match.params.id 
         })
         const { description, img_url, item_id, name, user_id, volume, weight } = item[0]
-        this.setState({ 
-            description, 
-            img_url, 
-            item_id, 
-            name, 
-            user_id, 
-            volume, 
-            weight
-        })
+        this.setState({ description, img_url, item_id, name, user_id, volume, weight })
     }
 
     async componentWillReceiveProps() {
-        console.log(`componentWillReceiveProps running`)
-        // re-render after submitting the edits
-        // might use a different lifecycle if the info is pulled from state and not redux
+        console.log(`Edit.jsx: componentWillReceiveProps. (This function currently does nothing at all.)`)
     }
 
+    // delete item from db, get updated items list from db and send to redux
     deleteItem = async () => {
         const { item_id, user_id } = this.state
         try {
-            const res = await axios.post('/api/delete', {item_id, user_id })
-            const updatedItemsList = res.data
-            this.props.deleteItem(updatedItemsList)
-            this.props.history.push('/items')
+            const res = await axios.post('/api/delete', {item_id, user_id }) //delete from db
+            const updatedItemsList = res.data // db returns updated items list
+            this.props.getItems(updatedItemsList)  //dispatch new items to redux
+            this.props.history.push('/items') // navigate user back to items view
         } catch(err){
-            alert(`Whoops! Something went wrong.`)
+            alert(`Edit.jsx: deleteItem`)
         }
     }
 
+    // send updated item info to db, get updated items list from db and send to redux
     submitEdit = async (event) => {
         event.preventDefault()
-        this.toggle()
+        this.toggle() // toggle out of editView after submitting
         const { name, img_url, weight, volume, description, item_id, user_id } = this.state
         try {
-            const res = await axios.put('/api/edit-item', { name, img_url, weight, volume, description, item_id, user_id })
-            const items = res.data
-            console.log(`response from db in <edit> (line 63):`, items)
-            // send updated items to redux state
-            this.props.getItems(items)
+            const res = await axios.put('/api/edit-item', { name, img_url, weight, volume, description, item_id, user_id }) //send updates to db
+            const items = res.data // db returns updated items list
+            this.props.getItems(items) // dispatch new items list to redux
         } catch(err){
-            alert('<Edit> line 68: The database might be down.')
+            alert('Edit.jsx: submitEdit')
         }
-        // submit to db via axios
-        // dispatch to the redux store to pull the updated items list for state from the db 
     }
 
+    // keep track of user inputs via state
     handleInput = event => {
         let {name, value} = event.target
         this.setState({
             [name]: value
         })
     }
-
+       
+    // toggle edit view
     toggle = () => {
-        // go in and out of edit view
-        // could also be done through routing
         this.setState({
             edit: !this.state.edit
         })
     }
 
+    // back to items view
     backButton = () => {
         this.props.history.push('/items')
     }
 
     render(){
-        // console.log(`Rendering <Edit>`)
+        //conditionally render the edit view
         let display = ''
         if (!this.state.edit){
             display = (
@@ -123,7 +100,6 @@ class Edit extends Component{
                 <button onClick={this.deleteItem}> DELETE </button>
                 </div>
             </div>
-           
             )
         } else {
             display = (
@@ -192,8 +168,7 @@ const mapStateToProps = (reduxState) => {
 }
 
 const mapDispatchToProps = {
-    getItems,
-    deleteItem
+    getItems
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Edit))

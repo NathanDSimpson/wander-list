@@ -17,6 +17,7 @@ class AddItem extends Component {
         }
     }
 
+    // track user inputs via local state
     handleInput = event => {
         let {name, value} = event.target
         this.setState({
@@ -24,19 +25,17 @@ class AddItem extends Component {
         })
     }
 
+    // submit from local state to the db, then update redux state with the db response
     handleSubmit = async (event) => {
         event.preventDefault()
-        this.props.toggleAdd()
+        this.props.toggleAdd() // passed as props from Items.jsx to toggle this component
         const { name, img_url, description, weight, volume } = this.state
         try {
-            //send item to db
             const res = await axios.post('/api/add-item', { user_id: this.props.user_id, name, img_url, description, weight, volume }) 
-            //get updated items list from db
             const items = res.data
-            // send updated items to redux state
-            this.props.getItems(items)
+            this.props.getItems(items) // update redux state by sending new items list
         } catch(err){
-            // display an error message
+            alert(`AddItem.jsx: handleSubmit`)
         }
     }
 

@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import axios from 'axios';
-import { deleteItem } from '../../redux/reducer'
 
 class SingleItem extends Component{
 
     editItem = () => {
-        // click on the item name to navigate to the edit view w/ the idem id as a param
         this.props.history.push(`/edit/${this.props.item.item_id}`)
     }
 
@@ -22,8 +19,4 @@ class SingleItem extends Component{
     }
 }
 
-const mapDispatchToProps = {
-    deleteItem
-}
-
-export default connect(null, mapDispatchToProps)(withRouter(SingleItem))
+export default connect(null, null)(withRouter(SingleItem))

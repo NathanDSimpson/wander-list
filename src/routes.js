@@ -11,11 +11,15 @@ import Edit from './Components/Item/Edit'
 export default (
     <Switch>
         <Route exact path='/' component={Home}/>
+
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
-        <Route path='/trips' component={Trips} />
-        <Route path='/lists' component={Lists} />
+
         <Route path='/items' component={Items} />
         <Route path='/edit/:id' component={Edit} />
+
+        <Route path='/lists' component={Lists} />
+
+        <Route path='/trips' component={Trips} />
     </Switch>
 )

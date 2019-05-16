@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { logoutUser } from '../../redux/reducer'
+import { logoutUser, loginUser } from '../../redux/reducer'
 import axios from 'axios';
 
 class Header extends Component{
@@ -12,27 +12,47 @@ class Header extends Component{
         }
     }
 
+    // Check if the server has a session. if so, update redux accordingly
+    async componentDidMount(){
+        console.log(`Header.jsx: componentDidMount`)
+        try {
+            const res = await axios.get('/auth/continue-session')
+            const { user_id, firstname, lastname, email } = res.data
+            if (user_id !== 0 && user_id !== undefined){
+                // update redux
+                this.props.loginUser({ user_id, firstname, lastname, email, authenticated: true })
+            } else {
+                return
+            }
+        } catch(err){
+            alert(`Header.jsx: componentDidMount`)
+        }
+    }
+
+    // toggle the drop down menu 
     toggleMenu = () => {
         this.setState({
             showMenu: !this.state.showMenu
         })
     }
 
+    // log out the user
     logout =  async () => {
         try{
             await axios.get('/auth/logout')
             this.props.logoutUser()
             this.toggleMenu()
         } catch(err) {
-            alert(`Error logging out`)
+            alert(`Header.jsx: logout`)
         }
     }
     
     render(){
-        let hamburger = ''
+        // conditionally render the dropdown menu depending on whether or not the user is logged in
+        let menu = ''
         if (this.state.showMenu){
             if (this.props.authenticated){
-                hamburger = (
+                menu = (
                     <ul className='hamburgerMenu'>
                         <Link to='/trips' onClick={this.toggleMenu}>My Trips</Link>
                         <Link to='/lists' onClick={this.toggleMenu}> My Lists</Link>
@@ -41,7 +61,7 @@ class Header extends Component{
                     </ul>
                     )
             } else {
-                hamburger = (
+                menu = (
                     <ul className='hamburgerMenu'>
                         <Link to='/login' onClick={this.toggleMenu}>Log In</Link>
                         <Link to='/register' onClick={this.toggleMenu}>Register</Link>
@@ -62,7 +82,7 @@ class Header extends Component{
                         <i className="fas fa-sort-down fa-xs"></i>                                        
                     </div>
                 </h1> 
-                {hamburger}
+                {menu}
             </>
         )
     }
@@ -73,7 +93,8 @@ const mapStateToProps = (reduxState) => {
 }
 
 const mapDispatchToProps = {
-    logoutUser
+    logoutUser,
+    loginUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

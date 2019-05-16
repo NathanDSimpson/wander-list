@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import axios from 'axios'
 import AddItem from './AddItem'
 import Icon from './Icon'
 
@@ -14,31 +13,6 @@ class Items extends Component{
         }
     }
 
-    async componentWillMount() {
-        console.log(`<Items> constructor firing.`)
-        if (this.props.user_id === 0){
-            return
-        }
-        const res = await axios.post('/api/items', {user_id: this.props.user_id}) //get user's items from the db
-        const items = res.data
-        this.setState({
-            displayItems: items
-            })
-    }
-
-    async componentWillReceiveProps() {
-        console.log(`componentWillReceiveProps running`)
-
-        if (this.props.user_id === 0){
-            return
-        }
-        const res = await axios.post('/api/items', {user_id: this.props.user_id}) //get user's items from the db
-        const items = res.data
-        this.setState({
-            displayItems: items
-            })
-    }
-
     toggleAdd = () => {
         this.setState({
             addItemWizard: !this.state.addItemWizard
@@ -46,27 +20,28 @@ class Items extends Component{
     }
 
     render(){
+        // map over items list for rendering
+        let icons
+        if (this.props.authenticated){ //make sure our user is logged in
+            icons = this.props.items.map((item) => {
+                return <Icon item={item} key={item.item_id}/>
+            })
+        }else {
+            alert(`Please log in to access your items. (Items.jsx: componentWillMount)`)
+        }
 
         return(
             <div>
                 <button onClick={this.toggleAdd}> {this.state.addItemWizard ? '- Collapse' : '+ Add Item'} </button>
-                {this.state.addItemWizard ? <AddItem toggleAdd={this.toggleAdd}/> :                 
-                    <section className='items'>
-                    {this.state.displayItems.map((item) => {
-                        return <Icon
-                                item={item}
-                                key={item.item_id}
-                                />
-                    })}
-                    </section>}
+                {this.state.addItemWizard ? <AddItem toggleAdd={this.toggleAdd}/> : <section className='items'> {icons} </section>}
             </div>
         )
     }
 }
 
 const mapStateToProps = (reduxState) => {
-    const { authenticated, user_id, firstname, lastname, email, items, lists, trips } = reduxState
-    return { authenticated, user_id, firstname, lastname, email, items, lists, trips }
+    const { authenticated, items } = reduxState
+    return { authenticated, items }
 }
 
 export default connect(mapStateToProps, null)(withRouter(Items))

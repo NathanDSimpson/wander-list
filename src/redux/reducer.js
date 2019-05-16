@@ -15,11 +15,15 @@ const LOGOUT_USER = 'LOGOUT_USER'
 
 const GET_ITEMS = 'GET_ITEMS'
 const ADD_ITEM ='ADD_ITEM'
-const DELETE_ITEM = 'DELETE_ITEM'
+// const DELETE_ITEM = 'DELETE_ITEM'
 
-// const UPDATE_USER_ITEMS = 'UPDATE_USER_ITEMS'
-// const UPDATE_USER_LISTS = 'UPDATE_USER_LISTS'
-// const UPDATE_USER_TRIPS = 'UPDATE_USER_TRIPS'
+// const GET_LISTS = 'GET_LISTS'
+// const ADD_LIST ='ADD_LIST'
+// const DELETE_LIST = 'DELETE_LIST'
+
+// const GET_TRIPS = 'GET_TRIPS'
+// const ADD_TRIP ='ADD_TRIP'
+// const DELETE_TRIP = 'DELETE_TRIP'
 
 export function registerUser(obj) {
 	return {
@@ -56,12 +60,12 @@ export function addItem(obj){
 	}
 }
 
-export function deleteItem(obj){
-	return {
-		type: DELETE_ITEM,
-		payload: obj
-	}
-}
+// export function deleteItem(obj){
+// 	return {
+// 		type: DELETE_ITEM,
+// 		payload: obj
+// 	}
+// }
 
 export default function reducer(state = initialState, action) {
 	const { type, payload } = action
@@ -107,11 +111,11 @@ export default function reducer(state = initialState, action) {
 				...state,
 				items: updatedItems
 			}
-		case DELETE_ITEM:
-			return {
-				...state,
-				items: payload
-			}
+		// case DELETE_ITEM:
+		// 	return {
+		// 		...state,
+		// 		items: payload
+		// 	}
 		default:
 			return state
 	}
