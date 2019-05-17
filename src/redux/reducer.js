@@ -14,16 +14,12 @@ const LOGIN_USER = 'LOGIN_USER'
 const LOGOUT_USER = 'LOGOUT_USER'
 
 const GET_ITEMS = 'GET_ITEMS'
+const GET_LISTS = 'GET_LISTS'
+const GET_TRIPS = 'GET_TRIPS'
+
+
 const ADD_ITEM ='ADD_ITEM'
-// const DELETE_ITEM = 'DELETE_ITEM'
 
-// const GET_LISTS = 'GET_LISTS'
-// const ADD_LIST ='ADD_LIST'
-// const DELETE_LIST = 'DELETE_LIST'
-
-// const GET_TRIPS = 'GET_TRIPS'
-// const ADD_TRIP ='ADD_TRIP'
-// const DELETE_TRIP = 'DELETE_TRIP'
 
 export function registerUser(obj) {
 	return {
@@ -53,6 +49,19 @@ export function getItems(items){
 	}
 }
 
+export function getLists(lists){
+	return {
+		type: GET_LISTS,
+		payload: lists
+	}
+}
+export function getTrips(trips){
+	return {
+		type: GET_TRIPS,
+		payload: trips
+	}
+}
+
 export function addItem(obj){
 	return {
 		type: ADD_ITEM,
@@ -60,12 +69,7 @@ export function addItem(obj){
 	}
 }
 
-// export function deleteItem(obj){
-// 	return {
-// 		type: DELETE_ITEM,
-// 		payload: obj
-// 	}
-// }
+
 
 export default function reducer(state = initialState, action) {
 	const { type, payload } = action
@@ -103,6 +107,16 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				items: payload
+			}
+		case GET_LISTS:
+			return {
+				...state,
+				lists: payload
+			}
+		case GET_TRIPS:
+			return {
+				...state,
+				trips: payload
 			}
 		case ADD_ITEM:
 			const updatedItems = [...state.items]

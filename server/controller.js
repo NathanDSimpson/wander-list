@@ -70,9 +70,9 @@ module.exports = {
         const { session } = req
         res.status(200).send(session.user)
 
-      },
+    },
 
-      getUserItems: async (req, res) => {
+    getUserItems: async (req, res) => {
         try {
             const database = req.app.get('db')
             const { user_id } = req.body
@@ -82,7 +82,21 @@ module.exports = {
             res.sendStatus(401)
             alert( `Controller: getUserItems`)
         }
-
+    },
+    
+    getUserData: async (req, res) => {
+        try {
+            const db = req.app.get('db')
+            const { user_id } = req.body
+            const items = await db.getItems({user_id})
+            const lists = await db.getLists({user_id})
+            const trips = await db.getTrips({user_id})
+            const userData = {items, lists, trips}
+            res.status(200).send(userData)
+        } catch(err){
+            res.sendStatus(401)
+            alert( `Controller: getUserItems`)
+        }
 	},
 
     addItem: async (req, res) => {
