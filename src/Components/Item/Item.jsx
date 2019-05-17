@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import { getItems } from '../../redux/reducer'
 
-class Edit extends Component{
+class Item extends Component{
     constructor(){
         super()
         this.state = {
@@ -21,17 +21,13 @@ class Edit extends Component{
 
     // use the URL params to find the right item in redux, then add that item to local state
     componentWillMount() {
-        console.log(`Edit.jsx: componentWillMount`)
         const item = this.props.items.filter( //filter redux items lists to match the URL param to the item_id
             (i) => {
             return i.item_id === +this.props.match.params.id 
         })
+        console.log(`item[0]`, item[0])
         const { description, img_url, item_id, name, user_id, volume, weight } = item[0]
         this.setState({ description, img_url, item_id, name, user_id, volume, weight })
-    }
-
-    async componentWillReceiveProps() {
-        console.log(`Edit.jsx: componentWillReceiveProps. (This function currently does nothing at all.)`)
     }
 
     // delete item from db, get updated items list from db and send to redux
@@ -171,4 +167,4 @@ const mapDispatchToProps = {
     getItems
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Edit))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Item))

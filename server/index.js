@@ -42,4 +42,6 @@ app.post('/api/add-item', controller.addItem)
 app.put('/api/edit-item', controller.editItem)
 app.post('/api/delete', controller.deleteItem) 
 //lists
-app.post('/api/lists', controller.getUserLists)
+app.post('/api/lists', controller.getUserLists) //Dont think this is needed anymore
+
+app.post('/api/list-items', controller.getListItems)

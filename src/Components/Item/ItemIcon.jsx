@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-class SingleItem extends Component{
+class ItemIcon extends Component{
 
     editItem = () => {
-        this.props.history.push(`/edit/${this.props.item.item_id}`)
+        this.props.history.push(`/item/${this.props.item.item_id}`)
     }
 
     render(){
@@ -19,4 +19,4 @@ class SingleItem extends Component{
     }
 }
 
-export default connect(null, null)(withRouter(SingleItem))
+export default connect(null, null)(withRouter(ItemIcon))

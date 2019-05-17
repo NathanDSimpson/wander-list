@@ -14,8 +14,8 @@ const LOGIN_USER = 'LOGIN_USER'
 const LOGOUT_USER = 'LOGOUT_USER'
 
 const GET_ITEMS = 'GET_ITEMS'
-const GET_LISTS = 'GET_LISTS'
-const GET_TRIPS = 'GET_TRIPS'
+const GET_USER_DATA = 'GET_USER_DATA'
+
 
 
 const ADD_ITEM ='ADD_ITEM'
@@ -49,16 +49,10 @@ export function getItems(items){
 	}
 }
 
-export function getLists(lists){
-	return {
-		type: GET_LISTS,
-		payload: lists
-	}
-}
-export function getTrips(trips){
-	return {
-		type: GET_TRIPS,
-		payload: trips
+export function getUserData(obj){
+	return{
+		type: GET_USER_DATA,
+		payload: obj
 	}
 }
 
@@ -108,15 +102,12 @@ export default function reducer(state = initialState, action) {
 				...state,
 				items: payload
 			}
-		case GET_LISTS:
+		case GET_USER_DATA:
 			return {
 				...state,
-				lists: payload
-			}
-		case GET_TRIPS:
-			return {
-				...state,
-				trips: payload
+				items: payload.items,
+				lists: payload.lists,
+				trips: payload.trips,
 			}
 		case ADD_ITEM:
 			const updatedItems = [...state.items]
@@ -125,11 +116,6 @@ export default function reducer(state = initialState, action) {
 				...state,
 				items: updatedItems
 			}
-		// case DELETE_ITEM:
-		// 	return {
-		// 		...state,
-		// 		items: payload
-		// 	}
 		default:
 			return state
 	}

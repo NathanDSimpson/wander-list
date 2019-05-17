@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import ListIcon from './ListIcon'
 
 class Lists extends Component{
     constructor(){
@@ -16,16 +17,19 @@ class Lists extends Component{
         })
     }
 
+    goToList = (id) => {
+        this.props.history.push(`/list/${id}`)
+    }
+
     render(){
+
+        let icons = this.props.lists.map((list) =>  <ListIcon list={list} key={list.list_id}/> )
 
         return(
             <div>
-                <button onClick={this.toggleAdd}> {this.state.addListWizard ? '- Collapse' : '+ Add Item'} </button>
-                {/* {this.state.addListWizard ? <AddList toggleAdd={this.toggleAdd}/> :                  */}
-                    <section className='lists'>
-                    {this.state.displayLists.map((list) => {
-                            return <div>{list.name}</div>
-                    })}
+                <button onClick={this.toggleAdd}> {this.state.addListWizard ? '- Collapse' : '+ Add List'} </button>
+                    <section>
+                        {icons}
                     </section>
             </div>
         )
@@ -33,8 +37,8 @@ class Lists extends Component{
 }
 
 const mapStateToProps = (reduxState) => {
-    const { authenticated, user_id, firstname, lastname, email, items, lists, trips } = reduxState
-    return { authenticated, user_id, firstname, lastname, email, items, lists, trips }
+    const { authenticated, user_id, lists } = reduxState
+    return { authenticated, user_id, lists }
 }
 
 export default connect(mapStateToProps, null)(withRouter(Lists))

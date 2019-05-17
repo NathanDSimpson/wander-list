@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { logoutUser, loginUser } from '../../redux/reducer'
+import { withRouter } from 'react-router-dom'
+import { logoutUser, loginUser, getUserData } from '../../redux/reducer'
 import axios from 'axios';
 
 class Header extends Component{
@@ -13,18 +14,21 @@ class Header extends Component{
     }
 
     // Check if the server has a session. if so, update redux accordingly
-    async componentDidMount(){
+    async componentWillMount(){
         console.log(`Header.jsx: componentDidMount`)
         try {
             const res = await axios.get('/auth/continue-session')
             const { user_id, firstname, lastname, email } = res.data
-            if (user_id !== 0 && user_id !== undefined){
-                // update redux
+            if (res.data){ // res.data is an empty sting if there is no the server has no session
                 this.props.loginUser({ user_id, firstname, lastname, email, authenticated: true })
+                const res = await axios.post('/api/user-data', {user_id})
+                this.props.getUserData(res.data)
+                // this.props.history.push('/items')
             } else {
-                return
+                this.props.history.push('/')
             }
         } catch(err){
+            console.log(`Header.jsx - componentWillMount catch(err):`, err)
             alert(`Header.jsx: componentDidMount`)
         }
     }
@@ -94,7 +98,8 @@ const mapStateToProps = (reduxState) => {
 
 const mapDispatchToProps = {
     logoutUser,
-    loginUser
+    loginUser,
+    getUserData
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header))

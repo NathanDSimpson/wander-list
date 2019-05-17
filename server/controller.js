@@ -11,11 +11,11 @@ module.exports = {
             alreadyRegistered = +alreadyRegistered[0].count
             if (alreadyRegistered !== 0) {
                 return res.sendStatus(409)
-                alert( `Already Registered`)
+                console.log( `Already Registered`)
             }
         } catch(err){
             res.sendStatus(401)
-            alert( `Controller: register - database.checkForEmail`)
+            console.log( `Controller: register - database.checkForEmail`)
         }
         try {        
             const salt = bcrypt.genSaltSync(10)
@@ -28,7 +28,7 @@ module.exports = {
             })
         } catch(err) {
             res.sendStatus(401)
-            alert( `Controller: register - database.register`)
+            console.log( `Controller: register - database.register`)
           }
 
         try{
@@ -37,7 +37,7 @@ module.exports = {
             res.status(200).send({user: user[0]})
         } catch(err){
             res.sendStatus(401)
-            alert( `Controller: register - database.login`)
+            console.log( `Controller: register - database.login`)
         }
     },
 
@@ -52,12 +52,12 @@ module.exports = {
                 session.user = credentials[0]
                 res.status(200).send({user: session.user})
             } else {
-                alert( `Controller: login - throw new Error`)
+                console.log( `Controller: login - throw new Error`)
                 throw new Error(401)
             }
         } catch(err){
             res.sendStatus(401)
-            alert(`Controller: login`)
+            console.log(`Controller: login`)
         }
     },
 
@@ -80,7 +80,7 @@ module.exports = {
             res.status(200).send(items)
         } catch(err){
             res.sendStatus(401)
-            alert( `Controller: getUserItems`)
+            console.log( `Controller: getUserItems`)
         }
     },
     
@@ -95,7 +95,7 @@ module.exports = {
             res.status(200).send(userData)
         } catch(err){
             res.sendStatus(401)
-            alert( `Controller: getUserItems`)
+            console.log( `Controller: getUserItems`)
         }
 	},
 
@@ -106,7 +106,7 @@ module.exports = {
             return res.status(200).send(updatedItemList)
         } catch(err){
             res.sendStatus(401)
-            alert( `Controller: addItem`)
+            console.log( `Controller: addItem`)
         }
     },
 
@@ -117,7 +117,7 @@ module.exports = {
             res.status(200).send(items)
         } catch(err){
             res.sendStatus(401)
-            alert( `Controller: editItem`)
+            console.log( `Controller: editItem`)
 
         }
     },
@@ -132,7 +132,7 @@ module.exports = {
 
         } catch(err){
             res.sendStatus(401)
-            alert( `Controller: deleteItem`)
+            console.log( `Controller: deleteItem`)
         }
     },
 
@@ -144,7 +144,19 @@ module.exports = {
             res.status(200).send(lists)
         } catch(err){
             res.sendStatus(401)
-            alert( `Controller: getUserLists`)
+            console.log( `Controller: getUserLists`)
+        }
+    },
+
+    getListItems: async (req, res) => {
+        try {
+            const db = req.app.get('db')
+            const { list_id } = req.body
+            const listItems = await db.getListItems({list_id})
+            res.status(200).send(listItems)
+        } catch(err){
+            res.sendStatus(401)
+            console.log(`Controller: getListItems`)
         }
     }
 }
