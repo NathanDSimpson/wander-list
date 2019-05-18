@@ -106,8 +106,8 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				items: payload.items,
-				lists: payload.lists,
-				trips: payload.trips,
+				lists: payload.lists_with_items,
+				trips: payload.trips_with_lists,
 			}
 		case ADD_ITEM:
 			const updatedItems = [...state.items]

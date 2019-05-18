@@ -69,7 +69,6 @@ module.exports = {
     continueSession: (req, res) => {
         const { session } = req
         res.status(200).send(session.user)
-
     },
 
     getUserItems: async (req, res) => {
@@ -91,8 +90,8 @@ module.exports = {
             const items = await db.getItems({user_id})
             const lists = await db.getLists({user_id})
             const trips = await db.getTrips({user_id})
+
             // loop through lists to get the items for each
-            
             const lists_with_items = []
             for (const list of lists){
                 const listItems = await db.getListItems({list_id: list.list_id}) 
@@ -103,7 +102,17 @@ module.exports = {
             }
 
             // loop through trips to get the lists for each
-            const userData = {items, lists, trips, lists_with_items}
+            const trips_with_lists = []
+            for (const trip of trips){
+                const tripItems = await db.getTripLists({trip_id: trip.trip_id}) 
+                trips_with_lists.push({
+                    ...trip,
+                    trip_lists: tripItems
+                })
+            }
+
+            // send back all of the users data
+            const userData = {items, lists_with_items, trips_with_lists}
             res.status(200).send(userData)
         } catch(err){
             res.sendStatus(401)
