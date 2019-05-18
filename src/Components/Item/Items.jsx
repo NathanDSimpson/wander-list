@@ -19,6 +19,7 @@ class Items extends Component{
     }
 
     render(){
+        console.log(`this.props:`, this.props)
         let icons = this.props.items.map((item) =>  <ItemIcon item={item} key={item.item_id}/> )
         
         return(

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { addItem, getItems } from '../../redux/reducer'
+import { addItem, getItems, getUserData } from '../../redux/reducer'
 
 class AddItem extends Component {
     constructor(){
@@ -28,15 +28,18 @@ class AddItem extends Component {
     // submit from local state to the db, then update redux state with the db response
     handleSubmit = async (event) => {
         event.preventDefault()
-        this.props.toggleAdd() // passed as props from Items.jsx to toggle this component
         const { name, img_url, description, weight, volume } = this.state
         try {
-            const res = await axios.post('/api/add-item', { user_id: this.props.user_id, name, img_url, description, weight, volume }) 
-            const items = res.data
-            this.props.getItems(items) // update redux state by sending new items list
+            // add to db
+            await axios.post('/api/add-item', { user_id: this.props.user_id, name, img_url, description, weight, volume }) 
+            // get updated info from db for redux
+            const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
+            // update redux
+            this.props.getUserData(res.data) 
         } catch(err){
             alert(`AddItem.jsx: handleSubmit`)
         }
+        this.props.toggleAdd() // passed as props from Items.jsx to toggle this component
     }
 
     render(){
@@ -96,7 +99,8 @@ const mapStateToProps = (reduxState) => {
 
 const mapDispatchToProps = {
     addItem,
-    getItems
+    getItems,
+    getUserData
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AddItem))

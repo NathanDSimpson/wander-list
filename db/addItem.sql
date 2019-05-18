@@ -14,5 +14,5 @@ insert into items (
     ${description}
 );
 
-select * from items
-where user_id = ${user_id};
+-- select * from items
+-- where user_id = ${user_id};
