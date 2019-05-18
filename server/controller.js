@@ -104,10 +104,11 @@ module.exports = {
             // loop through trips to get the lists for each
             const trips_with_lists = []
             for (const trip of trips){
-                const tripItems = await db.getTripLists({trip_id: trip.trip_id}) 
+                const tripLists = await db.getTripLists({trip_id: trip.trip_id}) 
+
                 trips_with_lists.push({
                     ...trip,
-                    trip_lists: tripItems
+                    trip_lists: tripLists
                 })
             }
 

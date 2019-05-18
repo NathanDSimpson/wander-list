@@ -17,10 +17,6 @@ class Lists extends Component{
         })
     }
 
-    goToList = (id) => {
-        this.props.history.push(`/list/${id}`)
-    }
-
     render(){
 
         let icons = this.props.lists.map((list) =>  <ListIcon list={list} key={list.list_id}/> )

@@ -4,13 +4,13 @@ import { withRouter } from 'react-router-dom'
 
 class ListIcon extends Component{
 
-    editList = () => {
+    goToList = () => {
         this.props.history.push(`/list/${this.props.list.list_id}`)
     }
 
     render(){
         return(
-            <div className='single-list' onClick={this.editList}>
+            <div className='single-list' onClick={this.goToList}>
                 <span className='list-name'>
                     {this.props.list.name}
                 </span>

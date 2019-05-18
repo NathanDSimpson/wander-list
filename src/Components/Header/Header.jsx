@@ -21,9 +21,12 @@ class Header extends Component{
             const { user_id, firstname, lastname, email } = res.data
             if (res.data){ // res.data is an empty sting if there is no the server has no session
                 this.props.loginUser({ user_id, firstname, lastname, email, authenticated: true })
+
                 const res = await axios.post('/api/user-data', {user_id})
                 this.props.getUserData(res.data)
-                this.props.history.push('/')
+
+                // this.props.history.push('/')
+
             } else {
                 this.props.history.push('/')
             }
