@@ -33,11 +33,9 @@ class Login extends Component {
 
             // get user's lists, trips, and items from db
             const res = await axios.post('/api/user-data', {user_id})
-            console.log(`res.data`, res.data)
             this.props.getUserData(res.data)
 
-            
-
+            // navigate the user
             this.props.history.push('/items') // navigate to the users items view
         } catch(err){alert(`The server is having trouble logging in (Login.jsx)`)}
     }
