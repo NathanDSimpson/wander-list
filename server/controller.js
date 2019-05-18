@@ -147,11 +147,9 @@ module.exports = {
     deleteItem: async (req, res) => {
         const db = req.app.get('db')
         try {
-            const {user_id, item_id} = req.body
+            const {item_id} = req.body
             await db.deleteItem({item_id})           
-            const items = await db.getItems({user_id: user_id})
-            res.status(200).send(items)
-
+            res.sendStatus(200)
         } catch(err){
             res.sendStatus(401)
             console.log( `Controller: deleteItem`)
