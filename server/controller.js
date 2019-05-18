@@ -91,7 +91,19 @@ module.exports = {
             const items = await db.getItems({user_id})
             const lists = await db.getLists({user_id})
             const trips = await db.getTrips({user_id})
-            const userData = {items, lists, trips}
+            // loop through lists to get the items for each
+            
+            const lists_with_items = []
+            for (const list of lists){
+                const listItems = await db.getListItems({list_id: list.list_id}) 
+                lists_with_items.push({
+                    ...list,
+                    list_items: listItems
+                })
+            }
+
+            // loop through trips to get the lists for each
+            const userData = {items, lists, trips, lists_with_items}
             res.status(200).send(userData)
         } catch(err){
             res.sendStatus(401)

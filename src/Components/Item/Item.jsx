@@ -20,12 +20,11 @@ class Item extends Component{
     }
 
     // use the URL params to find the right item in redux, then add that item to local state
-    componentWillMount() {
-        const item = this.props.items.filter( //filter redux items lists to match the URL param to the item_id
+    componentWillReceiveProps(nextProps) {
+        const item = nextProps.items.filter( //filter redux items lists to match the URL param to the item_id
             (i) => {
             return i.item_id === +this.props.match.params.id 
         })
-        console.log(`item[0]`, item[0])
         const { description, img_url, item_id, name, user_id, volume, weight } = item[0]
         this.setState({ description, img_url, item_id, name, user_id, volume, weight })
     }

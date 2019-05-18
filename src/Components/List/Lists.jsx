@@ -27,10 +27,12 @@ class Lists extends Component{
 
         return(
             <div>
-                <button onClick={this.toggleAdd}> {this.state.addListWizard ? '- Collapse' : '+ Add List'} </button>
-                    <section>
-                        {icons}
-                    </section>
+                <button onClick={this.toggleAdd}> 
+                    {this.state.addListWizard ? '- Collapse' : '+ Add List'} 
+                </button>
+                <section>
+                    {icons}
+                </section>
             </div>
         )
     }

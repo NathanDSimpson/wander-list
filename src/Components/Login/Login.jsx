@@ -33,7 +33,9 @@ class Login extends Component {
 
             // get user's lists, trips, and items from db
             const res = await axios.post('/api/user-data', {user_id})
+            console.log(`res.data`, res.data)
             this.props.getUserData(res.data)
+
             
 
             this.props.history.push('/items') // navigate to the users items view

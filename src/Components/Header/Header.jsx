@@ -23,7 +23,7 @@ class Header extends Component{
                 this.props.loginUser({ user_id, firstname, lastname, email, authenticated: true })
                 const res = await axios.post('/api/user-data', {user_id})
                 this.props.getUserData(res.data)
-                // this.props.history.push('/items')
+                this.props.history.push('/')
             } else {
                 this.props.history.push('/')
             }
