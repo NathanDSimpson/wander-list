@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import ItemIcon from '../Item/ItemIcon'
 
 class List extends Component{
     constructor(){
         super()
         this.state = {
             edit: false,
-            show_items: false
+            show_items: true
         }
     }
 
@@ -24,9 +25,12 @@ class List extends Component{
         if (this.state.show_items){
             items = list.list_items.map( item => {
                     return (
-                        <div key={item.item_id}> 
+                        <ItemIcon
+                            key={item.item_id}
+                            item={item}
+                            > 
                             {item.name}
-                        </div>
+                        </ItemIcon>
                     )
             })
         }
