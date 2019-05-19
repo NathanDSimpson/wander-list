@@ -30,7 +30,6 @@ class TripListIcon extends Component{
     }
 
     addToTrip = async () => {
-        console.log(`addToTrip`)
         try{
             // send data to db via axios endpoint, controller, and sql file
             await axios.post('/api/add-trip-list', { trip_id: +this.props.match.params.id, list_id: this.props.list.list_id })
@@ -43,9 +42,17 @@ class TripListIcon extends Component{
         }
     }
     
-    removeFromTrip = () => {
-        console.log(`removeFromTrip`)
-    }
+    removeFromTrip = async () => {
+        try{
+            // send data to db via axios endpoint, controller, and sql file
+            await axios.post('/api/delete-trip-list', { trip_id: +this.props.match.params.id, list_id: this.props.list.list_id })
+            // get updated info for user from db
+            const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
+            // dispatch new info to redux
+            this.props.getUserData(res.data)
+        } catch(err){
+            alert(`Error: Trips.jsx - submitTrip`)
+        }    }
 
     render(){
 

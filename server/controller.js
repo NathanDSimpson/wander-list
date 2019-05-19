@@ -259,7 +259,7 @@ module.exports = {
             res.sendStatus(200)
         } catch(err) {
             res.sendStatus(401)
-            console.log(`Controller: addTrip`)
+            console.log(`Controller: deleteTrip`)
 
         }
     },
@@ -271,7 +271,7 @@ module.exports = {
             res.sendStatus(200)
         } catch(err) {
             res.sendStatus(401)
-            console.log(`Controller: addTrip`)
+            console.log(`Controller: editTrip`)
 
         }
     },
@@ -283,7 +283,19 @@ module.exports = {
             res.sendStatus(200)
         } catch(err) {
             res.sendStatus(401)
-            console.log(`Controller: addTrip`)
+            console.log(`Controller: addTripList`)
+
+        }
+    },
+
+    deleteTripList: async (req, res) => {
+        const db = req.app.get('db')
+        try{
+           await db.deleteTripList(req.body)
+            res.sendStatus(200)
+        } catch(err) {
+            res.sendStatus(401)
+            console.log(`Controller: deleteTripList`)
 
         }
     }
