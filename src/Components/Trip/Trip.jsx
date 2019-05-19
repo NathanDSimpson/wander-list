@@ -12,7 +12,8 @@ class Trip extends Component{
         this.state = {
             trip_id: 0,
             viewLists: false,
-            edit: false
+            edit: false,
+            addTripLists: false
         }
     }
 
@@ -32,6 +33,12 @@ class Trip extends Component{
     toggleEdit = () => {
         this.setState({
             edit: !this.state.edit
+        })
+    }
+
+    toggleAdd = () => {
+        this.setState({
+            addTripLists: !this.state.addTripLists
         })
     }
 
@@ -57,7 +64,7 @@ class Trip extends Component{
         if (this.state.viewLists){
             trip_lists =  trip.trip_lists.map(list => {
                 return (
-                    <TripListIcon key={list.list_id} list={list}>
+                    <TripListIcon key={list.list_id} list={list} status='removeFromList'> 
                     </TripListIcon>
                 )
             })
@@ -71,6 +78,7 @@ class Trip extends Component{
                         {trip.name}
                         <button onClick={this.deleteTrip}> Delete Trip </button>
                         <button onClick={this.toggleEdit}> Edit Trip </button>
+                        <button onClick={this.toggleAdd}> Add Lists to Trip </button>
                         <button onClick={this.viewTripLists}> Toggle view trip lists </button>
                     </h3>
                     <h4>
@@ -87,17 +95,25 @@ class Trip extends Component{
             )
         }
 
+        let tripListWizard
+        if (this.state.addTripLists){
+            tripListWizard = this.props.lists.map(list => (
+                <TripListIcon key={list.list_id} list={list} status='addToList' ></TripListIcon>
+            ))
+        }
+
         return(
             <div>
                 {view}
+                {tripListWizard}
             </div>
         )
     }
 }
 
 const mapStateToProps = (reduxState) => {
-    const { authenticated, user_id, trips } = reduxState
-    return { authenticated, user_id, trips }
+    const { authenticated, user_id, trips, lists } = reduxState
+    return { authenticated, user_id, trips, lists }
 }
 
 const mapDispatchToProps = {

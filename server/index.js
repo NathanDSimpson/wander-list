@@ -54,6 +54,6 @@ app.post('/api/remove-list-item', controller.removeListItem)
 app.post('/api/add-trip', controller.addTrip)
 app.post('/api/delete-trip', controller.deleteTrip)
 app.put('/api/edit-trip', controller.editTrip)
-
+app.post('/api/add-trip-list', controller.addTripList)
 
 app.post('/api/list-items', controller.getListItems)

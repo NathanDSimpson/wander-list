@@ -274,6 +274,18 @@ module.exports = {
             console.log(`Controller: addTrip`)
 
         }
+    },
+
+    addTripList: async (req, res) => {
+        const db = req.app.get('db')
+        try{
+           await db.addTripList(req.body)
+            res.sendStatus(200)
+        } catch(err) {
+            res.sendStatus(401)
+            console.log(`Controller: addTrip`)
+
+        }
     }
     
 
