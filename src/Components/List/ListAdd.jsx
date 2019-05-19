@@ -10,16 +10,8 @@ class ListEdit extends Component{
         this.state = {
             name: '',
             description: '',
-            list_id: 0
+            user_id: 0
         }
-    }
-
-    componentWillMount(){
-        this.setState({
-            name: this.props.list.name,
-            description: this.props.list.description,
-            list_id: this.props.list.list_id
-        })
     }
 
     // keep track of user inputs via state
@@ -33,18 +25,19 @@ class ListEdit extends Component{
     // submit the edits
     handleSubmit = async (event) => {
         event.preventDefault()
-        this.props.toggleEdit()
+        this.props.toggleAdd() 
         const { name, description} = this.state
         try {
             // send edits to db
-            await axios.put('/api/edit-list', {list_id: this.state.list_id, name, description})
+            await axios.post('/api/add-list', {user_id: this.props.user_id, name, description})
+            console.log(`passed the delete list`)
             // get updated info from db
             const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
             // dispatch new info to redux
             this.props.getUserData(res.data)
 
         } catch(err){
-            alert(`ListEdit.jsx: handleSubmit`)
+            alert(`ListAdd.jsx: handleSubmit`)
         }
 
     }
@@ -58,14 +51,14 @@ class ListEdit extends Component{
                         onChange={this.handleInput} 
                         type="text" 
                         name='name' 
-                        value={this.state.name}
+                        placeholder='name'
                         />
-                    IMAGE URL:
+                    DESCRIPTION:
                     <input 
                         onChange={this.handleInput} 
                         type="text" 
                         name='description' 
-                        value={this.state.description}
+                        placeholder='description'
                         />                
                     <button> Submit Changes </button>
                 </form>

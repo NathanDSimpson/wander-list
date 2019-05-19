@@ -190,6 +190,32 @@ module.exports = {
             console.log(`Controller: editList`)
 
         }
-    }
+    },
+
+    deleteList: async (req, res) => {
+        const db = req.app.get('db')
+        try{
+            await db.deleteList(req.body)
+            res.sendStatus(200)
+        } catch(err) {
+            res.sendStatus(401)
+            console.log(`Controller: deleteList`)
+
+        }
+    },
+
+    addList: async (req, res) => {
+        const db = req.app.get('db')
+        try{
+            await db.addList(req.body)
+            res.sendStatus(200)
+        } catch(err) {
+            res.sendStatus(401)
+            console.log(`Controller: deleteList`)
+
+        }
+    },
+
+
 
 }

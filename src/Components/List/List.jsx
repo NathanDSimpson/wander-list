@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import ItemIcon from '../Item/ItemIcon'
 import ListEdit from './ListEdit'
+import {getUserData} from '../../redux/reducer'
 
 class List extends Component{
     constructor(){
         super()
         this.state = {
             edit: false,
-            show_items: true
+            show_items: true,
         }
     }
 
@@ -24,6 +26,21 @@ class List extends Component{
             edit: !this.state.edit
         })
     }
+
+
+    deleteList = async () =>{
+        this.props.history.push('/lists') 
+        try {
+            //delete from db
+            await axios.post('/api/delete-list', { list_id: +this.props.match.params.id }) 
+            //get updated info from db
+            const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
+            // update redux
+            this.props.getUserData(res.data)
+        } catch(err){
+            alert(`List.jsx: deleteList`)
+            }
+        }
 
     render(){
         let temp  = this.props.lists.filter( list => list.list_id === +this.props.match.params.id)
@@ -42,9 +59,9 @@ class List extends Component{
             })
         }
 
-        let list_header
+        let list_display
         if (this.state.edit){
-            list_header = (
+            list_display = (
                 <div>
                     <button onClick={this.editList}> Toggle Edit </button>
                     <div>edit</div>
@@ -55,12 +72,14 @@ class List extends Component{
                 </div>
             )
         } else {
-            list_header = (
+            list_display = (
                 <div>
                     <h2>
                         {list.name}
                         <button onClick={this.toggle_show_items}> Expand / Shrink </button>
                         <button onClick={this.editList}> Edit </button>
+                        <button onClick={this.deleteList}> Delete </button>
+
                     </h2>
                     <h5>
                         {list.description}
@@ -72,7 +91,7 @@ class List extends Component{
         return(
             <div>
                 <div>
-                    {list_header}
+                    {list_display}
                 </div>
                 <div>
                     {items}
@@ -91,4 +110,8 @@ const mapStateToProps = (reduxState) => {
     return { user_id, lists, authenticated }
 }
 
-export default connect(mapStateToProps, null)(withRouter(List))
+const mapDispatchToProps = {
+    getUserData
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(List))
