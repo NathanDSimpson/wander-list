@@ -60,7 +60,7 @@ class ListEdit extends Component{
                         name='name' 
                         value={this.state.name}
                         />
-                    IMAGE URL:
+                    Description:
                     <input 
                         onChange={this.handleInput} 
                         type="text" 

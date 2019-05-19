@@ -211,11 +211,22 @@ module.exports = {
             res.sendStatus(200)
         } catch(err) {
             res.sendStatus(401)
-            console.log(`Controller: deleteList`)
+            console.log(`Controller: addList`)
 
         }
     },
 
+    addListItem: async (req, res) => {
+        const db = req.app.get('db')
+        try{
+            await db.addListItem(req.body)
+            res.sendStatus(200)
+        } catch(err) {
+            res.sendStatus(401)
+            console.log(`Controller: addListItem`)
+
+        }
+    }
 
 
 }

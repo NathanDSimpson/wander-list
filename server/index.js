@@ -46,5 +46,6 @@ app.post('/api/lists', controller.getUserLists) //Dont think this is needed anym
 app.put('/api/edit-list', controller.editList)
 app.post('/api/delete-list', controller.deleteList)
 app.post('/api/add-list', controller.addList)
+app.post('/api/add-list-item', controller.addListItem)
 
 app.post('/api/list-items', controller.getListItems)

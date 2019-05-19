@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import ItemIcon from '../Item/ItemIcon'
 import ListEdit from './ListEdit'
+import ItemWizard from './ItemWizard'
 import {getUserData} from '../../redux/reducer'
 
 class List extends Component{
@@ -12,12 +13,19 @@ class List extends Component{
         this.state = {
             edit: false,
             show_items: true,
+            add_items: false
         }
     }
 
     toggle_show_items = () => {
         this.setState({
             show_items: !this.state.show_items
+        })
+    }
+
+    toggleAddItems = () => {
+        this.setState({
+            add_items: !this.state.add_items
         })
     }
 
@@ -47,10 +55,10 @@ class List extends Component{
         let list = temp[0]
         let items 
         if (this.state.show_items){
-            items = list.list_items.map( item => {
+            items = list.list_items.map( (item, index) => {
                     return (
                         <ItemIcon
-                            key={item.item_id}
+                            key={index}
                             item={item}
                             > 
                             {item.name}
@@ -77,6 +85,7 @@ class List extends Component{
                     <h2>
                         {list.name}
                         <button onClick={this.toggle_show_items}> Expand / Shrink </button>
+                        <button onClick={this.toggleAddItems}> Toggle Add Items </button>
                         <button onClick={this.editList}> Edit </button>
                         <button onClick={this.deleteList}> Delete </button>
 
@@ -85,6 +94,12 @@ class List extends Component{
                         {list.description}
                     </h5>
                 </div>
+            )
+        }
+        let add_item_wizard
+        if (this.state.add_items){
+            add_item_wizard = (
+                <ItemWizard ></ItemWizard>
             )
         }
 
@@ -97,7 +112,7 @@ class List extends Component{
                     {items}
                 </div>
                 <div>
-
+                    {add_item_wizard}
                 </div>
             </div>
         )
