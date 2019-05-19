@@ -8,7 +8,7 @@ class Items extends Component{
     constructor(){
         super()
         this.state = {
-            addItemWizard: false
+            addItemWizard: false,
         }
     }
 

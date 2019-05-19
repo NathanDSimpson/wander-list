@@ -9,6 +9,7 @@ import List from './Components/List/List'
 import Lists from './Components/List/Lists'
 import Trips from './Components/Trip/Trips'
 import Trip from './Components/Trip/Trip'
+import ItemsTestCopy from './Components/Item/ItemsTestCopy'
 
 export default (
     <Switch>
@@ -17,7 +18,7 @@ export default (
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
 
-        <Route path='/items' component={Items} />
+        <Route path='/items' component={ItemsTestCopy} />
         <Route path='/item/:id' component={Item} />
 
         <Route path='/lists' component={Lists} />
