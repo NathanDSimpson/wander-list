@@ -4,13 +4,15 @@ import { withRouter } from 'react-router-dom'
 import TripListIcon from './TripListIcon'
 import { getUserData } from '../../redux/reducer'
 import axios from 'axios'
+import TripEdit from './TripEdit'
 
 class Trip extends Component{
     constructor(){
         super()
         this.state = {
             trip_id: 0,
-            viewLists: false
+            viewLists: false,
+            edit: false
         }
     }
 
@@ -24,6 +26,12 @@ class Trip extends Component{
     viewTripLists = () => {
         this.setState({
             viewLists: !this.state.viewLists
+        })
+    }
+
+    toggleEdit = () => {
+        this.setState({
+            edit: !this.state.edit
         })
     }
 
@@ -55,20 +63,33 @@ class Trip extends Component{
             })
         }
 
+        let view 
+        if (!this.state.edit) {
+            view = (
+                <div>
+                    <h3>
+                        {trip.name}
+                        <button onClick={this.deleteTrip}> Delete Trip </button>
+                        <button onClick={this.toggleEdit}> Edit Trip </button>
+                        <button onClick={this.viewTripLists}> Toggle view trip lists </button>
+                    </h3>
+                    <h4>
+                        {trip.description}
+                    </h4>
+                    <h6>
+                        {trip_lists}
+                    </h6>
+                </div>
+            )
+        } else{
+            view = (
+                <TripEdit trip={trip} toggleEdit={this.toggleEdit}></TripEdit>
+            )
+        }
+
         return(
             <div>
-                <h3>
-                    {trip.name}
-                    <button onClick={this.deleteTrip}> Delete Trip </button>
-                    <button onClick={this.viewTripLists}> Toggle view trip lists </button>
-                </h3>
-                <h4>
-                    {trip.description}
-                </h4>
-                <h6>
-                    {trip_lists}
-                </h6>
-
+                {view}
             </div>
         )
     }
