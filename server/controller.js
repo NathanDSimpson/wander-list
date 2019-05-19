@@ -226,7 +226,21 @@ module.exports = {
             console.log(`Controller: addListItem`)
 
         }
+    },
+
+    removeListItem: async (req, res) => {
+        const db = req.app.get('db')
+        try{
+           await db.deleteListItem(req.body)
+            res.sendStatus(200)
+        } catch(err) {
+            res.sendStatus(401)
+            console.log(`Controller: removeListItem`)
+
+        }
     }
+
+    
 
 
 }

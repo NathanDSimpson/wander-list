@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import ItemIcon from '../Item/ItemIcon'
+import ListItemIcon from './ListItemIcon'
 import ListEdit from './ListEdit'
 import ItemWizard from './ItemWizard'
 import {getUserData} from '../../redux/reducer'
@@ -57,12 +57,12 @@ class List extends Component{
         if (this.state.show_items){
             items = list.list_items.map( (item, index) => {
                     return (
-                        <ItemIcon
+                        <ListItemIcon
                             key={index}
                             item={item}
                             > 
                             {item.name}
-                        </ItemIcon>
+                        </ListItemIcon>
                     )
             })
         }

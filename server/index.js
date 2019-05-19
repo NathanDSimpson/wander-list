@@ -47,5 +47,6 @@ app.put('/api/edit-list', controller.editList)
 app.post('/api/delete-list', controller.deleteList)
 app.post('/api/add-list', controller.addList)
 app.post('/api/add-list-item', controller.addListItem)
+app.post('/api/remove-list-item', controller.removeListItem)
 
 app.post('/api/list-items', controller.getListItems)
