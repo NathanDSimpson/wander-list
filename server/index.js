@@ -52,5 +52,7 @@ app.post('/api/remove-list-item', controller.removeListItem)
 
 //Trips
 app.post('/api/add-trip', controller.addTrip)
+app.post('/api/delete-trip', controller.deleteTrip)
+
 
 app.post('/api/list-items', controller.getListItems)

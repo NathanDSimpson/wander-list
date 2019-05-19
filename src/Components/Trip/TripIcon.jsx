@@ -26,24 +26,28 @@ class TripIcon extends Component{
         if (this.state.viewLists){
             trip_lists =  this.props.trip.trip_lists.map(list => {
                 return (
-                    <TripListIcon key={list.list_id} list={list}>
-                    </TripListIcon>
+                    <li key={list.list_id}>
+                        <TripListIcon list={list}>
+                        </TripListIcon>
+                    </li>
                 )
             })
         }
 
         return(
             <div>
-                <h3 onClick={this.goToTrip}>
-                    {this.props.trip.name}
+                <h3>
+                    <span onClick={this.goToTrip}>
+                        {this.props.trip.name}
+                    </span>
+                    <button onClick={this.viewTripLists}> Toggle view trip lists </button>
                 </h3>
-                <h4>
-                    {this.props.trip.description}
-                </h4>
-                <button onClick={this.viewTripLists}> Toggle view trip lists </button>
                 <h6>
-                    {trip_lists}
+                    {this.props.trip.description}
                 </h6>
+                <ul>
+                    {trip_lists}
+                </ul>
 
             </div>
         )

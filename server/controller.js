@@ -250,6 +250,18 @@ module.exports = {
             console.log(`Controller: addTrip`)
 
         }
+    },
+
+    deleteTrip: async (req, res) => {
+        const db = req.app.get('db')
+        try{
+           await db.deleteTrip(req.body)
+            res.sendStatus(200)
+        } catch(err) {
+            res.sendStatus(401)
+            console.log(`Controller: addTrip`)
+
+        }
     }
 
     

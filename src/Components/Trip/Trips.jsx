@@ -45,7 +45,6 @@ class Trips extends Component{
         } catch(err){
             alert(`Error: Trips.jsx - submitTrip`)
         }
-
     }
 
     render(){
