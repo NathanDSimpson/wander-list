@@ -36,8 +36,16 @@ class Items extends Component{
 
     render(){
         let icons
+        // filter our items
         if (this.state.filterItems){
-            let filteredItems = this.props.items.filter( item => item.name === this.state.filterValue)
+            let filteredItems = this.props.items.filter( item =>  {
+                // account for case-sensitivity
+                let filter_lowercase = this.state.filterValue.toLowerCase()
+                let name_lowercase = item.name.toLowerCase()
+                let tags_lowercase = item.tags.toLowerCase()
+                return name_lowercase.includes(filter_lowercase) || tags_lowercase.includes(filter_lowercase)
+                })
+            // map the list into components
             icons = filteredItems.map((item) =>  <ItemIcon item={item} key={item.item_id}/> )
         } else {
             icons = this.props.items.map((item) =>  <ItemIcon item={item} key={item.item_id}/> )

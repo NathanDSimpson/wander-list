@@ -99,6 +99,7 @@ class Item extends Component{
                 <div>WEIGHT (pounds):{item.weight}</div>
                 <div>VOLUME (L):{item.volume}</div>
                 <div>DETAILS:{item.description}</div>
+                <div>TAGS:{item.tags}</div>
                 <div>
                 <button onClick={this.toggle}> EDIT </button>
                 <button onClick={this.deleteItem}> DELETE </button>
