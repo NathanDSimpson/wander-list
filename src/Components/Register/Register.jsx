@@ -70,14 +70,14 @@ class Register extends Component {
                     <input 
                         className='form-entry'
                         onChange={this.handleInput} 
-                        type="text" 
+                        type="password" 
                         name='password' 
                         placeholder='Password'
                     />
                     <input 
                         className='form-entry'
                         onChange={this.handleInput} 
-                        type="text" 
+                        type="password" 
                         name='confirmPassword' 
                         placeholder='Re-enter Password'
                         />

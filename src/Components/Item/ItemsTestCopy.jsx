@@ -8,21 +8,14 @@ class Items extends Component{
     constructor(){
         super()
         this.state = {
-            addItemWizard: false,
-            filterItems: false,
-            filterValue: ''
+            addItem: false,
+            searchValue: ''
         }
     }
 
     toggleAdd = () => {
         this.setState({
-            addItemWizard: !this.state.addItemWizard
-        })
-    }
-
-    toggleFilter = () => {
-        this.setState({
-            filterItems: !this.state.filterItems
+            addItem: !this.state.addItem
         })
     }
 
@@ -35,33 +28,36 @@ class Items extends Component{
     }
 
     render(){
-        let icons
-        // filter our items
-        if (this.state.filterItems){
-            let filteredItems = this.props.items.filter( item =>  {
-                // account for case-sensitivity
-                let filter_lowercase = this.state.filterValue.toLowerCase()
-                let name_lowercase = item.name.toLowerCase()
-                let tags_lowercase = item.tags.toLowerCase()
-                return name_lowercase.includes(filter_lowercase) || tags_lowercase.includes(filter_lowercase)
-                })
-            // map the list into components
-            icons = filteredItems.map((item) =>  <ItemIcon item={item} key={item.item_id}/> )
-        } else {
-            icons = this.props.items.map((item) =>  <ItemIcon item={item} key={item.item_id}/> )
-        }
-        
-        return(
-            <div>
-                <button onClick={this.toggleAdd}> {this.state.addItemWizard ? '- Collapse' : '+ Add Item'} </button>
-                <button onClick={this.toggleFilter}> Toggle Filter: {this.state.toggleFilter} </button>
-                <input 
+        let filteredItems = this.props.items.filter( item =>  {
+            // account for case-sensitivity
+            let filter_lowercase = this.state.searchValue.toLowerCase()
+            let name_lowercase = item.name.toLowerCase()
+            let tags_lowercase = item.tags.toLowerCase()
+            return name_lowercase.includes(filter_lowercase) || tags_lowercase.includes(filter_lowercase)
+            })
+        // map the list into components
+        let icons = filteredItems.map((item) =>  <ItemIcon item={item} key={item.item_id}/> )
+
+        let backButton = (<i class="fas fa-chevron-left"></i>)
+        let addButton = (<i class="fas fa-plus"></i>)
+  
+        let search
+            if (!this.state.addItem){
+                search = (
+                    <input 
                         onChange={this.handleInput} 
                         type="text" 
-                        name='filterValue' 
-                        placeholder='filter value'
+                        name='searchValue' 
+                        placeholder='Search'
                     />
-                {this.state.addItemWizard ? <AddItem toggleAdd={this.toggleAdd}/> : <section className='items'> {icons} </section>}
+                )            
+            }
+
+        return(
+            <div>
+                <button onClick={this.toggleAdd}> {this.state.addItem ? backButton : addButton} </button>
+                {search}
+                {this.state.addItem ? <AddItem toggleAdd={this.toggleAdd}/> : <section className='items'> {icons} </section>}
             </div>
         )
     }

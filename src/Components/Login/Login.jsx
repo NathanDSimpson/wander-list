@@ -54,7 +54,7 @@ class Login extends Component {
                     <input 
                         className='form-entry'
                         onChange={this.handleInput} 
-                        type="text" 
+                        type="password" 
                         name='password' 
                         placeholder='password'
                     />
