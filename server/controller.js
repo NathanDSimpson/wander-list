@@ -169,14 +169,27 @@ module.exports = {
     },
 
     getListItems: async (req, res) => {
+        const db = req.app.get('db')
+        const { list_id } = req.body
         try {
-            const db = req.app.get('db')
-            const { list_id } = req.body
             const listItems = await db.getListItems({list_id})
             res.status(200).send(listItems)
         } catch(err){
             res.sendStatus(401)
             console.log(`Controller: getListItems`)
         }
+    },
+
+    editList: async (req, res) => {
+        const db = req.app.get('db')
+        try{
+            await db.updateList(req.body)
+            res.sendStatus(200)
+        } catch(err) {
+            res.sendStatus(401)
+            console.log(`Controller: editList`)
+
+        }
     }
+
 }

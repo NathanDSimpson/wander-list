@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import ItemIcon from '../Item/ItemIcon'
+import ListEdit from './ListEdit'
 
 class List extends Component{
     constructor(){
@@ -15,6 +16,12 @@ class List extends Component{
     toggle_show_items = () => {
         this.setState({
             show_items: !this.state.show_items
+        })
+    }
+
+    editList = () => {
+        this.setState({
+            edit: !this.state.edit
         })
     }
 
@@ -35,12 +42,38 @@ class List extends Component{
             })
         }
 
+        let list_header
+        if (this.state.edit){
+            list_header = (
+                <div>
+                    <button onClick={this.editList}> Toggle Edit </button>
+                    <div>edit</div>
+                    <ListEdit
+                        list={list}
+                        toggleEdit={this.editList}
+                    ></ListEdit>
+                </div>
+            )
+        } else {
+            list_header = (
+                <div>
+                    <h2>
+                        {list.name}
+                        <button onClick={this.toggle_show_items}> Expand / Shrink </button>
+                        <button onClick={this.editList}> Edit </button>
+                    </h2>
+                    <h5>
+                        {list.description}
+                    </h5>
+                </div>
+            )
+        }
+
         return(
             <div>
-                <h2>
-                    {list.name}
-                    <button onClick={this.toggle_show_items}> Expand / Shrink </button>
-                </h2>
+                <div>
+                    {list_header}
+                </div>
                 <div>
                     {items}
                 </div>
