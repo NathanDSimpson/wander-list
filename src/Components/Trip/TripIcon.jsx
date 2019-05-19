@@ -3,21 +3,13 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import TripListIcon from './TripListIcon'
 
-class Trip extends Component{
+class TripIcon extends Component{
     constructor(){
         super()
         this.state = {
-            trip_id: 0,
             viewLists: false
         }
     }
-
-    componentWillMount(){
-        this.setState({
-            trip_id: +this.props.match.params.id
-        })
-    }
-
 
     viewTripLists = () => {
         this.setState({
@@ -25,12 +17,14 @@ class Trip extends Component{
         })
     }
 
+    goToTrip = () => {
+        this.props.history.push(`/trip/${this.props.trip.trip_id}`)
+    }
+
     render(){
-        const temp = this.props.trips.filter(trip => trip.trip_id === this.state.trip_id)
-        const trip = temp[0]
         let trip_lists
         if (this.state.viewLists){
-            trip_lists =  trip.trip_lists.map(list => {
+            trip_lists =  this.props.trip.trip_lists.map(list => {
                 return (
                     <TripListIcon key={list.list_id} list={list}>
                     </TripListIcon>
@@ -40,11 +34,11 @@ class Trip extends Component{
 
         return(
             <div>
-                <h3>
-                    {trip.name}
+                <h3 onClick={this.goToTrip}>
+                    {this.props.trip.name}
                 </h3>
                 <h4>
-                    {trip.description}
+                    {this.props.trip.description}
                 </h4>
                 <button onClick={this.viewTripLists}> Toggle view trip lists </button>
                 <h6>
@@ -61,5 +55,5 @@ const mapStateToProps = (reduxState) => {
     return { authenticated, user_id, trips }
 }
 
-export default connect(mapStateToProps, null)(withRouter(Trip))
+export default connect(mapStateToProps, null)(withRouter(TripIcon))
 

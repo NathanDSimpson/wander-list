@@ -41,6 +41,7 @@ app.post('/api/items', controller.getUserItems)
 app.post('/api/add-item', controller.addItem) 
 app.put('/api/edit-item', controller.editItem)
 app.post('/api/delete', controller.deleteItem) 
+
 //lists
 app.post('/api/lists', controller.getUserLists) //Dont think this is needed anymore
 app.put('/api/edit-list', controller.editList)
@@ -48,5 +49,8 @@ app.post('/api/delete-list', controller.deleteList)
 app.post('/api/add-list', controller.addList)
 app.post('/api/add-list-item', controller.addListItem)
 app.post('/api/remove-list-item', controller.removeListItem)
+
+//Trips
+app.post('/api/add-trip', controller.addTrip)
 
 app.post('/api/list-items', controller.getListItems)

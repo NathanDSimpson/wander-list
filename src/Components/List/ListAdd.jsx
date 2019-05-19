@@ -30,7 +30,6 @@ class ListEdit extends Component{
         try {
             // send edits to db
             await axios.post('/api/add-list', {user_id: this.props.user_id, name, description})
-            console.log(`passed the delete list`)
             // get updated info from db
             const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
             // dispatch new info to redux
@@ -75,4 +74,5 @@ const mapStateToProps = (reduxState) => {
 const mapDispatchToProps = {
     getUserData
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ListEdit))
