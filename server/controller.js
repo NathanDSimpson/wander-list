@@ -11,11 +11,10 @@ module.exports = {
             alreadyRegistered = +alreadyRegistered[0].count
             if (alreadyRegistered !== 0) {
                 return res.sendStatus(409)
-                console.log( `Already Registered`)
+                alert(`That email is already registered.`)
             }
         } catch(err){
             res.sendStatus(401)
-            console.log( `Controller: register - database.checkForEmail`)
         }
         try {        
             const salt = bcrypt.genSaltSync(10)
@@ -28,7 +27,6 @@ module.exports = {
             })
         } catch(err) {
             res.sendStatus(401)
-            console.log( `Controller: register - database.register`)
           }
 
         try{
@@ -37,7 +35,6 @@ module.exports = {
             res.status(200).send({user: user[0]})
         } catch(err){
             res.sendStatus(401)
-            console.log( `Controller: register - database.login`)
         }
     },
 
@@ -52,12 +49,10 @@ module.exports = {
                 session.user = credentials[0]
                 res.status(200).send({user: session.user})
             } else {
-                console.log( `Controller: login - throw new Error`)
                 throw new Error(401)
             }
         } catch(err){
             res.sendStatus(401)
-            console.log(`Controller: login`)
         }
     },
 
@@ -79,7 +74,6 @@ module.exports = {
             res.status(200).send(items)
         } catch(err){
             res.sendStatus(401)
-            console.log( `Controller: getUserItems`)
         }
     },
     
@@ -117,7 +111,6 @@ module.exports = {
             res.status(200).send(userData)
         } catch(err){
             res.sendStatus(401)
-            console.log( `Controller: getUserItems`)
         }
 	},
 
@@ -128,7 +121,6 @@ module.exports = {
             res.sendStatus(200)
         } catch(err){
             res.sendStatus(401)
-            console.log( `Controller: addItem`)
         }
     },
 
@@ -139,8 +131,6 @@ module.exports = {
             res.sendStatus(200)
         } catch(err){
             res.sendStatus(401)
-            console.log( `Controller: editItem`)
-
         }
     },
 
@@ -152,7 +142,6 @@ module.exports = {
             res.sendStatus(200)
         } catch(err){
             res.sendStatus(401)
-            console.log( `Controller: deleteItem`)
         }
     },
 
@@ -164,7 +153,6 @@ module.exports = {
             res.status(200).send(lists)
         } catch(err){
             res.sendStatus(401)
-            console.log( `Controller: getUserLists`)
         }
     },
 
@@ -176,7 +164,6 @@ module.exports = {
             res.status(200).send(listItems)
         } catch(err){
             res.sendStatus(401)
-            console.log(`Controller: getListItems`)
         }
     },
 
@@ -187,8 +174,6 @@ module.exports = {
             res.sendStatus(200)
         } catch(err) {
             res.sendStatus(401)
-            console.log(`Controller: editList`)
-
         }
     },
 
@@ -199,8 +184,6 @@ module.exports = {
             res.sendStatus(200)
         } catch(err) {
             res.sendStatus(401)
-            console.log(`Controller: deleteList`)
-
         }
     },
 
@@ -211,8 +194,6 @@ module.exports = {
             res.sendStatus(200)
         } catch(err) {
             res.sendStatus(401)
-            console.log(`Controller: addList`)
-
         }
     },
 
@@ -223,8 +204,6 @@ module.exports = {
             res.sendStatus(200)
         } catch(err) {
             res.sendStatus(401)
-            console.log(`Controller: addListItem`)
-
         }
     },
 
@@ -235,8 +214,6 @@ module.exports = {
             res.sendStatus(200)
         } catch(err) {
             res.sendStatus(401)
-            console.log(`Controller: removeListItem`)
-
         }
     },
 
@@ -247,8 +224,6 @@ module.exports = {
             res.sendStatus(200)
         } catch(err) {
             res.sendStatus(401)
-            console.log(`Controller: addTrip`)
-
         }
     },
 
@@ -259,8 +234,6 @@ module.exports = {
             res.sendStatus(200)
         } catch(err) {
             res.sendStatus(401)
-            console.log(`Controller: deleteTrip`)
-
         }
     },
     
@@ -271,8 +244,6 @@ module.exports = {
             res.sendStatus(200)
         } catch(err) {
             res.sendStatus(401)
-            console.log(`Controller: editTrip`)
-
         }
     },
 
@@ -283,8 +254,6 @@ module.exports = {
             res.sendStatus(200)
         } catch(err) {
             res.sendStatus(401)
-            console.log(`Controller: addTripList`)
-
         }
     },
 
@@ -295,8 +264,6 @@ module.exports = {
             res.sendStatus(200)
         } catch(err) {
             res.sendStatus(401)
-            console.log(`Controller: deleteTripList`)
-
         }
     }
     

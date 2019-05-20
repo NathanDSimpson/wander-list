@@ -8,15 +8,9 @@ class ItemWizard extends Component{
     constructor(){
         super()
         this.state = {
-            filter: false,
+            filter: true,
             filterValue: ''
         }
-    }
-
-    toggleFilter = () => {
-        this.setState({
-            filter: !this.state.filter
-        })
     }
 
     // track user inputs via local state
@@ -46,15 +40,15 @@ class ItemWizard extends Component{
 
         return(
             <div>
-                ItemWizard
-                <button onClick={this.toggleFilter}> Toggle Filter </button>
                 <input 
                         onChange={this.handleInput} 
                         type="text" 
                         name='filterValue' 
-                        placeholder='filter value'
+                        placeholder='Search'
                     />
-                {items}
+                <div>
+                    {items}
+                </div>
             </div>
         )
     }

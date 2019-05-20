@@ -7,7 +7,6 @@ import {getUserData} from '../../redux/reducer'
 class ListItemIcon extends Component{
 
     removeItemFromList = async () => {
-        console.log(`removeItemFromList`)
         await axios.post('/api/remove-list-item', {item_id: this.props.item.item_id, list_id: +this.props.match.params.id })
         const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
         this.props.getUserData(res.data)

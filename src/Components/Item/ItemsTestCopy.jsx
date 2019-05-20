@@ -38,8 +38,8 @@ class Items extends Component{
         // map the list into components
         let icons = filteredItems.map((item) =>  <ItemIcon item={item} key={item.item_id}/> )
 
-        let backButton = (<i class="fas fa-chevron-left"></i>)
-        let addButton = (<i class="fas fa-plus"></i>)
+        let backButton = (<i className="fas fa-chevron-left"></i>)
+        let addButton = (<i className="fas fa-plus">  Item</i>)
   
         let search
             if (!this.state.addItem){

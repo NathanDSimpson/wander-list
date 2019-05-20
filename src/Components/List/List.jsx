@@ -13,19 +13,13 @@ class List extends Component{
         this.state = {
             edit: false,
             show_items: true,
-            add_items: false
+            add_items: true
         }
     }
 
     toggle_show_items = () => {
         this.setState({
             show_items: !this.state.show_items
-        })
-    }
-
-    toggleAddItems = () => {
-        this.setState({
-            add_items: !this.state.add_items
         })
     }
 
@@ -51,6 +45,14 @@ class List extends Component{
         }
 
     render(){
+
+        let showItemsButton
+        if (!this.state.show_items){
+            showItemsButton = (<i className="fas fa-plus"></i>)
+        } else {
+            showItemsButton = (<i className="fas fa-minus"></i>)
+        }
+
         let temp  = this.props.lists.filter( list => list.list_id === +this.props.match.params.id)
         let list = temp[0]
         let items 
@@ -58,6 +60,7 @@ class List extends Component{
             items = list.list_items.map( (item, index) => {
                     return (
                         <ListItemIcon
+                            className='single-item'
                             key={index}
                             item={item}
                             > 
@@ -84,15 +87,15 @@ class List extends Component{
                 <div>
                     <h2>
                         {list.name}
-                        <button onClick={this.toggle_show_items}> Expand / Shrink </button>
-                        <button onClick={this.toggleAddItems}> Toggle Add Items </button>
+                        <button onClick={this.toggle_show_items}> {showItemsButton} </button>
+                    </h2>
+                    <div>
+                        {list.description}
+                    </div>
+                    <div>
                         <button onClick={this.editList}> Edit </button>
                         <button onClick={this.deleteList}> Delete </button>
-
-                    </h2>
-                    <h5>
-                        {list.description}
-                    </h5>
+                    </div>
                 </div>
             )
         }
@@ -108,7 +111,7 @@ class List extends Component{
                 <div>
                     {list_display}
                 </div>
-                <div>
+                <div className='items'>
                     {items}
                 </div>
                 <div>

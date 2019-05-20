@@ -15,7 +15,6 @@ class Header extends Component{
 
     // Check if the server has a session. if so, update redux accordingly
     async componentWillMount(){
-        console.log(`Header.jsx: componentDidMount`)
         try {
             const res = await axios.get('/auth/continue-session')
             const { user_id, firstname, lastname, email } = res.data
@@ -31,7 +30,6 @@ class Header extends Component{
                 this.props.history.push('/')
             }
         } catch(err){
-            console.log(`Header.jsx - componentWillMount catch(err):`, err)
             alert(`Header.jsx: componentDidMount`)
         }
     }
@@ -53,30 +51,59 @@ class Header extends Component{
             alert(`Header.jsx: logout`)
         }
     }
-    
+
+    goToItems = () => this.props.history.push('/items')
+    goToLists = () => this.props.history.push('/lists')
+    goToTrips = () => this.props.history.push('/trips')
+
     render(){
+        const location = this.props.location.pathname
+        let trips = 'Trips'
+        let lists = 'Lists'
+        let items = 'Items'
+        if (location.includes('trip')){
+            trips = 'TRIPS'
+        }
+        if (location.includes('list')){
+            lists = 'LISTS'
+        }
+        if (location.includes('item')){
+            items = 'ITEMS'
+        }
+        
         // conditionally render the dropdown menu depending on whether or not the user is logged in
-        let menu = ''
+        let menu
         if (this.state.showMenu){
             if (this.props.authenticated){
                 menu = (
                     <ul className='hamburgerMenu'>
-                        <Link to='/trips' onClick={this.toggleMenu}>My Trips</Link>
-                        <Link to='/lists' onClick={this.toggleMenu}> My Lists</Link>
-                        <Link to='/items' onClick={this.toggleMenu}> My Items</Link>
                         <Link to='/' onClick={this.logout}>Log Out</Link>
                     </ul>
                     )
-            } else {
-                menu = (
-                    <ul className='hamburgerMenu'>
+                } else {
+                    menu = (
+                        <ul className='hamburgerMenu'>
                         <Link to='/login' onClick={this.toggleMenu}>Log In</Link>
                         <Link to='/register' onClick={this.toggleMenu}>Register</Link>
                     </ul>
                     )
+                }
             }
-
+            
+        let navbar
+        if (this.props.authenticated){
+            navbar = (
+                <span className='navbar'>
+                    <nav onClick={this.goToTrips} > {trips} </nav>
+                    <nav onClick={this.goToLists} > {lists} </nav>
+                    <nav onClick={this.goToItems} > {items} </nav>
+                </span>
+            )
         }
+
+
+
+    
         return(
             <>
                 <h1 className='navbar'>
@@ -90,6 +117,7 @@ class Header extends Component{
                     </div>
                 </h1> 
                 {menu}
+                {navbar}
             </>
         )
     }

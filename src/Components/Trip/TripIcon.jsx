@@ -34,13 +34,20 @@ class TripIcon extends Component{
             })
         }
 
+        let buttonIcon
+        if (this.state.viewLists){
+            buttonIcon = (<i className="fas fa-minus"></i>)
+        }else{
+            buttonIcon = (<i className="fas fa-plus"></i>)
+        }
+
         return(
             <div>
                 <h3>
                     <span onClick={this.goToTrip}>
                         {this.props.trip.name}
                     </span>
-                    <button onClick={this.viewTripLists}> Toggle view trip lists </button>
+                    <button onClick={this.viewTripLists}> {buttonIcon} </button>
                 </h3>
                 <h6>
                     {this.props.trip.description}

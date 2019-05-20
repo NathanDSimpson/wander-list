@@ -37,8 +37,7 @@ class Register extends Component {
             this.props.registerUser({firstname, lastname, email, id: response.data.user.id, authenticated: true})// dispatch to store
             this.props.history.push('/items')
         } catch(err){
-            alert(`Our database does not appear to be functioning.`)
-            console.log(err)
+            alert(`Log In Failed.`)
         }
     }
 

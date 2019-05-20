@@ -32,10 +32,18 @@ class Lists extends Component{
             )
         }
 
+        let buttonIcon
+        if (this.state.add_list){
+            buttonIcon = (<i className="fas fa-chevron-left"></i>)
+        }else{
+            buttonIcon = (<i className="fas fa-plus">  List</i>)
+        }
+        
+        
         return(
             <div>
                 <button onClick={this.toggleAdd}> 
-                    {this.state.addListWizard ? '- Collapse' : '+ Add List'} 
+                    {buttonIcon}
                 </button>
                 <section>
                     {display}

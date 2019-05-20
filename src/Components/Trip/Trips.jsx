@@ -30,7 +30,7 @@ class Trips extends Component{
 
     submitTrip = async (event) => {
         event.preventDefault()
-        console.log(`submitting trip`)
+        this.toggleAdd()
         try{
             // send data to db via axios endpoint, controller, and sql file
             await axios.post('/api/add-trip', {
@@ -64,14 +64,21 @@ class Trips extends Component{
                         name='tripDescription' 
                         placeholder='description'
                     />
-                    <button> Submit </button>
+                    <button> Add Trip </button>
                 </form>
             )
         }
 
+        let buttonIcon
+        if (this.state.addTrip){
+            buttonIcon = (<i className="fas fa-chevron-left"></i>)
+        }else{
+            buttonIcon = (<i className="fas fa-plus">  Trip</i>)
+        }
+
         return(
             <div>
-                <button onClick={this.toggleAdd}> {this.state.addTripWizard ? '- Collapse' : '+ Add Trip'} </button>
+                <button onClick={this.toggleAdd}> {buttonIcon} </button>
                 <div>
                     {addTrip}
                 </div>
