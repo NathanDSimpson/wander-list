@@ -13,7 +13,7 @@ class AddItem extends Component {
             description: '',
             weight: 0,
             volume: 0,
-            tags: []
+            tags: ''
         }
     }
 
@@ -28,10 +28,10 @@ class AddItem extends Component {
     // submit from local state to the db, then update redux state with the db response
     handleSubmit = async (event) => {
         event.preventDefault()
-        const { name, img_url, description, weight, volume } = this.state
+        const { name, img_url, description, weight, volume, tags } = this.state
         try {
             // add to db
-            await axios.post('/api/add-item', { user_id: this.props.user_id, name, img_url, description, weight, volume }) 
+            await axios.post('/api/add-item', { user_id: this.props.user_id, name, img_url, description, weight, volume, tags }) 
             // get updated info from db for redux
             const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
             // update redux

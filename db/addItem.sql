@@ -4,14 +4,16 @@ insert into items (
     img_url,
     weight,
     volume,
-    description
+    description,
+    tags
 ) values (
     ${user_id},
     ${name},
     ${img_url},
     ${weight},
     ${volume},
-    ${description}
+    ${description},
+    ${tags}
 );
 
 -- select * from items
