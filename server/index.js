@@ -1,3 +1,6 @@
+// to use router with our production code
+const path = require('path');
+
 const express = require('express')
 require('dotenv').config()
 const app = express()
@@ -24,6 +27,13 @@ massive(CONNECTION_STRING)
         console.log(`SERVER: ${SERVER_PORT}`)
     })
 })
+
+// for production build
+//point your server to your front end static files. This tells express to look for a build folder. 
+//The __dirname variable tells it to start at the current file where Node is running (i.e., your server file), 
+//and /../build tells it to then go up one file and into a build folder. 
+app.use( express.static( `${__dirname}/../build` ) );
+
 
 //ENDPOINTS
 
@@ -57,3 +67,8 @@ app.post('/api/add-trip-list', controller.addTripList)
 app.post('/api/delete-trip-list', controller.deleteTripList)
 
 app.post('/api/list-items', controller.getListItems)
+
+// for production build
+app.get('*', (req, res)=>{
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+});
