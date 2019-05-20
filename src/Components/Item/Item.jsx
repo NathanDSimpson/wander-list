@@ -20,17 +20,26 @@ class Item extends Component{
 
     // put the item info onto local state so we can edit and then submit to the db
     componentWillMount() {
-        const temp = this.props.items.filter(item => item.item_id === +this.props.match.params.id)
-        const item = temp[0]
-        const { img_url, item_id, name, volume, weight, description } = item
-        this.setState({ 
-            img_url, 
-            item_id, 
-            name, 
-            volume, 
-            weight, 
-            description })
+        if (this.props.items.length === 0){
+            console.log(`11111`)
+            this.props.history.push('/items')
+        } else{
+            const temp = this.props.items.filter(item => item.item_id === +this.props.match.params.id)
+            const item = temp[0]
+            const { img_url, item_id, name, volume, weight, description } = item
+            this.setState({ 
+                img_url, 
+                item_id, 
+                name, 
+                volume, 
+                weight, 
+                description 
+            })
+        }
     }
+
+    
+
 
     // delete item from db, get updated items list from db and send to redux
     deleteItem = async () => {
@@ -84,6 +93,10 @@ class Item extends Component{
     }
 
     render(){
+        if (this.props.items.length === 0){
+            return null
+        } 
+
         //conditionally render the edit view
         const temp = this.props.items.filter(item => item.item_id === +this.props.match.params.id)
         const item = temp[0]
@@ -94,16 +107,15 @@ class Item extends Component{
                  <div>
                     <button onClick={this.backButton}>  BACK </button>
                 </div>
-                <h3>NAME:{item.name}</h3>
-                <div>IMAGE URL:{item.img_url}</div>
-                <div>WEIGHT (pounds):{item.weight}</div>
-                <div>VOLUME (L):{item.volume}</div>
-                <div>DETAILS:{item.description}</div>
-                <div>TAGS:{item.tags}</div>
-                <div>
-                <button onClick={this.toggle}> EDIT </button>
-                <button onClick={this.deleteItem}> DELETE </button>
-
+                    <h3>NAME:{item.name}</h3>
+                    <div>IMAGE URL:{item.img_url}</div>
+                    <div>WEIGHT (pounds):{item.weight}</div>
+                    <div>VOLUME (L):{item.volume}</div>
+                    <div>DETAILS:{item.description}</div>
+                    <div>TAGS:{item.tags}</div>
+                    <div>
+                    <button onClick={this.toggle}> EDIT </button>
+                    <button onClick={this.deleteItem}> DELETE </button>
                 </div>
             </div>
             )

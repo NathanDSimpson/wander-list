@@ -18,9 +18,13 @@ class Trip extends Component{
     }
 
     componentWillMount(){
-        this.setState({
-            trip_id: +this.props.match.params.id
-        })
+        if (this.props.trips.length === 0){
+            this.props.history.push('/trips')
+        } else{
+            this.setState({
+                trip_id: +this.props.match.params.id
+            })
+        }
     }
 
 
@@ -58,13 +62,17 @@ class Trip extends Component{
     }
 
     render(){
+        if (this.props.trips.length === 0){
+            return null
+        }
+        
         const temp = this.props.trips.filter(trip => trip.trip_id === this.state.trip_id)
         const trip = temp[0]
         let trip_lists
         if (this.state.viewLists){
-            trip_lists =  trip.trip_lists.map(list => {
+            trip_lists =  trip.trip_lists.map((list, index) => {
                 return (
-                    <TripListIcon key={list.list_id} list={list} status='removeFromList'> 
+                    <TripListIcon key={index} list={list}> 
                     </TripListIcon>
                 )
             })
@@ -97,8 +105,8 @@ class Trip extends Component{
 
         let tripListWizard
         if (this.state.addTripLists){
-            tripListWizard = this.props.lists.map(list => (
-                <TripListIcon key={list.list_id} list={list} status='addToList' ></TripListIcon>
+            tripListWizard = this.props.lists.map((list, index) => (
+                <TripListIcon key={index} list={list} status='addToList' ></TripListIcon>
             ))
         }
 

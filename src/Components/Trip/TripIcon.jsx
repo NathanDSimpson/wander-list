@@ -24,9 +24,9 @@ class TripIcon extends Component{
     render(){
         let trip_lists
         if (this.state.viewLists){
-            trip_lists =  this.props.trip.trip_lists.map(list => {
+            trip_lists =  this.props.trip.trip_lists.map((list, index) => {
                 return (
-                    <li key={list.list_id}>
+                    <li key={index}>
                         <TripListIcon list={list}>
                         </TripListIcon>
                     </li>

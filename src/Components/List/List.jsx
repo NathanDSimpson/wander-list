@@ -17,6 +17,12 @@ class List extends Component{
         }
     }
 
+    componentWillMount() {
+        if (this.props.lists.length === 0){
+            this.props.history.push('/lists')
+        }
+    }
+
     toggle_show_items = () => {
         this.setState({
             show_items: !this.state.show_items
@@ -45,6 +51,9 @@ class List extends Component{
         }
 
     render(){
+        if (this.props.lists.length === 0){
+            return null
+        }
 
         let showItemsButton
         if (!this.state.show_items){

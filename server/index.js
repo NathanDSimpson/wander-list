@@ -25,7 +25,6 @@ massive(CONNECTION_STRING)
     })
 })
 
-
 //ENDPOINTS
 
 // auth
