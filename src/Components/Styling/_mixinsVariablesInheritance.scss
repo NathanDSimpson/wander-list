@@ -1,0 +1,17 @@
+
+// variables
+$theme-color: rgb(80, 131, 107);
+$font: 'Stylish', sans-serif;
+
+// inheritance
+%image{
+    height: 75%;
+    width: 75%;
+}
+
+// mixins
+@mixin flex($spacing){
+    display: flex;
+    align-items: center;
+    justify-content: $spacing;
+}

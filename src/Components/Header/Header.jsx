@@ -69,13 +69,13 @@ class Header extends Component{
             // conditionally render
             if (this.props.authenticated){
                 menu = (
-                    <ul className='hamburgerMenu'>
+                    <ul className='dropDown'>
                         <Link to='/' onClick={this.logout}> <i className="fas fa-sign-out-alt"></i> </Link>
                     </ul>
                     )
                 } else {
                     menu = (
-                        <ul className='hamburgerMenu'>
+                        <ul className='dropDown'>
                         <Link to='/login' onClick={this.toggleMenu}>Log In</Link>
                         <Link to='/register' onClick={this.toggleMenu}>Register</Link>
                     </ul>
@@ -94,15 +94,14 @@ class Header extends Component{
                 </h3>
             )
         }
-
-
-
     
         return(
             <>
-                <h1 className='navbar'>
-                    WanderList
-                    <div className='user-menu' onClick={this.toggleMenu}> 
+                <h1 className='header'>
+                    <div>
+                        WanderList
+                    </div>
+                    <div onClick={this.toggleMenu}> 
                         <span>
                             {this.props.firstname}
                         </span>

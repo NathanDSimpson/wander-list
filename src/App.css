@@ -18,6 +18,71 @@ time, mark, audio, video {
   font: inherit;
   vertical-align: baseline; }
 
+.itemIcon {
+  height: 75%;
+  width: 75%; }
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #50836b;
+  height: 8vh;
+  font-family: "Stylish", sans-serif;
+  font-size: 2.5rem; }
+  .header div {
+    margin: 0 4vw 0 4vw; }
+  .header span {
+    display: none; }
+
+@media (min-width: 410px) {
+  .header {
+    font-size: 3.5rem; } }
+
+@media (min-width: 625px) {
+  .header span {
+    font-size: 2.5rem;
+    display: inline-flex;
+    padding-right: 2vw; } }
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5vh 0 5vh;
+  height: 6vh;
+  background-color: #50836b;
+  font-family: "Stylish", sans-serif;
+  font-size: 1rem; }
+
+@media (min-width: 410px) {
+  .navbar {
+    font-size: 1.5rem; } }
+
+@media (min-width: 650px) {
+  .navbar {
+    padding: 0 10vh 0 10vh; } }
+
+form {
+  height: 45vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.form-entry {
+  width: 65vw;
+  text-align: center; }
+
+.register-button {
+  width: 30vw; }
+
+.register-prompt {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
 .single-item {
   height: 14vh;
   width: 14vh;
@@ -58,28 +123,3 @@ form {
 
 body {
   background-color: silver; }
-
-.navbar {
-  background-color: #50836b;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0;
-  padding: 0 3vh 0 3vh;
-  height: 10vh;
-  font-family: 'Stylish', sans-serif;
-  top: 0px; }
-
-.hamburgerMenu {
-  list-style: none;
-  background-color: #50836b;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  margin: 0; }
-
-.register-prompt {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; }

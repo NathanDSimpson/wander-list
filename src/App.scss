@@ -1,4 +1,11 @@
+// variables, mixins, and inheritance
+
 @import './reset';
-@import './Components/Item/styling/itemStyling';
-@import './Components/Header/header';
-@import './Components/Home/home'
+
+@import './Components/Styling/mixinsVariablesInheritance';
+
+@import './Components/Styling/header';
+@import './Components//Styling/register';
+@import './Components/Styling/home';
+
+@import './Components/Styling/itemStyling';

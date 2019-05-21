@@ -1,0 +1,62 @@
+
+.header {
+    @include flex(space-between);
+    background-color: $theme-color;
+    height: 8vh;
+    font-family: $font;
+    font-size: 2.5rem;
+    div {
+        margin: 0 4vw 0 4vw;
+    }
+    span {
+        display: none
+    }
+}
+
+@media (min-width: 410px){
+    .header {
+        font-size: 3.5rem;
+    }
+
+}
+
+@media (min-width: 625px){
+    .header {
+        span {
+            font-size: 2.5rem;
+            display: inline-flex;
+            padding-right: 2vw;
+        }
+    }
+}
+
+.navbar {
+    @include flex(space-between);
+    padding: 0 5vh 0 5vh;
+    height: 6vh;
+    background-color: $theme-color;
+    font-family: $font;
+    font-size: 1rem;
+}
+
+@media (min-width: 410px){
+    .navbar{
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 650px){
+    .navbar{
+        padding: 0 10vh 0 10vh;
+    }
+}
+
+// .dropDown {
+//     list-style: none;
+//     background-color: $theme-color;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: flex-end;
+//     margin: 0;
+// }
+
