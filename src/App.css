@@ -1,21 +1,22 @@
-.navbar {
-  background-color: #50836b;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
   margin: 0;
-  padding: 0 3vh 0 3vh;
-  height: 10vh;
-  font-family: 'Stylish', sans-serif;
-  top: 0px; }
-
-.hamburgerMenu {
-  list-style: none;
-  background-color: #50836b;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  margin: 0; }
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
 
 .single-item {
   height: 14vh;
@@ -55,11 +56,30 @@ form {
 .register-button {
   width: 30vw; }
 
+body {
+  background-color: silver; }
+
+.navbar {
+  background-color: #50836b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0 3vh 0 3vh;
+  height: 10vh;
+  font-family: 'Stylish', sans-serif;
+  top: 0px; }
+
+.hamburgerMenu {
+  list-style: none;
+  background-color: #50836b;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 0; }
+
 .register-prompt {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center; }
-
-body {
-  background-color: silver; }

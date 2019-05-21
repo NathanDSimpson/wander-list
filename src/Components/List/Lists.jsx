@@ -41,9 +41,7 @@ class Lists extends Component{
             icons = filtered.map((list) =>  <ListIcon list={list} key={list.list_id}/> )
 
         }
-
-        console.log(`icons`, icons)
-        
+                
         let display
         if (!this.state.add_list){
             display = icons
@@ -80,7 +78,9 @@ class Lists extends Component{
                     <div onClick={this.toggleAdd}> 
                         {buttonIcon}
                     </div>
-                    {search}
+                    <span>
+                        {search}
+                    </span>
                 </span>
                 <section>
                     {display}

@@ -1,0 +1,40 @@
+.single-item {
+    height: 14vh;
+    width: 14vh;
+    margin: 1vh;
+    border: 1px solid black;
+    font-size: 0.5em; }
+  
+.item-name {
+    padding: 0;
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-size: 0.7em; }
+  
+ul {
+    list-style-type: none; }
+  
+.items {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2%; }
+  
+.add-item-form {
+    margin: 2%; }
+  
+form {
+    height: 45vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+
+.form-entry {
+    width: 65vw;
+    text-align: center; }
+  
+.register-button {
+    width: 30vw; }
+    
+body {
+    background-color: silver; }

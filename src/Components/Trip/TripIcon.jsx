@@ -35,11 +35,13 @@ class TripIcon extends Component{
         }
 
         let buttonIcon
-        if (this.state.viewLists){
-            buttonIcon = (<i className="fas fa-minus"></i>)
-        }else{
-            buttonIcon = (<i className="fas fa-plus"></i>)
-        }
+        let viewLists
+        this.state.viewLists ? viewLists = (<i className="fas fa-caret-down"></i>) : viewLists = (<i className="fas fa-caret-right"></i>)
+        // if (this.state.viewLists){
+        //     buttonIcon = (<i className="fas fa-minus"></i>)
+        // }else{
+        //     buttonIcon = (<i className="fas fa-plus"></i>)
+        // }
 
         return(
             <div>
@@ -47,7 +49,7 @@ class TripIcon extends Component{
                     <span onClick={this.goToTrip}>
                         {this.props.trip.name}
                     </span>
-                    <button onClick={this.viewTripLists}> {buttonIcon} </button>
+                    <button onClick={this.viewTripLists}> {viewLists} </button>
                 </h3>
                 <h6>
                     {this.props.trip.description}

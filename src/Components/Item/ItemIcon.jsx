@@ -9,11 +9,24 @@ class ItemIcon extends Component{
     }
 
     render(){
+        // size the item's image
+        const imgStyle = {
+            height: '75%',
+            width: '75%'
+        }
+
+    let default_image = 'http://savings.gov.pk/wp-content/plugins/ldd-directory-lite/public/images/noimage.png'
+    let image = this.props.item.img_url ? this.props.item.img_url : default_image
+
+
         return(
             <div className='single-item' onClick={this.goToItem}>
-                <span className='item-name'>
-                    {this.props.item.name}
-                </span>
+                <div className='item-name'>
+                    <img style={imgStyle} src={image} alt={this.props.item.name}/>
+                    <div>
+                        {this.props.item.name}
+                    </div>
+                </div>
             </div>
         )
     }

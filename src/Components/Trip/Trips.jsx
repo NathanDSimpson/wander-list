@@ -48,9 +48,9 @@ class Trips extends Component{
     }
 
     render(){
-        let addTrip
+        let tripIconsOrAddTripWizard
         if (this.state.addTrip){
-            addTrip = (
+            tripIconsOrAddTripWizard = (
                 <form onSubmit={this.submitTrip}>
                     <input 
                         onChange={this.handleInput} 
@@ -67,6 +67,10 @@ class Trips extends Component{
                     <button> Add Trip </button>
                 </form>
             )
+        } else{
+            tripIconsOrAddTripWizard = this.props.trips.map((trip) => {
+                return <TripIcon key={trip.trip_id} trip={trip}> </TripIcon>
+        })
         }
 
         let buttonIcon
@@ -80,13 +84,8 @@ class Trips extends Component{
             <div>
                 <button onClick={this.toggleAdd}> {buttonIcon} </button>
                 <div>
-                    {addTrip}
+                    {tripIconsOrAddTripWizard}
                 </div>
-                <section className='trips'>
-                    {this.props.trips.map((trip) => {
-                            return <TripIcon key={trip.trip_id} trip={trip}> </TripIcon>
-                    })}
-                </section>
             </div>
         )
     }

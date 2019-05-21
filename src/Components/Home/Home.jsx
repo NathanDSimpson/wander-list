@@ -1,16 +1,12 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import React from 'react'
 import Login from '../Login/Login'
 
-class Header extends Component{
-
-    render(){
-        return(
-            <>
-                <Login/>
-            </>
-        )
-    }
+function Home() {
+    return(
+        <>
+            <Login/>
+        </>
+    )
 }
 
-export default withRouter(Header)
+export default Home;

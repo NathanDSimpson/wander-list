@@ -1,12 +1,4 @@
-@import './Components//Header/header';
-@import './Components//Item/single-item.scss';
-@import './Components//Item/items.scss';
-@import './Components//Item/add-item';
-@import './Components/Register/register';
-@import './Components/Home/home';
-
-
-
-body {
-  background-color: silver;
-};
+@import './reset';
+@import './Components/Item/styling/itemStyling';
+@import './Components/Header/header';
+@import './Components/Home/home'

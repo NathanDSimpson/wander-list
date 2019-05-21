@@ -8,23 +8,64 @@ class Items extends Component{
     constructor(){
         super()
         this.state = {
-            addItemWizard: false,
+            addItem: false,
+            searchValue: ''
         }
     }
 
     toggleAdd = () => {
         this.setState({
-            addItemWizard: !this.state.addItemWizard
+            addItem: !this.state.addItem
+        })
+    }
+
+    // track user inputs via local state
+    handleInput = event => {
+        let {name, value} = event.target
+        this.setState({
+            [name]: value
         })
     }
 
     render(){
-        let icons = this.props.items.map((item) =>  <ItemIcon item={item} key={item.item_id}/> )
-        
+        let items
+        if (this.state.searchValue === ''){
+            items = this.props.items
+        } else {
+            items = this.props.items.filter( item =>  {
+                let filter_lowercase = this.state.searchValue.toLowerCase()
+                let description_lowercase = item.description.toLowerCase()
+                let name_lowercase = item.name.toLowerCase()
+                let tags_lowercase = item.tags.toLowerCase()
+                return (
+                    name_lowercase.includes(filter_lowercase) 
+                    || tags_lowercase.includes(filter_lowercase) 
+                    || description_lowercase.includes(filter_lowercase)
+                )
+                })
+        }
+        let icons = items.map((item) =>  <ItemIcon item={item} key={item.item_id}/> )
+
+        let backButton = (<i className="fas fa-chevron-left"></i>)
+        let addButton = (<i className="fas fa-plus">  Item</i>)
+  
+        let search
+            if (!this.state.addItem){
+                search = (
+                    <input 
+                        onChange={this.handleInput} 
+                        type="text" 
+                        name='searchValue' 
+                        placeholder='Search'
+                    />
+                )            
+            }
+
         return(
             <div>
-                <button onClick={this.toggleAdd}> {this.state.addItemWizard ? '- Collapse' : '+ Add Item'} </button>
-                {this.state.addItemWizard ? <AddItem toggleAdd={this.toggleAdd}/> : <section className='items'> {icons} </section>}
+                <button onClick={this.toggleAdd}> {this.state.addItem ? backButton : addButton} </button>
+                {search}
+                {this.state.addItem ? <AddItem toggleAdd={this.toggleAdd}/> : <section className='items'> {icons} </section>}
             </div>
         )
     }

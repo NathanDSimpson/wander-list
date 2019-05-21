@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { logoutUser, loginUser, getUserData } from '../../redux/reducer'
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 class Header extends Component{
     constructor(){
@@ -13,7 +14,8 @@ class Header extends Component{
         }
     }
 
-    // Check if the server has a session. if so, update redux accordingly
+    // Check if the server has a session
+    // dispatch user_id from session to db to get info and update redux
     async componentWillMount(){
         try {
             const res = await axios.get('/auth/continue-session')
@@ -26,18 +28,16 @@ class Header extends Component{
                 this.props.history.push('/')
             }
         } catch(err){
-            alert(`Header.jsx: componentDidMount`)
+            Swal.fire('Cannot communicate with database. Sorry!')
         }
     }
 
-    // toggle the drop down menu 
     toggleMenu = () => {
         this.setState({
             showMenu: !this.state.showMenu
         })
     }
 
-    // log out the user
     logout =  async () => {
         try{
             await axios.get('/auth/logout')
@@ -53,6 +53,7 @@ class Header extends Component{
     goToTrips = () => this.props.history.push('/trips')
 
     render(){
+        // Make users location all CAPS in navbar
         const location = this.props.location.pathname
         let trips = 'Trips'
         let lists = 'Lists'
@@ -63,11 +64,13 @@ class Header extends Component{
         
         // conditionally render the dropdown menu depending on whether or not the user is logged in
         let menu
+        // dont render anything until click
         if (this.state.showMenu){
+            // conditionally render
             if (this.props.authenticated){
                 menu = (
                     <ul className='hamburgerMenu'>
-                        <Link to='/' onClick={this.logout}>Log Out</Link>
+                        <Link to='/' onClick={this.logout}> <i className="fas fa-sign-out-alt"></i> </Link>
                     </ul>
                     )
                 } else {
@@ -80,14 +83,15 @@ class Header extends Component{
                 }
             }
             
+        // only render the navbar if the user is logged in
         let navbar
         if (this.props.authenticated){
             navbar = (
-                <span className='navbar'>
+                <h3 className='navbar'>
                     <nav onClick={this.goToTrips} > {trips} </nav>
                     <nav onClick={this.goToLists} > {lists} </nav>
                     <nav onClick={this.goToItems} > {items} </nav>
-                </span>
+                </h3>
             )
         }
 
