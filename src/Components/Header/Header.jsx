@@ -39,6 +39,7 @@ class Header extends Component{
     }
 
     logout =  async () => {
+        this.props.history.push('/')
         try{
             await axios.get('/auth/logout')
             this.props.logoutUser()
@@ -70,15 +71,16 @@ class Header extends Component{
             if (this.props.authenticated){
                 menu = (
                     <ul className='dropDown'>
-                        <Link to='/' onClick={this.logout}> <i className="fas fa-sign-out-alt"></i> </Link>
+                        <li onClick={this.logout}><i className="fas fa-sign-out-alt"></i></li>
+                        {/* <Link to='/' onClick={this.logout}> <i className="fas fa-sign-out-alt"></i> </Link> */}
                     </ul>
                     )
                 } else {
                     menu = (
                         <ul className='dropDown'>
-                        <Link to='/login' onClick={this.toggleMenu}>Log In</Link>
-                        <Link to='/register' onClick={this.toggleMenu}>Register</Link>
-                    </ul>
+                            <li><Link to='/login' onClick={this.toggleMenu}>Log In</Link></li>
+                            <li><Link to='/register' onClick={this.toggleMenu}>Register</Link></li>
+                        </ul>
                     )
                 }
             }

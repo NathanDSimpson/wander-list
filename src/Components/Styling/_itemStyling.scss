@@ -1,29 +1,37 @@
-.itemIcon{
+.item-image{
     @extend %image;
-    
+
 }
 
-.single-item {
+.item-item {
     height: 14vh;
     width: 14vh;
     margin: 1vh;
-    border: 1px solid black;
-    font-size: 0.5em; }
-  
-.item-name {
+    font-size: 0.5rem;  
+}
+
+.item-name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 0;
-    text-transform: uppercase;
-    font-weight: bolder;
-    font-size: 0.7em; }
-  
-ul {
-    list-style-type: none; }
+    font-size: 0.8rem;
+    font-family: $font; 
+}
   
 .items {
+    height: 100%;
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
-    margin: 2%; }
+    margin: 2%; 
+}
   
+.items-nav{
+    padding: 2vh 10vw 0 10vw;
+    display: flex;
+    justify-content: space-between;
+}
 .add-item-form {
     margin: 2%; }
   
@@ -42,4 +50,4 @@ form {
     width: 30vw; }
     
 body {
-    background-color: silver; }
+    background-color: white; }

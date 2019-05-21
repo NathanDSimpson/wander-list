@@ -63,8 +63,10 @@ class Items extends Component{
 
         return(
             <div>
-                <button onClick={this.toggleAdd}> {this.state.addItem ? backButton : addButton} </button>
-                {search}
+                <div className='items-nav'>
+                    <button onClick={this.toggleAdd}> {this.state.addItem ? backButton : addButton} </button>
+                    {search}
+                </div>
                 {this.state.addItem ? <AddItem toggleAdd={this.toggleAdd}/> : <section className='items'> {icons} </section>}
             </div>
         )

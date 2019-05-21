@@ -16,12 +16,11 @@ class ItemIcon extends Component{
 
 
         return(
-            <div className='single-item' onClick={this.goToItem}>
+            <div className='item-item' onClick={this.goToItem}>
+                <img className='item-image' src={image} alt={this.props.item.name}/>
                 <div className='item-name'>
-                    <img className='itemIcon' src={image} alt={this.props.item.name}/>
-                    <div>
-                        {this.props.item.name}
-                    </div>
+                    {this.props.item.name}
+                    {/* <div>{this.props.item.name}</div> */}
                 </div>
             </div>
         )
