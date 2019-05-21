@@ -53,21 +53,22 @@ class ListEdit extends Component{
         return(
             <div>
                 <form onSubmit={this.handleSubmit}> 
-                    NAME:
                     <input 
                         onChange={this.handleInput} 
                         type="text" 
                         name='name' 
+                        placeholder='Name'
                         value={this.state.name}
                         />
-                    Description:
                     <input 
                         onChange={this.handleInput} 
                         type="text" 
                         name='description' 
+                        placeholder='Description'
                         value={this.state.description}
                         />                
-                    <button> Submit Changes </button>
+                    <button> Submit </button>
+                    <button> Cancel </button>
                 </form>
             </div>
         )

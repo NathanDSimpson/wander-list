@@ -21,7 +21,6 @@ class ListIcon extends Component{
     }
 
     render(){
-        console.log(`this.props.list.items`, this.props.list.list_items)
         let items
         if (this.state.showItems){
             items = this.props.list.list_items.map( (item, index) => {
@@ -31,11 +30,20 @@ class ListIcon extends Component{
             })
         }
 
+        let showItems
+        this.state.showItems ? showItems = (<i className="fas fa-caret-down"></i>) : showItems = (<i className="fas fa-caret-right"></i>)
+
         return(
             <div className='single-list'>
-                <span onClick={this.goToList}> {this.props.list.name} </span>
+                <span>
+                    <span onClick={this.goToList}>
+                        {this.props.list.name} 
+                    </span>
+                    <span onClick={this.toggleShowItems}>
+                        {showItems} 
+                    </span>
+                </span>
                 <ul className='list-name'>
-                    <button onClick={this.toggleShowItems}>Expand List </button>
                     {items}
                 </ul>
             </div>

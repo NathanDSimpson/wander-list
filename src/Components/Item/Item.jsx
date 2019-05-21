@@ -14,6 +14,7 @@ class Item extends Component{
             weight: 0,
             volume: 0,
             description: '',
+            tags: '',
             edit: false
         }
     }
@@ -26,14 +27,15 @@ class Item extends Component{
         } else{
             const temp = this.props.items.filter(item => item.item_id === +this.props.match.params.id)
             const item = temp[0]
-            const { img_url, item_id, name, volume, weight, description } = item
+            const { img_url, item_id, name, volume, weight, description, tags } = item
             this.setState({ 
                 img_url, 
                 item_id, 
                 name, 
                 volume, 
                 weight, 
-                description 
+                description,
+                tags
             })
         }
     }
@@ -105,68 +107,54 @@ class Item extends Component{
             display = (
             <div>
                  <div>
-                    <button onClick={this.backButton}>  BACK </button>
+                    <button onClick={this.backButton}>  <i className="fas fa-angle-left"></i> </button>
                 </div>
-                    <h3>NAME:{item.name}</h3>
-                    <div>IMAGE URL:{item.img_url}</div>
-                    <div>WEIGHT (pounds):{item.weight}</div>
-                    <div>VOLUME (L):{item.volume}</div>
-                    <div>DETAILS:{item.description}</div>
-                    <div>TAGS:{item.tags}</div>
+                    <h3>
+                        {item.name}
+                        <button onClick={this.toggle}> <i className="fas fa-edit"></i> </button>
+                        <button onClick={this.deleteItem}> <i className="fas fa-trash-alt"></i> </button>
+                    </h3>
+                    <div>{item.img_url}</div>
+                    <div>{item.description}</div>
+                    <div>{item.tags}</div>
                     <div>
-                    <button onClick={this.toggle}> EDIT </button>
-                    <button onClick={this.deleteItem}> DELETE </button>
                 </div>
             </div>
             )
         } else {
             display = (
                 <div>
-                    <button onClick={this.toggle}>  BACK </button>
+                    <button onClick={this.toggle}>  <i className="fas fa-angle-left"></i> </button>
                     <form onSubmit={this.submitEdit}> 
-                        NAME:
                         <input 
                             onChange={this.handleInput} 
                             type="text" 
-                            name='name' 
+                            name='name'
+                            placeholder='Name' 
                             value={this.state.name}
                             />
-                        IMAGE URL:
                         <input 
                             onChange={this.handleInput} 
                             type="text" 
                             name='img_url' 
+                            placeholder='Image URL' 
                             value={this.state.img_url}
                             />
-                        WEIGHT (pounds):
-                        <input 
-                            onChange={this.handleInput} 
-                            type="text" 
-                            name='weight' 
-                            value={this.state.weight}
-                            />
-                        VOLUME (liters):
-                        <input 
-                            onChange={this.handleInput} 
-                            type="text" 
-                            name='volume' 
-                            value={this.state.volume}
-                            />
-                        DETAILS:
                         <input 
                             onChange={this.handleInput} 
                             type="text" 
                             name='description' 
+                            placeholder='Description' 
                             value={this.state.description}
                             />
-                        HASHTAGS:
                         <input 
                             onChange={this.handleInput} 
                             type="text" 
                             name='tags' 
-                            value='Hashtags (#)'
+                            placeholder='Tags' 
+                            value={this.state.tags}
                             />
-                        <button> Submit Changes </button>
+                        <button> Submit </button>
                     </form>
                  </div>
             )

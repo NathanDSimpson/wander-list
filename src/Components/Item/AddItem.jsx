@@ -83,7 +83,7 @@ class AddItem extends Component {
                         name='description' 
                         placeholder='Description'
                     />
-                    <button> Add to library </button>
+                    <button> Add Item </button>
                 </form>
             </div>
             </>

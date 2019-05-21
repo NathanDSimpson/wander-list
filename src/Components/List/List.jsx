@@ -12,7 +12,7 @@ class List extends Component{
         super()
         this.state = {
             edit: false,
-            show_items: true,
+            show_items: false,
             add_items: true
         }
     }
@@ -56,11 +56,7 @@ class List extends Component{
         }
 
         let showItemsButton
-        if (!this.state.show_items){
-            showItemsButton = (<i className="fas fa-plus"></i>)
-        } else {
-            showItemsButton = (<i className="fas fa-minus"></i>)
-        }
+        this.state.show_items ? showItemsButton = (<i className="fas fa-caret-down"></i>) : showItemsButton = (<i className="fas fa-caret-right"></i>)
 
         let temp  = this.props.lists.filter( list => list.list_id === +this.props.match.params.id)
         let list = temp[0]
@@ -83,8 +79,7 @@ class List extends Component{
         if (this.state.edit){
             list_display = (
                 <div>
-                    <button onClick={this.editList}> Toggle Edit </button>
-                    <div>edit</div>
+                    <button onClick={this.editList}> <i className="fas fa-angle-left"></i> </button>
                     <ListEdit
                         list={list}
                         toggleEdit={this.editList}
@@ -97,13 +92,13 @@ class List extends Component{
                     <h2>
                         {list.name}
                         <button onClick={this.toggle_show_items}> {showItemsButton} </button>
+                        <button onClick={this.editList}> <i className="fas fa-edit"></i> </button>
+                        <button onClick={this.deleteList}> <i className="fas fa-trash-alt"></i>  </button>
                     </h2>
                     <div>
                         {list.description}
                     </div>
                     <div>
-                        <button onClick={this.editList}> Edit </button>
-                        <button onClick={this.deleteList}> Delete </button>
                     </div>
                 </div>
             )
