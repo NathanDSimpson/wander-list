@@ -34,16 +34,16 @@ class ListIcon extends Component{
         this.state.showItems ? showItems = (<i className="fas fa-caret-down"></i>) : showItems = (<i className="fas fa-caret-right"></i>)
 
         return(
-            <div className='single-list'>
+            <div>
                 <span>
-                    <span onClick={this.goToList}>
+                    <span onClick={this.goToList} className='list-name' >
                         {this.props.list.name} 
                     </span>
-                    <span onClick={this.toggleShowItems}>
+                    <span onClick={this.toggleShowItems} >
                         {showItems} 
                     </span>
                 </span>
-                <ul className='list-name'>
+                <ul className='list-items'>
                     {items}
                 </ul>
             </div>

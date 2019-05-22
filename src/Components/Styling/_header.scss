@@ -1,3 +1,9 @@
+* {
+    font-display: $font;
+}
+
+body {
+    background-color: white; }
 
 .header {
     @include flex(space-between);

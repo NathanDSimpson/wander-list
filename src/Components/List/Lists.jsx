@@ -28,29 +28,22 @@ class Lists extends Component{
 
     render(){
         let icons 
+        let filtered
         if (this.state.searchValue === ''){
-            icons = this.props.lists.map((list) =>  <ListIcon list={list} key={list.list_id}/> )
+            filtered = this.props.lists
         } else {
-            let filtered = this.props.lists.filter( list =>  {
-                console.log(`list`, list)
+            filtered = this.props.lists.filter( list =>  {
                 let filter_lowercase = this.state.searchValue.toLowerCase()
                 let description_lowercase = list.description.toLowerCase()
                 let name_lowercase = list.name.toLowerCase()
                 return (name_lowercase.includes(filter_lowercase) || description_lowercase.includes(filter_lowercase))
-                })
-            icons = filtered.map((list) =>  <ListIcon list={list} key={list.list_id}/> )
+                })  
+            }
 
-        }
-                
-        let display
-        if (!this.state.add_list){
-            display = icons
-        }
-        else {
-            display = (
-                <ListAdd toggleAdd={this.toggleAdd}> </ListAdd>
-            )
-        }
+        icons = filtered.map((list) =>  <ListIcon list={list} key={list.list_id}/> )
+        
+        let addList= <ListAdd toggleAdd={this.toggleAdd}> </ListAdd>
+    
 
         let buttonIcon
         if (this.state.add_list){
@@ -73,18 +66,21 @@ class Lists extends Component{
         
         
         return(
-            <div>
-                <span>
+            <div className='lists'>
+                <div className='lists-nav'>
                     <div onClick={this.toggleAdd}> 
                         {buttonIcon}
                     </div>
                     <span>
                         {search}
                     </span>
-                </span>
-                <section>
-                    {display}
-                </section>
+                </div>
+                <div>
+                    {this.state.add_list ? addList : null}
+                </div>
+                <div className='list-icons'>
+                    {!this.state.add_list ? icons : null}
+                </div>
             </div>
         )
     }
