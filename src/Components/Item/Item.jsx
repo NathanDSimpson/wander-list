@@ -5,17 +5,14 @@ import axios from 'axios'
 import { getUserData } from '../../redux/reducer'
 
 class Item extends Component{
-    constructor(){
-        super()
-        this.state = {
-            item_id: 0,
-            name: '',
-            img_url: '',
-            description: '',
-            tags: '',
-            edit: false
+    state = {
+        item_id: 0,
+        name: '',
+        img_url: '',
+        description: '',
+        tags: '',
+        edit: false
         }
-    }
 
     // put the item info onto local state so we can edit and then submit to the db
     componentWillMount() {
@@ -24,8 +21,9 @@ class Item extends Component{
         } else{
             const temp = this.props.items.filter(item => item.item_id === +this.props.match.params.id)
             const item = temp[0]
-            const {item_id, name, description, tags } = item
+            const {item_id, name, description } = item
             const img_url = item.img_url === null ? '' : item.img_url
+            const tags = item.tags === null ? '' : item.tags
             this.setState({ 
                 img_url, 
                 item_id, 
@@ -35,9 +33,6 @@ class Item extends Component{
             })
         }
     }
-
-    
-
 
     // delete item from db, get updated items list from db and send to redux
     deleteItem = async () => {
@@ -58,7 +53,7 @@ class Item extends Component{
     submitEdit = async (event) => {
         event.preventDefault()
         this.toggle() // toggle out of editView after submitting
-        const { name, img_url, description, item_id, tags} = this.state
+        const { name, img_url, description, item_id, tags } = this.state
         try {
             //send updates to db
             await axios.put('/api/edit-item', { name, img_url, description, item_id, tags }) 
@@ -95,8 +90,6 @@ class Item extends Component{
         if (this.props.items.length === 0){
             return null
         } 
-
-        console.log(`what the fuck`)
 
         //conditionally render the edit view
         const temp = this.props.items.filter(item => item.item_id === +this.props.match.params.id)

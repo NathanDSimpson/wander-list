@@ -127,7 +127,9 @@ module.exports = {
     editItem: async (req, res) => {
         const db = req.app.get('db')
         try {
+            console.log(`req.body`, req.body)
             await db.updateItem(req.body)
+            console.log(`passed db`)
             res.sendStatus(200)
         } catch(err){
             res.sendStatus(401)

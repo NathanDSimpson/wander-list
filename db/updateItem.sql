@@ -2,8 +2,6 @@ update items
    set 
         name = ${name},
         img_url = ${img_url},
-        weight = ${weight},
-        volume = ${volume},
         description = ${description},
         tags = ${tags}
  where item_id = $(item_id);
