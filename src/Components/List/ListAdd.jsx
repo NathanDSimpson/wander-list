@@ -57,7 +57,7 @@ class ListEdit extends Component{
                         name='description' 
                         placeholder='Description'
                         />                
-                    <button> Submit Changes </button>
+                    <button> Add List </button>
                 </form>
             </div>
         )

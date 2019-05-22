@@ -53,14 +53,6 @@ input {
   font-size: 1rem;
   text-align: center; }
 
-@media (min-width: 1000px) {
-  input {
-    font-size: 2rem;
-    text-align: center; }
-  .navbar, .header {
-    height: 10vh;
-    font-size: 4rem; } }
-
 * {
   font-family: "Stylish", sans-serif; }
 
@@ -134,7 +126,8 @@ body {
   display: flex; }
 
 .trip-add-lists-header {
-  font-size: 1.5rem; }
+  font-size: 1.5rem;
+  padding-top: 6vh; }
 
 .trip-lists-delete {
   display: flex; }
@@ -164,21 +157,24 @@ form {
     padding-right: 1vw; }
 
 .trip-description {
-  font-size: 1.2rem; }
+  font-size: 1.2rem;
+  padding-bottom: 5vh;
+  padding-top: 2vh; }
 
 .trip {
   font-family: "Stylish", sans-serif;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-left: 20vw; }
+  padding-left: 15vw; }
 
 .trip-title-single-trip {
   font-size: 2rem;
   font-family: "Stylish", sans-serif;
   display: flex;
   align-items: center;
-  justify-content: space-between; }
+  justify-content: space-between;
+  padding: 3vh 0 3vh 0; }
   .trip-title-single-trip div {
     font-size: 1rem; }
 
@@ -216,13 +212,14 @@ form {
   font-size: 1.7rem; }
 
 .list-name {
-  padding-right: 2vw; }
+  padding: 5vh; }
 
 .list-items {
   font-size: 1.2rem;
   display: flex;
   flex-direction: column;
-  align-items: center; }
+  align-items: center;
+  padding: 1vh 0 1vh 0; }
 
 .list-item-name i {
   padding-right: 1vw; }

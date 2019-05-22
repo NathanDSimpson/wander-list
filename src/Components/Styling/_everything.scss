@@ -77,15 +77,15 @@ input{
     @include input(1rem);
 }
 
-@media (min-width: 1000px){
-    input{
-        @include input(2rem);
-    }
-    .navbar, .header{
-        height: 10vh;
-        font-size: 4rem;
-    }
-}
+// @media (min-width: 1000px){
+//     input{
+//         @include input(2rem);
+//     }
+//     .navbar, .header{
+//         height: 10vh;
+//         font-size: 4rem;
+//     }
+// }
 
 * {
     font-family: $font;
@@ -208,6 +208,7 @@ body {
 
 .trip-add-lists-header{
     font-size: 1.5rem;
+    padding-top: 6vh;
 }
 
 .trip-lists-delete{
@@ -266,6 +267,9 @@ form{
 
 .trip-description{
     font-size: 1.2rem;
+    padding-bottom: 5vh;
+    padding-top: 2vh;
+
 }
 
 .trip{
@@ -273,7 +277,7 @@ form{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding-left: 20vw;
+    padding-left: 15vw;
 }
 
 .trip-title-single-trip{
@@ -282,6 +286,7 @@ form{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 3vh 0 3vh 0;
     div{
         font-size: 1rem;
     }
@@ -334,7 +339,7 @@ form{
 }
 
 .list-name{
-    padding-right: 2vw;
+    padding: 5vh;
 }
 
 .list-items{
@@ -342,6 +347,7 @@ form{
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 1vh 0 1vh 0;
 }
 
 .list-item-name{
