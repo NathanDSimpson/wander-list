@@ -62,18 +62,6 @@ class AddItem extends Component {
                     <input 
                         onChange={this.handleInput} 
                         type="text" 
-                        name='weight' 
-                        placeholder='Weight (lbs)'
-                    />
-                    <input 
-                        onChange={this.handleInput} 
-                        type="text" 
-                        name='volume' 
-                        placeholder='Volume (L)'
-                    />
-                    <input 
-                        onChange={this.handleInput} 
-                        type="text" 
                         name='tags' 
                         placeholder='Hashtags #'
                     />

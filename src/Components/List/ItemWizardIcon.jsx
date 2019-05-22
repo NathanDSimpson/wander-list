@@ -16,6 +16,7 @@ class ItemWizardIcon extends Component{
     render(){
         return(
             <div onClick={this.addToList}>
+                <i className="fas fa-plus"></i>
                 {this.props.item.name}
             </div>
         )

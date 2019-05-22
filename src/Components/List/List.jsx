@@ -12,8 +12,6 @@ class List extends Component{
         super()
         this.state = {
             edit: false,
-            show_items: false,
-            add_items: true
         }
     }
 
@@ -23,18 +21,11 @@ class List extends Component{
         }
     }
 
-    toggle_show_items = () => {
-        this.setState({
-            show_items: !this.state.show_items
-        })
-    }
-
     editList = () => {
         this.setState({
             edit: !this.state.edit
         })
     }
-
 
     deleteList = async () =>{
         this.props.history.push('/lists') 
@@ -55,25 +46,17 @@ class List extends Component{
             return null
         }
 
-        let showItemsButton
-        this.state.show_items ? showItemsButton = (<i className="fas fa-caret-down"></i>) : showItemsButton = (<i className="fas fa-caret-right"></i>)
-
         let temp  = this.props.lists.filter( list => list.list_id === +this.props.match.params.id)
         let list = temp[0]
-        let items 
-        if (this.state.show_items){
-            items = list.list_items.map( (item, index) => {
-                    return (
-                        <ListItemIcon
-                            className='single-item'
-                            key={index}
-                            item={item}
-                            > 
-                            {item.name}
-                        </ListItemIcon>
-                    )
+        let items = list.list_items.map( (item, index) => {
+            return (
+                <div key={index}>
+                    <ListItemIcon item={item}> 
+                        {item.name}
+                    </ListItemIcon>
+                </div>
+            )
             })
-        }
 
         let list_display
         if (this.state.edit){
@@ -88,39 +71,34 @@ class List extends Component{
             )
         } else {
             list_display = (
-                <div>
-                    <h2>
-                        {list.name}
-                        <button onClick={this.toggle_show_items}> {showItemsButton} </button>
+                <div className='list-display'>
+                    <h2 className='list-info'>
+                        <span>
+                            {list.name}
+                        </span>
                         <button onClick={this.editList}> <i className="fas fa-edit"></i> </button>
-                        <button onClick={this.deleteList}> <i className="fas fa-trash-alt"></i>  </button>
+                        <button onClick={this.deleteList}> <i className="fas fa-trash"></i></button>
                     </h2>
-                    <div>
+                    <div className='list-description'>
                         {list.description}
-                    </div>
-                    <div>
                     </div>
                 </div>
             )
-        }
-        let add_item_wizard
-        if (this.state.add_items){
-            add_item_wizard = (
-                <ItemWizard ></ItemWizard>
-            )
-        }
+        }        
 
         return(
-            <div>
+            <div className='list'>
                 <div>
                     {list_display}
                 </div>
-                <div className='items'>
-                    {items}
-                </div>
-                <div>
-                    {add_item_wizard}
-                </div>
+                <span>
+                    <section className='list-items-in-list'>
+                        {items}
+                    </section>
+                    <div>
+                        <ItemWizard ></ItemWizard>
+                    </div>
+                </span>
             </div>
         )
     }

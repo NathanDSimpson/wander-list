@@ -29,36 +29,24 @@ class TripListIcon extends Component{
         this.props.history.push(`/list/${this.props.list.list_id}`)
     }
 
-    // addToTrip = async () => {
-    //     try{
-    //         // send data to db via axios endpoint, controller, and sql file
-    //         await axios.post('/api/add-trip-list', { trip_id: +this.props.match.params.id, list_id: this.props.list.list_id })
-    //         // get updated info for user from db
-    //         const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
-    //         // dispatch new info to redux
-    //         this.props.getUserData(res.data)
-    //     } catch(err){
-    //         alert(`Error: Trips.jsx - submitTrip`)
-    //     }
-    // }
-    
-    removeFromTrip = async () => {
+    addToTrip = async () => {
         try{
             // send data to db via axios endpoint, controller, and sql file
-            await axios.post('/api/delete-trip-list', { trip_id: +this.props.match.params.id, list_id: this.props.list.list_id })
+            await axios.post('/api/add-trip-list', { trip_id: +this.props.match.params.id, list_id: this.props.list.list_id })
             // get updated info for user from db
             const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
             // dispatch new info to redux
             this.props.getUserData(res.data)
         } catch(err){
             alert(`Error: Trips.jsx - submitTrip`)
-        }    }
+        }
+    }
 
     render(){
 
         return(
             <li>
-                <div onClick={this.removeFromTrip}>
+                <div onClick={this.addToTrip}>
                     {this.props.list.name}
                 </div>                
             </li>

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import TripListIcon from './TripListIcon'
+import TripListIconAdd from './TripListIconAdd'
 import { getUserData } from '../../redux/reducer'
 import axios from 'axios'
 import TripEdit from './TripEdit'
@@ -11,9 +12,8 @@ class Trip extends Component{
         super()
         this.state = {
             trip_id: 0,
-            viewLists: false,
+            viewLists: true,
             edit: false,
-            addTripLists: false
         }
     }
 
@@ -40,12 +40,6 @@ class Trip extends Component{
         })
     }
 
-    toggleAdd = () => {
-        this.setState({
-            addTripLists: !this.state.addTripLists
-        })
-    }
-
     deleteTrip = async () => {
         // navigate back to all trips
         this.props.history.push(`/trips`)
@@ -61,6 +55,32 @@ class Trip extends Component{
         }
     }
 
+    // deleteTripList = async () => {
+    //     try{
+    //         // send data to db via axios endpoint, controller, and sql file
+    //         await axios.post('/api/delete-trip-list', { trip_id: this.state.trip_id,  })
+    //         // get updated info for user from db
+    //         const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
+    //         // dispatch new info to redux
+    //         this.props.getUserData(res.data)
+    //     } catch(err){
+    //         alert(`Error: Trips.jsx - submitTrip`)
+    //     }
+    // }
+
+    // addTripList = async () => {
+    //     try{
+    //         // send data to db via axios endpoint, controller, and sql file
+    //         await axios.post('/api/delete-trip-list', { trip_id: this.state.trip_id,  })
+    //         // get updated info for user from db
+    //         const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
+    //         // dispatch new info to redux
+    //         this.props.getUserData(res.data)
+    //     } catch(err){
+    //         alert(`Error: Trips.jsx - submitTrip`)
+    //     }
+    // }
+
     render(){
         if (this.props.trips.length === 0){
             return null
@@ -72,8 +92,10 @@ class Trip extends Component{
         if (this.state.viewLists){
             trip_lists =  trip.trip_lists.map((list, index) => {
                 return (
-                    <TripListIcon key={index} list={list}> 
-                    </TripListIcon>
+                    <div className='trip-lists-delete' key={index} >
+                        <TripListIcon list={list}> </TripListIcon>
+                        <i className="fas fa-trash"></i>
+                    </div>
                 )
             })
         }
@@ -81,20 +103,21 @@ class Trip extends Component{
         let view 
         if (!this.state.edit) {
             view = (
-                <div>
-                    <h3>
+                <div className='sub-trip'>
+                    <div className='trip-title-single-trip'>
+                        <div onClick={this.viewTripLists}> 
+                        {this.state.viewLists ? <i className="fas fa-caret-down"></i> : <i className="fas fa-caret-right"></i>}
+                        </div>
                         {trip.name}
-                        <button onClick={this.deleteTrip}> Delete Trip </button>
-                        <button onClick={this.toggleEdit}> Edit Trip </button>
-                        <button onClick={this.toggleAdd}> Add Lists to Trip </button>
-                        <button onClick={this.viewTripLists}> Toggle view trip lists </button>
-                    </h3>
-                    <h4>
+                        <div onClick={this.toggleEdit}> <i className="fas fa-edit"></i> </div>
+                        <div onClick={this.deleteTrip}> <i className="fas fa-trash"></i> </div>
+                    </div>
+                    <div className='trip-description'>
                         {trip.description}
-                    </h4>
-                    <h6>
+                    </div>
+                    <ul className='trip-lists'>
                         {trip_lists}
-                    </h6>
+                    </ul>
                 </div>
             )
         } else{
@@ -103,17 +126,20 @@ class Trip extends Component{
             )
         }
 
-        let tripListWizard
-        if (this.state.addTripLists){
-            tripListWizard = this.props.lists.map((list, index) => (
-                <TripListIcon key={index} list={list} status='addToList' ></TripListIcon>
+        let tripListWizard = this.props.lists.map((list, index) => (
+            <div className='trip-add-list' key={index} >
+                <i className="fas fa-plus"> </i>
+                <TripListIconAdd list={list} > </TripListIconAdd>
+            </div>
             ))
-        }
 
         return(
-            <div>
+            <div className='trip'> 
                 {view}
-                {tripListWizard}
+                <ul className='trip-add-lists'>
+                    <div className='trip-add-lists-header'> Add Lists to your Trip:</div>
+                    {tripListWizard}
+                </ul>
             </div>
         )
     }

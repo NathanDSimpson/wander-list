@@ -33,21 +33,17 @@ class Items extends Component{
             items = this.props.items
         } else {
             items = this.props.items.filter( item =>  {
-                let filter_lowercase = this.state.searchValue.toLowerCase()
-                let description_lowercase = item.description.toLowerCase()
-                let name_lowercase = item.name.toLowerCase()
-                let tags_lowercase = item.tags.toLowerCase()
-                return (
-                    name_lowercase.includes(filter_lowercase) 
-                    || tags_lowercase.includes(filter_lowercase) 
-                    || description_lowercase.includes(filter_lowercase)
-                )
+                let searchFor = this.state.searchValue.toLowerCase()
+                let searchIn = item.description ? item.description.toLowerCase() : ''
+                searchIn += item.name ? item.name.toLowerCase() : ''
+                searchIn +=  item.tags ? item.tags.toLowerCase() : ''
+                return searchIn.includes(searchFor) 
                 })
         }
         let icons = items.map((item) =>  <ItemIcon item={item} key={item.item_id}/> )
 
         let backButton = (<i className="fas fa-chevron-left"></i>)
-        let addButton = (<i className="fas fa-plus">  Item</i>)
+        let addButton = (<i className='add-button' className="fas fa-plus">  Item</i>)
   
         let search
             if (!this.state.addItem){
@@ -64,10 +60,10 @@ class Items extends Component{
         return(
             <div>
                 <div className='items-nav'>
-                    <button onClick={this.toggleAdd}> {this.state.addItem ? backButton : addButton} </button>
+                    <div onClick={this.toggleAdd}> {this.state.addItem ? backButton : addButton} </div>
                     {search}
                 </div>
-                {this.state.addItem ? <AddItem toggleAdd={this.toggleAdd}/> : <section className='items'> {icons} </section>}
+                {this.state.addItem ? <AddItem toggleAdd={this.toggleAdd}/> : <section className='items-library'> {icons} </section>}
             </div>
         )
     }

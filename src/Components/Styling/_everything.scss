@@ -1,0 +1,460 @@
+//
+// VARIABLES
+//
+
+$theme-color: rgb(80, 131, 107);
+$font: 'Stylish', sans-serif;
+
+//
+// INHERITANCE
+//
+
+%image{
+    height: 90%;
+    width: 100%;
+}
+
+%item-name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    font-size: 0.8rem;
+    font-family: $font; 
+}
+
+%list{
+    font-family: $font;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 20vw;
+}
+
+%grid{
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin: 2%; 
+}
+
+%nav{
+    padding: 2vh 10vw 0 10vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+//
+// MIXINS
+//
+
+@mixin flex($spacing){
+    display: flex;
+    align-items: center;
+    justify-content: $spacing;
+}
+
+@mixin icon($size){
+    height: $size;
+    width: $size;
+    margin: 1vh;
+    font-size: 0.5rem;  
+}
+
+@mixin input($font-size){
+    font-size: $font-size;
+    text-align: center;
+}
+
+
+//
+// ALL
+//
+
+input{
+    @include input(1rem);
+}
+
+@media (min-width: 1000px){
+    input{
+        @include input(2rem);
+    }
+    .navbar, .header{
+        height: 10vh;
+        font-size: 4rem;
+    }
+}
+
+* {
+    font-family: $font;
+}
+
+body {
+    background-color: white; 
+}
+
+.add-button{
+    font-display: $font;
+}
+
+//
+// ITEMS
+//
+
+.items-nav{
+    @extend %nav;
+}
+
+.items-library {
+    @extend %grid;
+}
+
+.items-item {
+    @include icon(20vw) 
+}
+
+.items-image{
+    @extend %image;
+}
+
+
+//
+// LIST
+//
+
+.list-items-in-list{
+    @extend %grid;
+}
+
+.list-single-item-in-list{
+    @include icon(14vw);
+    padding: 3vw;
+}
+
+.list-item-image{
+    @extend %image;
+    
+}
+.list-item-image:hover{
+    border: 2px solid red;
+    border-radius: 10px;
+}
+
+.list-item-name{
+    display: flex;
+    justify-content: space-around;
+}
+
+.lists-item-wizard{
+    font-family: $font;
+    align-items: center;
+}
+
+.lists-item-wizard-header{
+    padding: 5vh 0 5vh 5vw;
+    font-size: 1.7rem;
+
+}
+
+.lists-item-wizard-items{
+    display: flex;
+    flex-wrap: wrap;
+    li{
+        padding: 2vw;
+        list-style: none;
+    }
+}
+
+.list-info{
+    font-family: $font;
+    justify-items: center;
+    font-size: 2rem;
+    padding: 2vh;
+    button{
+        font-size: 1.3rem;
+    }
+}
+
+.list-display{
+    font-size: 1.2rem;
+    align-items: center;
+}
+.list-description{
+    font-family: $font;
+    display: flex;
+    justify-content: center;
+    padding: 0 2vh 2vh 2vh;
+}
+
+
+//
+// TRIPS
+//
+//
+
+.add-trip-button{
+    padding: 5vw;
+}
+
+.trip-add-lists{
+    list-style: none;
+}
+
+.trip-add-list{
+    display: flex;
+}
+
+.trip-add-lists-header{
+    font-size: 1.5rem;
+}
+
+.trip-lists-delete{
+    display: flex;
+}
+//
+//
+//
+
+
+
+
+
+
+
+
+
+
+
+
+form{
+    height: 45vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-entry{
+    width: 65vw;
+    text-align: center;
+}
+
+.register-button{
+    width: 30vw;
+}
+
+.trips{
+    @extend %list;
+}
+
+.sub-trip{
+    ul{
+        padding-left: 6vw;
+    }
+}
+
+.trip-title{
+    font-size: 2rem;
+    display: flex;
+    align-items: flex-end;
+    i{
+        padding-right: 1vw;
+    }
+}
+
+.trip-description{
+    font-size: 1.2rem;
+}
+
+.trip{
+    font-family: $font;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 20vw;
+}
+
+.trip-title-single-trip{
+    font-size: 2rem;
+    font-family: $font;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    div{
+        font-size: 1rem;
+    }
+}
+
+.trip-lists{
+    @extend %list;
+    padding-left: 0;
+}
+
+
+form{
+    height: 45vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-entry{
+    width: 65vw;
+    text-align: center;
+}
+
+.register-button{
+    width: 30vw;
+}
+
+.lists-nav{
+    padding: 2vh 10vw 0 10vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.lists{
+    height: 80vh;
+}
+
+.list-icons {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: $font;
+    font-size: 1.7rem;
+    div {
+        // display: flex;
+        // flex-direction: column;
+    }
+}
+
+.list-name{
+    padding-right: 2vw;
+}
+
+.list-items{
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.list-item-name{
+    @extend %item-name;
+    i{
+        padding-right: 1vw;
+    }
+}
+
+.single-item {
+    font-size: 4.6rem;
+    display:inline-block;
+    justify-content: center;
+}
+
+
+
+
+
+.items-and-wizard{
+    ul{
+        height: 40vh;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        overflow: scroll;
+    }
+    // img, li{
+    //     @include icon(10vw);
+
+    // }
+    justify-content: space-between;
+    padding-left: 10vw;
+    padding-right: 10vw;
+}
+
+.item-name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    font-size: 0.8rem;
+    font-family: $font; 
+}
+
+//*
+
+
+
+
+.add-button{  
+    font-size: 1.6 rem;
+}
+
+.item-page{
+    font-family: $font;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.back-button{
+    font-size: 1.5rem;
+    padding-left: 5vw;
+}
+
+.image{
+    padding: 5vh;
+    height: 76.5vw;
+    width: 85vw;
+    // @extend %image;
+}
+
+.item-title{ 
+    font-size: 2.4rem;
+    i{
+        font-size: 1.6rem;
+        padding: 0 1vw 0 1vw;
+    }
+    span{
+        padding-right: 5vw;
+    }
+}
+
+.edit-item{
+    font-family: $font;
+    font-size: 2.4rem;
+}
+
+
+
+    
+.register-prompt {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form{
+    height: 45vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-entry{
+    width: 65vw;
+    text-align: center;
+}
+
+.register-button{
+    width: 30vw;
+}

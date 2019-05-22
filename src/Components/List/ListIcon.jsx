@@ -36,11 +36,11 @@ class ListIcon extends Component{
         return(
             <div>
                 <span>
-                    <span onClick={this.goToList} className='list-name' >
-                        {this.props.list.name} 
-                    </span>
                     <span onClick={this.toggleShowItems} >
                         {showItems} 
+                    </span>
+                    <span onClick={this.goToList} className='list-name' >
+                        {this.props.list.name} 
                     </span>
                 </span>
                 <ul className='list-items'>

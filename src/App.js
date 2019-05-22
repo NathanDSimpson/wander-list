@@ -13,7 +13,9 @@ function App() {
       <HashRouter>
         <div className="App">
           <Header/>
-          {router}
+          <div className='app-body'>
+            {router}  
+          </div>
         </div>
       </HashRouter>
     </Provider>

@@ -13,11 +13,17 @@ class ListItemIcon extends Component{
     }
 
     render(){
+        // size the item's image
+        let default_image = 'http://savings.gov.pk/wp-content/plugins/ldd-directory-lite/public/images/noimage.png'
+        let image = this.props.item.img_url ? this.props.item.img_url : default_image
+
         return(
-            <div className='single-item' onClick={this.removeItemFromList}>
-                <span className='item-name'>
+            <div  className='list-single-item-in-list'  onClick={this.removeItemFromList}>
+                <img className='list-item-image' src={image} alt={this.props.item.name}/>
+                <div className='list-item-name'>
                     {this.props.item.name}
-                </span>
+                    <i className="fas fa-trash"></i>
+                </div>
             </div>
         )
     }

@@ -49,7 +49,7 @@ class Lists extends Component{
         if (this.state.add_list){
             buttonIcon = (<i className="fas fa-chevron-left"></i>)
         }else{
-            buttonIcon = (<i className="fas fa-plus">  List</i>)
+            buttonIcon = (<i className="fas fa-plus"> <span className='add-button' >List</span></i>)
         }
 
         let search
@@ -68,7 +68,7 @@ class Lists extends Component{
         return(
             <div className='lists'>
                 <div className='lists-nav'>
-                    <div onClick={this.toggleAdd}> 
+                    <div className='add-button' onClick={this.toggleAdd}> 
                         {buttonIcon}
                     </div>
                     <span>

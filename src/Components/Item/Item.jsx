@@ -108,12 +108,11 @@ class Item extends Component{
                     <div className='item-title'>
                         <span>{item.name}</span>
                         <i onClick={this.toggle}> <i className="fas fa-edit"></i> </i>
-                        <i onClick={this.deleteItem}> <i className="fas fa-trash-alt"></i> </i>
+                        <i onClick={this.deleteItem}> <i className="fas fa-trash"></i></i>
                     </div>
                     <div className='image-container'>
                         <img className='image' src={image_url} alt={item.name}/>
                     </div>
-                    <div>{item.img_url}</div>
                     <div>{item.description}</div>
                     <div>{item.tags}</div>
                     <div>
@@ -125,7 +124,7 @@ class Item extends Component{
             display = (
                 <div>
                     <button onClick={this.toggle}>  <i className="fas fa-angle-left"></i> </button>
-                    <form onSubmit={this.submitEdit}> 
+                    <form  className='edit-item' onSubmit={this.submitEdit}> 
                         <input 
                             onChange={this.handleInput} 
                             type="text" 

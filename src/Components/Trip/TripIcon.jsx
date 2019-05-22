@@ -26,34 +26,28 @@ class TripIcon extends Component{
         if (this.state.viewLists){
             trip_lists =  this.props.trip.trip_lists.map((list, index) => {
                 return (
-                    <li key={index}>
+                    <div key={index}>
                         <TripListIcon list={list}>
                         </TripListIcon>
-                    </li>
+                    </div>
                 )
             })
         }
 
-        let buttonIcon
         let viewLists
         this.state.viewLists ? viewLists = (<i className="fas fa-caret-down"></i>) : viewLists = (<i className="fas fa-caret-right"></i>)
-        // if (this.state.viewLists){
-        //     buttonIcon = (<i className="fas fa-minus"></i>)
-        // }else{
-        //     buttonIcon = (<i className="fas fa-plus"></i>)
-        // }
 
         return(
-            <div>
-                <h3>
-                    <span onClick={this.goToTrip}>
+            <div className='sub-trip'>
+                <div className='trip-title'>
+                    <div onClick={this.viewTripLists}> {viewLists} </div>
+                    <div onClick={this.goToTrip}>
                         {this.props.trip.name}
-                    </span>
-                    <button onClick={this.viewTripLists}> {viewLists} </button>
-                </h3>
-                <h6>
+                    </div>
+                </div>
+                <div className='trip-description'>
                     {this.props.trip.description}
-                </h6>
+                </div>
                 <ul>
                     {trip_lists}
                 </ul>

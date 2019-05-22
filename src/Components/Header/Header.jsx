@@ -71,8 +71,7 @@ class Header extends Component{
             if (this.props.authenticated){
                 menu = (
                     <ul className='dropDown'>
-                        <li onClick={this.logout}><i className="fas fa-sign-out-alt"></i></li>
-                        {/* <Link to='/' onClick={this.logout}> <i className="fas fa-sign-out-alt"></i> </Link> */}
+                        <li onClick={this.logout}><i className="fas fa-sign-out-alt"></i> </li>
                     </ul>
                     )
                 } else {
@@ -98,7 +97,7 @@ class Header extends Component{
         }
     
         return(
-            <>
+            <div className='fixed'>
                 <h1 className='header'>
                     <div>
                         WanderList
@@ -112,7 +111,7 @@ class Header extends Component{
                 </h1> 
                 {menu}
                 {navbar}
-            </>
+            </div>
         )
     }
 }
