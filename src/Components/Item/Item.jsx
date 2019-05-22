@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
-import { getItems, getUserData } from '../../redux/reducer'
+import { getUserData } from '../../redux/reducer'
 
 class Item extends Component{
     constructor(){
@@ -11,8 +11,6 @@ class Item extends Component{
             item_id: 0,
             name: '',
             img_url: '',
-            weight: 0,
-            volume: 0,
             description: '',
             tags: '',
             edit: false
@@ -22,18 +20,16 @@ class Item extends Component{
     // put the item info onto local state so we can edit and then submit to the db
     componentWillMount() {
         if (this.props.items.length === 0){
-            console.log(`11111`)
             this.props.history.push('/items')
         } else{
             const temp = this.props.items.filter(item => item.item_id === +this.props.match.params.id)
             const item = temp[0]
-            const { img_url, item_id, name, volume, weight, description, tags } = item
+            const {item_id, name, description, tags } = item
+            const img_url = item.img_url === null ? '' : item.img_url
             this.setState({ 
                 img_url, 
                 item_id, 
                 name, 
-                volume, 
-                weight, 
                 description,
                 tags
             })
@@ -62,10 +58,10 @@ class Item extends Component{
     submitEdit = async (event) => {
         event.preventDefault()
         this.toggle() // toggle out of editView after submitting
-        const { name, img_url, weight, volume, description, item_id} = this.state
+        const { name, img_url, description, item_id, tags} = this.state
         try {
             //send updates to db
-            await axios.put('/api/edit-item', { name, img_url, weight, volume, description, item_id }) 
+            await axios.put('/api/edit-item', { name, img_url, description, item_id, tags }) 
             // get updated info from db and send to redux
             const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
             this.props.getUserData(res.data)
@@ -95,29 +91,40 @@ class Item extends Component{
     }
 
     render(){
+        // avoid error
         if (this.props.items.length === 0){
             return null
         } 
 
+        console.log(`what the fuck`)
+
         //conditionally render the edit view
         const temp = this.props.items.filter(item => item.item_id === +this.props.match.params.id)
         const item = temp[0]
+        let default_image = 'http://savings.gov.pk/wp-content/plugins/ldd-directory-lite/public/images/noimage.png'
+        const image_url = item.img_url === null || item.img_url === '' ? default_image : item.img_url
+        
         let display = ''
         if (!this.state.edit){
             display = (
             <div>
-                 <div>
-                    <button onClick={this.backButton}>  <i className="fas fa-angle-left"></i> </button>
+                <div>
+                    <button className='back-button' onClick={this.backButton}>  <i className="fas fa-angle-left"></i> </button>
                 </div>
-                    <h3>
-                        {item.name}
-                        <button onClick={this.toggle}> <i className="fas fa-edit"></i> </button>
-                        <button onClick={this.deleteItem}> <i className="fas fa-trash-alt"></i> </button>
-                    </h3>
+                <div className='item-page'>
+                    <div className='item-title'>
+                        <span>{item.name}</span>
+                        <i onClick={this.toggle}> <i className="fas fa-edit"></i> </i>
+                        <i onClick={this.deleteItem}> <i className="fas fa-trash-alt"></i> </i>
+                    </div>
+                    <div className='image-container'>
+                        <img className='image' src={image_url} alt={item.name}/>
+                    </div>
                     <div>{item.img_url}</div>
                     <div>{item.description}</div>
                     <div>{item.tags}</div>
                     <div>
+                    </div>
                 </div>
             </div>
             )
@@ -174,7 +181,6 @@ const mapStateToProps = (reduxState) => {
 }
 
 const mapDispatchToProps = {
-    getItems,
     getUserData
 }
 
