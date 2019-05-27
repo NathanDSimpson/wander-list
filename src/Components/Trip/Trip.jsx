@@ -6,6 +6,8 @@ import TripListIconAdd from './TripListIconAdd'
 import { getUserData } from '../../redux/reducer'
 import axios from 'axios'
 import TripEdit from './TripEdit'
+import Swal from 'sweetalert2'
+
 
 class Trip extends Component{
     constructor(){
@@ -50,9 +52,20 @@ class Trip extends Component{
             const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
             // dispatch new info to redux
             this.props.getUserData(res.data)
+            Swal.fire({
+                position: 'top-end',
+                type: 'success',
+                title: 'Trip deleted successfully!',
+                showConfirmButton: false,
+                timer: 1500
+              })
         } catch(err){
-            alert(`Error: Trips.jsx - submitTrip`)
-        }
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Problem deleting the trip'
+              })
+          }
     }
 
     // deleteTripList = async () => {
@@ -64,7 +77,6 @@ class Trip extends Component{
     //         // dispatch new info to redux
     //         this.props.getUserData(res.data)
     //     } catch(err){
-    //         alert(`Error: Trips.jsx - submitTrip`)
     //     }
     // }
 
@@ -77,7 +89,6 @@ class Trip extends Component{
     //         // dispatch new info to redux
     //         this.props.getUserData(res.data)
     //     } catch(err){
-    //         alert(`Error: Trips.jsx - submitTrip`)
     //     }
     // }
 

@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import TripIcon from './TripIcon'
 import axios from 'axios'
 import { getUserData } from '../../redux/reducer'
+import Swal from 'sweetalert2'
 
 class Trips extends Component{
     constructor(){
@@ -42,9 +43,20 @@ class Trips extends Component{
             const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
             // dispatch new info to redux
             this.props.getUserData(res.data)
+            Swal.fire({
+                position: 'top-end',
+                type: 'success',
+                title: 'Trip added successfully!',
+                showConfirmButton: false,
+                timer: 1500
+              })
         } catch(err){
-            alert(`Error: Trips.jsx - submitTrip`)
-        }
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Problem adding your trip'
+              })  
+            }
     }
 
     render(){

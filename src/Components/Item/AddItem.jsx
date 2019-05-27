@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { addItem, getItems, getUserData } from '../../redux/reducer'
+import Swal from 'sweetalert2'
 
 class AddItem extends Component {
     constructor(){
@@ -36,9 +37,20 @@ class AddItem extends Component {
             const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
             // update redux
             this.props.getUserData(res.data) 
+            Swal.fire({
+                position: 'top-end',
+                type: 'success',
+                title: 'Item added successfully!',
+                showConfirmButton: false,
+                timer: 1500
+              })
         } catch(err){
-            alert(`AddItem.jsx: handleSubmit`)
-        }
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Failed to add item'
+              })        
+            }
         this.props.toggleAdd() // passed as props from Items.jsx to toggle this component
     }
 

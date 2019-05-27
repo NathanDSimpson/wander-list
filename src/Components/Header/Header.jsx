@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { logoutUser, loginUser, getUserData } from '../../redux/reducer'
 import axios from 'axios';
 import Swal from 'sweetalert2'
@@ -45,7 +45,11 @@ class Header extends Component{
             this.props.logoutUser()
             this.toggleMenu()
         } catch(err) {
-            alert(`Header.jsx: logout`)
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Logout failed'
+              }) 
         }
     }
 

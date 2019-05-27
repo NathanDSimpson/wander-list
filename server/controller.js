@@ -11,7 +11,6 @@ module.exports = {
             alreadyRegistered = +alreadyRegistered[0].count
             if (alreadyRegistered !== 0) {
                 return res.sendStatus(409)
-                alert(`That email is already registered.`)
             }
         } catch(err){
             res.sendStatus(401)

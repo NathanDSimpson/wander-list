@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { registerUser } from '../../redux/reducer'
 import { Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 
 class Register extends Component {
@@ -29,7 +30,11 @@ class Register extends Component {
         event.preventDefault()
         const { firstname, lastname, email, password, confirmPassword } = this.state
         if (password !== confirmPassword){
-            alert(`Your passwords do not match`)
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Your passwords do not match'
+              })  
             return
         }
         try {
@@ -37,13 +42,17 @@ class Register extends Component {
             this.props.registerUser({firstname, lastname, email, id: response.data.user.id, authenticated: true})// dispatch to store
             this.props.history.push('/items')
         } catch(err){
-            alert(`Log In Failed.`)
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Registration Failed'
+              })          
         }
     }
 
     render(){
         return(
-            <>
+            <div>
                 <form onSubmit={this.handleSubmit}>
                     <input 
                         className='form-entry'
@@ -92,7 +101,7 @@ class Register extends Component {
                         <Link to='/login'> Log In </Link>
                     </div>
                 </div>
-            </>
+            </div>
         )
     }
 

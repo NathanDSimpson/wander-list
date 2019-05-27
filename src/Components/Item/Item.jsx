@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import { getUserData } from '../../redux/reducer'
+import Swal from 'sweetalert2'
+
 
 class Item extends Component{
     state = {
@@ -44,8 +46,19 @@ class Item extends Component{
             // get updated info from db and send to redux
             const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
             this.props.getUserData(res.data)
+            Swal.fire({
+                position: 'top-end',
+                type: 'success',
+                title: 'Item deleted successfully!',
+                showConfirmButton: false,
+                timer: 1500
+              })
         } catch(err){
-            alert(`Edit.jsx: deleteItem`)
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Problem deleting item'
+              })
         }
     }
 
@@ -60,8 +73,19 @@ class Item extends Component{
             // get updated info from db and send to redux
             const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
             this.props.getUserData(res.data)
+            Swal.fire({
+                position: 'top-end',
+                type: 'success',
+                title: 'Item edited successfully!',
+                showConfirmButton: false,
+                timer: 1500
+              })
         } catch(err){
-            alert('Edit.jsx: submitEdit')
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Problem submitting edit'
+              })        
         }
     }
 
@@ -102,7 +126,7 @@ class Item extends Component{
             display = (
             <div>
                 <div>
-                    <button className='back-button' onClick={this.backButton}>  <i className="fas fa-angle-left"></i> </button>
+                    <div className='back-button' onClick={this.backButton}>  <i className="fas fa-angle-left"></i> </div>
                 </div>
                 <div className='item-page'>
                     <div className='item-title'>
@@ -123,7 +147,7 @@ class Item extends Component{
         } else {
             display = (
                 <div>
-                    <button onClick={this.toggle}>  <i className="fas fa-angle-left"></i> </button>
+                    <div onClick={this.toggle}>  <i className="fas fa-angle-left"></i> </div>
                     <form  className='edit-item' onSubmit={this.submitEdit}> 
                         <input 
                             onChange={this.handleInput} 

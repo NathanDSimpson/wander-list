@@ -6,6 +6,8 @@ import ListItemIcon from './ListItemIcon'
 import ListEdit from './ListEdit'
 import ItemWizard from './ItemWizard'
 import {getUserData} from '../../redux/reducer'
+import Swal from 'sweetalert2'
+
 
 class List extends Component{
     constructor(){
@@ -36,8 +38,19 @@ class List extends Component{
             const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
             // update redux
             this.props.getUserData(res.data)
+            Swal.fire({
+                position: 'top-end',
+                type: 'success',
+                title: 'List deleted successfully!',
+                showConfirmButton: false,
+                timer: 1500
+              })
         } catch(err){
-            alert(`List.jsx: deleteList`)
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Problem deleting list'
+              })
             }
         }
 
@@ -62,7 +75,7 @@ class List extends Component{
         if (this.state.edit){
             list_display = (
                 <div>
-                    <button onClick={this.editList}> <i className="fas fa-angle-left"></i> </button>
+                    <div onClick={this.editList}> <i className="fas fa-angle-left"></i> </div>
                     <ListEdit
                         list={list}
                         toggleEdit={this.editList}
@@ -76,8 +89,8 @@ class List extends Component{
                         <span>
                             {list.name}
                         </span>
-                        <button onClick={this.editList}> <i className="fas fa-edit"></i> </button>
-                        <button onClick={this.deleteList}> <i className="fas fa-trash"></i></button>
+                        <div onClick={this.editList}> <i className="fas fa-edit"></i> </div>
+                        <div onClick={this.deleteList}> <i className="fas fa-trash"></i></div>
                     </h2>
                     <div className='list-description'>
                         {list.description}

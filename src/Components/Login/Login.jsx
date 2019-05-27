@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { loginUser, getUserData } from '../../redux/reducer'
 import { Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 class Login extends Component {
     constructor(){
@@ -37,12 +38,18 @@ class Login extends Component {
 
             // navigate the user
             this.props.history.push('/items') // navigate to the users items view
-        } catch(err){alert(`The server is having trouble logging in (Login.jsx)`)}
+        } catch(err){
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'We are having trouble logging you in'
+              })        
+        }
     }
 
     render(){
         return(
-            <>
+            <div className='login'>
                 <form onSubmit={this.handleSubmit}> 
                     <input 
                         className='form-entry'
@@ -72,7 +79,7 @@ class Login extends Component {
                         <Link to='/register'> Register </Link>
                     </div>
                 </div>
-            </>
+            </div>
         )
     }
 

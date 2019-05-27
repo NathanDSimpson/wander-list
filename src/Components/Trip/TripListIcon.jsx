@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import { getUserData } from '../../redux/reducer'
+import Swal from 'sweetalert2'
+
 
 class TripListIcon extends Component{
     constructor(){
@@ -38,7 +40,6 @@ class TripListIcon extends Component{
     //         // dispatch new info to redux
     //         this.props.getUserData(res.data)
     //     } catch(err){
-    //         alert(`Error: Trips.jsx - submitTrip`)
     //     }
     // }
     
@@ -51,8 +52,13 @@ class TripListIcon extends Component{
             // dispatch new info to redux
             this.props.getUserData(res.data)
         } catch(err){
-            alert(`Error: Trips.jsx - submitTrip`)
-        }    }
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'We are having trouble removing the list from the trip.'
+              })  
+            }    
+        }
 
     render(){
 

@@ -2,7 +2,7 @@
 // VARIABLES
 //
 
-$theme-color: rgb(80, 131, 107);
+// $theme-color: rgb(80, 111, 131);
 $font: 'Stylish', sans-serif;
 
 //
@@ -72,6 +72,10 @@ $font: 'Stylish', sans-serif;
 //
 // ALL
 //
+
+img{
+    border-radius: 10%;
+}
 
 input{
     @include input(1rem);
@@ -155,7 +159,11 @@ body {
 .lists-item-wizard-header{
     padding: 5vh 0 5vh 5vw;
     font-size: 1.7rem;
-
+    display: flex;
+    justify-content: center;
+    input{
+        margin-left: 3vw;
+    }
 }
 
 .lists-item-wizard-items{
@@ -168,12 +176,15 @@ body {
 }
 
 .list-info{
+    display: flex;
+    justify-content: center;
     font-family: $font;
     justify-items: center;
     font-size: 2rem;
     padding: 2vh;
-    button{
-        font-size: 1.3rem;
+    div{
+        margin: 0 2vw 0 2vw;
+        font-size: 1.7rem;
     }
 }
 
@@ -339,7 +350,7 @@ form{
 }
 
 .list-name{
-    padding: 5vh;
+    padding: 0 5vh 5vh 5vh;
 }
 
 .list-items{
@@ -463,4 +474,8 @@ form{
 
 .register-button{
     width: 30vw;
+}
+
+body{
+    background-image: url('https://s3-us-west-2.amazonaws.com/wanderlistimages/sky.jpeg');
 }

@@ -3,6 +3,8 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { getUserData } from '../../redux/reducer'
+import Swal from 'sweetalert2'
+
 
 class ListEdit extends Component{
     constructor(){
@@ -34,9 +36,20 @@ class ListEdit extends Component{
             const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
             // dispatch new info to redux
             this.props.getUserData(res.data)
+            Swal.fire({
+                position: 'top-end',
+                type: 'success',
+                title: 'List added successfully!',
+                showConfirmButton: false,
+                timer: 1500
+              })
 
         } catch(err){
-            alert(`ListAdd.jsx: handleSubmit`)
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Problem adding the list'
+              })        
         }
 
     }

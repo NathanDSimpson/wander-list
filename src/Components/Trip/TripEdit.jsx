@@ -3,6 +3,7 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { getUserData } from '../../redux/reducer'
+import Swal from 'sweetalert2'
 
 // import into trip.jsx and conditionally render
 // pass trip as props from parent 
@@ -48,10 +49,20 @@ class TripEdit extends Component{
             const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
             // dispatch new info to redux
             this.props.getUserData(res.data)
-
+            Swal.fire({
+                position: 'top-end',
+                type: 'success',
+                title: 'Trip edited successfully!',
+                showConfirmButton: false,
+                timer: 1500
+              })
         } catch(err){
-            alert(`TripEdit.jsx: handleSubmit`)
-        }
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'We are having trouble submitting your edits.'
+              })  
+            }
     }
     
     render(){

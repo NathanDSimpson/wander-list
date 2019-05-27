@@ -1,6 +1,6 @@
 const initialState = {
 	authenticated: false,
-	user_id: 0,
+	user_id: null,
 	firstname: '',
 	lastname: '',
 	email: '',
@@ -15,8 +15,6 @@ const LOGOUT_USER = 'LOGOUT_USER'
 
 const GET_ITEMS = 'GET_ITEMS'
 const GET_USER_DATA = 'GET_USER_DATA'
-
-
 
 const ADD_ITEM ='ADD_ITEM'
 
